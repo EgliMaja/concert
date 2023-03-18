@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="text-center">
+          <h1><strong>RIHANNA</strong></h1>
+        </div>
+        <div class="text-center">
+          <h1><strong>Welcome Back</strong></h1>
+        </div>
+        <div class="text-center text-secondary">The Faster you fill up, the faster you get a ticket</div>
+
+        <form class="example-form">
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+            <i class="fa-solid fa-envelope"></i>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput [formControl]="passwordFormControl"
+              placeholder="The Password You Used During Registration">
+            <i class="fa-solid fa-key"></i>
+            <mat-error *ngIf="passwordFormControl.hasError('email') && !passwordFormControl.hasError('required')">
+              Please enter a valid password
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
+
+        <button class="btn btn-dark">Sign in</button>
+
+        <div class="row">
+          <div class="col text-center">
+            <div class="text-secondary">Don't have an account?</div>
+            <h5>Sign up</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <img
+          src="https://hips.hearstapps.com/ell.h-cdn.co/assets/16/10/1280x1280/square-1457901132-gettyimages-494142426.jpg?resize=640:*"
+          class="img-riri">
+      </div>
+    </div>
+  </div>
+</div>

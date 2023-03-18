@@ -1,0 +1,109 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-5">
+        <img src="https://wallpaperaccess.com/full/2151594.png" alt="">
+      </div>
+      <div class="col-7">
+        <h2>Register</h2>
+        <h6>Manage all your data</h6>
+        <p class="text-secondary">Let's get you all set up so you can verify your
+          personal account and being setting up your profile.
+        </p>
+
+        <form [formGroup]="registerPerson">
+          <div class="row">
+            <div class="col-sm-6">
+
+              <mat-form-field class="example-full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput type="text" placeholder="Your Name" name="firstName" formControlName="firstName"
+                  [(ngModel)]="personRegist.firstName">
+              </mat-form-field>
+              <mat-hint *ngIf="registerPerson.get('firstName')?.touched && registerPerson get('firstName')?.errors">
+                First Name is Invalid
+              </mat-hint>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Last Name</mat-label>
+                <input matInput type="text" placeholder="Your Name" name="lastName" formControlName="lastName"
+                  [(ngModel)]="personRegist.lastName">
+              </mat-form-field>
+              <mat-hint *ngIf="registerPerson.get('lastName')?.touched && registerPerson get('lastName')?.errors">
+                Last Name is Invalid
+              </mat-hint>
+            </div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Telephone</mat-label>
+                <input matInput type="phone" placeholder="+355 06X 765 4321" name="phone" formControlName="phone"
+                  [(ngModel)]="personRegist.phone">
+                <i class="fa-solid fa-phone"></i>
+              </mat-form-field>
+              <mat-hint *ngIf="registerPerson.get('phone')?.touched && registerPerson get('phone')?.errors">
+                Make sure you put phone number
+              </mat-hint>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Ex. pat@example.com" name="email" formControlName="email"
+                  [(ngModel)]="personRegist.email">
+                <i class="fa-solid fa-envelope"></i>
+              </mat-form-field>
+              <mat-hint *ngIf="registerPerson.get('email')?.touched && registerPerson get('email')?.errors">
+                Invalid e-mail
+              </mat-hint>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder=" Password " name="password" formControlName="password"
+                  [(ngModel)]="personRegist.password">
+                <i class="fa-solid fa-key"></i>
+              </mat-form-field>
+              <mat-hint *ngIf="registerPerson.get('password')?.touched && registerPerson get('password')?.errors">
+                Invalid Password
+              </mat-hint>
+            </div>
+
+            <div class="col-sm-6">
+              <mat-form-field class="example-full-width">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput type="password" placeholder="Repeat Password" name="confirm_password"
+                  formControlName="confirm_password">
+                <i class="fa-solid fa-key"></i>
+              </mat-form-field>
+              <mat-hint
+                *ngIf="registerPerson.get('confirm_password')?.touched && registerPerson get('confirm_password')?.errors">
+                Password is not equal
+              </mat-hint>
+            </div>
+          </div>
+
+          <button mat-button color="primary" (click)="createAccount()">Create Account</button>
+        </form>
+
+        <h5 class="text-secondary text-center">Alredy have an account?</h5>
+        <a routerLink="register">Log in</a>
+      </div>
+    </div>
+  </div>
+</div>

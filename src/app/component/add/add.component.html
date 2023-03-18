@@ -1,0 +1,22 @@
+<form [formGroup]="GenerateTicket" (ngSubmit)="generateTicket()">
+  <input
+    type="text"
+    placeholder="Location"
+    name="location"
+    formControlName="location"
+  />
+  <input type="date" name="date" formArrayName="date" [min]="ToDate" />
+  <input
+    type="number"
+    placeholder="Price"
+    name="price"
+    formControlName="price"
+  />
+  <input
+    type="text"
+    placeholder="Add Coment"
+    name="coment"
+    formControlName="coment"
+  />
+  <button type="submit">Generate</button>
+</form>

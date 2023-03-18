@@ -1,0 +1,87 @@
+.container-fluid{
+  background-color: rgb(230, 205, 205);
+}
+.container{
+  margin-top: 50px;
+}
+h2 ,h6{
+  color: rgb(0, 0, 73);
+}
+.text-secondary{
+  font-family: Arial, Helvetica, sans-serif;
+}
+img{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid gray;
+  box-shadow: gray 1px 3px 5px,
+              gray 2px 3px 5px;
+}
+mat-form-field{
+  width: 300px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+
+}
+mat-hint{
+  color: red;
+}
+i{
+  margin-left: 260px;
+  color: rgb(0, 0, 73);
+  font-size: large;
+}
+button{
+  background-color: rgb(251, 102, 102);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  font-size: large;
+  cursor: pointer;
+}
+button:invalid{
+  cursor: not-allowed;
+}
+mat-hint{
+  margin-left: 30px;
+}
+a{
+  cursor: pointer;
+  text-decoration: solid;
+  font-size: 25px;
+  margin-left: 330px;
+}
+@media screen and (max-width : 600px) {
+  .col-5{
+    opacity: 0;
+  }
+  .col-7{
+    margin-left: -100px;
+  }
+  .container{
+    margin-top: 0px;
+  }
+  h2,h6{
+    text-align: center;
+  }
+  .text-secondary{
+    text-align: center;
+    width: 400px;
+    margin-left: -70px;
+  }
+
+  mat-form-field{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  button{
+    margin-right: 20px;
+  }
+  a{
+    margin-left: 100px;
+  }
+}

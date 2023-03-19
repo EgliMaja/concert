@@ -16,9 +16,15 @@
       "email": "megilosha@gmail.com",
       "password": "12345678",
       "id": 3
+    },
+    {
+      "firstName": "Ina",
+      "lastName": "Maja",
+      "phone": "+344 62 83 85 234",
+      "email": "inamaja@gmail.com",
+      "password": "sdfwewer3424",
+      "id": 4
     }
   ],
-  "concert": [
-
-  ]
+  "concert": []
 }

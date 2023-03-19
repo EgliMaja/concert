@@ -21,8 +21,6 @@ export class RegisterComponent implements OnInit {
   constructor(private service: MyserviceService, private route: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.registerPerson.valueChanges.pipe(tap()).subscribe()
-    this.getuserData();
     this.validatorForm();
   }
 
@@ -37,10 +35,7 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  getuserData() {
-    this.service.getRegisterList().subscribe(this.userDatas)
-  }
-
+ 
   createAccount() {
     this.service.adduserData(this.personRegist).subscribe({
       next: (data: userData[]) => {
@@ -65,5 +60,9 @@ export class RegisterComponent implements OnInit {
 
       return { notMatch: true };
     };
+  }
+
+  goToSigninPage(){
+    this.route.navigate(['/signin'])
   }
 }

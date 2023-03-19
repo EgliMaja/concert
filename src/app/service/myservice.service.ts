@@ -18,16 +18,14 @@ export class MyserviceService {
     this.api = environment.api + 'userDataData';
   }
 
+  // get Register User
   getRegisterList(): Observable<userData[]> {
-    return this.http.get<userData[]>(this.api)
-      .pipe(
-        tap(cli => this.userDatas.next(cli))
-      )
+    return this.http.get<userData[]>(`${this.api}`);
   }
 
   //add userData ,while registered
   adduserData(userDatas: Omit<userData, 'id'>): Observable<userData[]> {
-    const userData: userData[] = this.userDatas.getValue()
-    return this.http.post<userData[]>(this.api, userDatas)
+    const userData: userData[] = this.userDatas.getValue();
+    return this.http.post<userData[]>(`${this.api}`, userDatas)
   }
 }

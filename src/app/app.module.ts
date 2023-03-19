@@ -6,16 +6,13 @@ import { AppComponent } from './app.component';
 import { AddComponent } from './component/add/add.component';
 import { EditComponent } from './component/edit/edit.component';
 import { ViewadminComponent } from './component/viewadmin/viewadmin.component';
-import { NavbarComponent } from './component/navbar/navbar.component';
-import { SigninComponent } from './component/signin/signin.component';
-import { RegisterComponent } from './component/register/register.component';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ObserversModule } from '@angular/cdk/observers';
@@ -30,9 +27,6 @@ import { DxAutocompleteModule } from 'devextreme-angular';
     AddComponent,
     EditComponent,
     ViewadminComponent,
-    NavbarComponent,
-    SigninComponent,
-    RegisterComponent,
     DevExtComponent,
   ],
   imports: [
@@ -41,7 +35,6 @@ import { DxAutocompleteModule } from 'devextreme-angular';
     AppRoutingModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,
@@ -52,7 +45,7 @@ import { DxAutocompleteModule } from 'devextreme-angular';
     ObserversModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    DxAutocompleteModule,
+    DxAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent],

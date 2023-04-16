@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { userData } from 'src/app/data/userData';
+import { userData } from 'src/app/model/userData';
 import { MyserviceService } from 'src/app/service/myservice.service';
 import { environment } from 'src/environments/environment';
 

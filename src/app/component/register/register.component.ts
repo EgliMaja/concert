@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Val
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { MyserviceService } from 'src/app/service/myservice.service';
-import { userData } from 'src/app/data/userData';
+import { userData } from 'src/app/model/userData';
 
 @Component({
   selector: 'app-register',
@@ -26,16 +26,16 @@ export class RegisterComponent implements OnInit {
 
   validatorForm() {
     this.registerPerson = this.fb.group({
-      firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]),
-      lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(25)]),
+      firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+      lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
       phone: new FormControl('', [Validators.required, Validators.minLength(12)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8) , Validators.maxLength(15)]),
       confirm_password: new FormControl('', [Validators.required, this.MatchValidator('password')])
     })
   }
 
- 
+
   createAccount() {
     this.service.adduserData(this.personRegist).subscribe({
       next: (data: userData[]) => {

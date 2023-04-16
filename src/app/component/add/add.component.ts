@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { concert } from 'src/app/data/concert';
+import { concert } from 'src/app/model/concert';
 import { concertService } from 'src/app/service/add-concert.service';
 
 @Component({

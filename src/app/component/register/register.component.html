@@ -1,10 +1,3 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-  integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-  crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <div class="container-fluid">
   <div class="container">
     <div class="row">
@@ -27,8 +20,8 @@
                 <input matInput type="text" placeholder="Your Name" name="firstName" formControlName="firstName"
                   [(ngModel)]="personRegist.firstName">
               </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('firstName')?.touched && registerPerson get('firstName')?.errors">
-                First Name is Invalid
+              <mat-hint *ngIf="registerPerson.get('required')?.errors">
+                First Name is Required
               </mat-hint>
             </div>
 
@@ -38,7 +31,7 @@
                 <input matInput type="text" placeholder="Your Name" name="lastName" formControlName="lastName"
                   [(ngModel)]="personRegist.lastName">
               </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('lastName')?.touched && registerPerson get('lastName')?.errors">
+              <mat-hint *ngIf="registerPerson.get('required')?.errors">
                 Last Name is Invalid
               </mat-hint>
             </div>
@@ -53,7 +46,7 @@
                   [(ngModel)]="personRegist.phone">
                 <i class="fa-solid fa-phone"></i>
               </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('phone')?.touched && registerPerson get('phone')?.errors">
+              <mat-hint *ngIf="registerPerson.get('required')?.errors">
                 Make sure you put phone number
               </mat-hint>
             </div>
@@ -65,7 +58,7 @@
                   [(ngModel)]="personRegist.email">
                 <i class="fa-solid fa-envelope"></i>
               </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('email')?.touched && registerPerson get('email')?.errors">
+              <mat-hint *ngIf="registerPerson.get('required')?.errors">
                 Invalid e-mail
               </mat-hint>
             </div>
@@ -79,7 +72,7 @@
                   [(ngModel)]="personRegist.password">
                 <i class="fa-solid fa-key"></i>
               </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('password')?.touched && registerPerson get('password')?.errors">
+              <mat-hint *ngIf="registerPerson.get('required')?.errors">
                 Invalid Password
               </mat-hint>
             </div>
@@ -92,7 +85,7 @@
                 <i class="fa-solid fa-key"></i>
               </mat-form-field>
               <mat-hint
-                *ngIf="registerPerson.get('confirm_password')?.touched && registerPerson get('confirm_password')?.errors">
+                *ngIf="registerPerson.get('required')?.errors">
                 Password is not equal
               </mat-hint>
             </div>
@@ -102,7 +95,7 @@
         </form>
 
         <h5 class="text-secondary text-center">Alredy have an account?</h5>
-        <a routerLink="register">Log in</a>
+        <button (click)="goToSigninPage()">Log in</button>
       </div>
     </div>
   </div>

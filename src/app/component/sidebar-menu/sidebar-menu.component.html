@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="nav flex-column flex-nowrap vh-100 overflow-auto p-2 sidebar-space">
+  <i class="fa-regular fa-circle-user"></i>
+  <p class="text-white fullName mt-3">{{logedUserName}}</p>
+  <div class="list-unstyled mt-2">
+  <li *ngFor="let link of menu ; let i = index; ">
+    <ul *ngIf="link.title" class="submenu">
+      <hr>
+      <a
+      class="nav-link sidebar_menu text-white" (click)="navigateToComponent(link.action)"
+      [innerHTML]="link.title">
+      {{link.title}}</a>
+    </ul>
+  </li>
+</div>
+</div>

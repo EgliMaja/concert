@@ -94,6 +94,22 @@
           "role":"USER"
         }
       ]
+    },
+
+    {
+      "id":7,
+      "title":"Sign out",
+      "action": "/signin",
+      "roles":[
+        {
+          "id":7.1,
+          "role":"ADMIN"
+        },
+        {
+          "id":7.2,
+          "role":"USER"
+        }
+      ]
     }
   ]
 }

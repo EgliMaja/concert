@@ -4,11 +4,13 @@ import { DashboardComponent } from "./dashboard.component";
 import { DashboardRoutingModule } from "./dashboard.routing.module";
 import { MatMenuModule } from '@angular/material/menu';
 import { SidebarMenuComponent } from "../sidebar-menu/sidebar-menu.component";
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @NgModule({
   declarations : [
     DashboardComponent,
-    SidebarMenuComponent ],
+    SidebarMenuComponent,
+    NavbarComponent],
   imports : [
     CommonModule,
     DashboardRoutingModule,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { MyserviceService } from 'src/app/service/myservice.service';
+import { UserService } from 'src/app/service/user-service.service';
 import { userData } from 'src/app/model/userData';
 
 @Component({
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   registerPerson!: FormGroup;
 
 
-  constructor(private service: MyserviceService, private route: Router, private fb: FormBuilder) { }
+  constructor(private service: UserService , private route: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.validatorForm();

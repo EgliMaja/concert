@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { userData } from 'src/app/model/userData';
-import { MyserviceService } from 'src/app/service/myservice.service';
+import { UserService } from 'src/app/service/user-service.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,15 +18,17 @@ export class SigninComponent implements OnInit {
   login! : FormGroup;
   private api: string;
   dataUser! : userData;
+  private role : string[];
 
   constructor(
     private route: Router ,
     private httpClient : HttpClient ,
     private fb : FormBuilder,
-    private userService : MyserviceService
+    private userService : UserService
     )
     {
     this.api = environment.api + 'userDataData/';
+    this.role = ['ADMIN','USER'];
     }
 
   ngOnInit(): void {

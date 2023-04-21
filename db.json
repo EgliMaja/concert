@@ -1,12 +1,22 @@
 {
   "userDataData": [
     {
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "phone": "+344 62 83 85 234",
+      "email": "admin@gmail.com",
+      "password": "sfghfgh2327$$",
+      "role": "ADMIN" ,
+      "id": 235234324
+    },
+    {
       "firstName": "Egli",
       "lastName": "Maja",
       "phone": "0688185255",
       "email": "firstperson@gmail.com",
       "password": "12345678",
       "confirm_password": "12345678",
+      "role": "USER" ,
       "id": 2
     },
     {
@@ -15,6 +25,7 @@
       "phone": "+3550688385255",
       "email": "secondperson@gmail.com",
       "password": "12345678",
+      "role": "USER" ,
       "id": 3
     },
     {
@@ -23,6 +34,7 @@
       "phone": "+344 62 83 85 234",
       "email": "person@gmail.com",
       "password": "sdfwewer3424",
+      "role": "USER" ,
       "id": 4
     }
   ],

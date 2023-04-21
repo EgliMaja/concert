@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SidebarMenu } from 'src/app/model/sidebar-menu-model';
-import { userData } from 'src/app/model/userData';
-import { MyserviceService } from 'src/app/service/myservice.service';
+import { UserService } from 'src/app/service/user-service.service';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
 
 @Component({
@@ -24,7 +23,7 @@ export class SidebarMenuComponent implements OnInit {
     private _router: Router ,
     private menuService: SidebarMenuService ,
     private activatedRoute : ActivatedRoute,
-    private user_service : MyserviceService )  { }
+    private user_service : UserService )  { }
 
   ngOnInit(): void {
     this.getMenu();

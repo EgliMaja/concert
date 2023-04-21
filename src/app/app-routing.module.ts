@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddComponent } from './component/add/add.component';
-import { EditComponent } from './component/edit/edit.component';
-import { ViewadminComponent } from './component/viewadmin/viewadmin.component';
+// import { EditComponent } from './component/edit/edit.component';
+// import { ViewadminComponent } from './component/viewadmin/viewadmin.component';
 
 const routes: Routes = [
   { path:'', redirectTo:'signin', pathMatch:'full'},
@@ -18,9 +17,8 @@ const routes: Routes = [
     path: 'rihanna',
     loadChildren: ()=> import('src/app/component/dashboard/dashboard.module').then((m)=> m.DashboardModule)
   },
-  {path:'viewadmin',component:ViewadminComponent},
-  { path:'add',component:AddComponent},
-  {path:'edit/update/:dataid',component:EditComponent}
+  // {path:'viewadmin',component:ViewadminComponent},
+  // {path:'edit/update/:dataid',component:EditComponent}
 
 ];
 

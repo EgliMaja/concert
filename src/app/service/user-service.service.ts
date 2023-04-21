@@ -8,7 +8,7 @@ import { userData } from '../model/userData';
 @Injectable({
   providedIn: 'root'
 })
-export class MyserviceService {
+export class UserService {
 
   private api: string;
   private userDatas: BehaviorSubject<userData[]> = new BehaviorSubject<userData[]>([])

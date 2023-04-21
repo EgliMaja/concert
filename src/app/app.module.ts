@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddComponent } from './component/add/add.component';
 import { EditComponent } from './component/edit/edit.component';
 import { ViewadminComponent } from './component/viewadmin/viewadmin.component';
 import { MatInputModule } from '@angular/material/input';
@@ -20,11 +19,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DevExtComponent } from './component/dev-ext/dev-ext.component';
 import { DxAutocompleteModule } from 'devextreme-angular';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddComponent,
     EditComponent,
     ViewadminComponent,
     DevExtComponent,
@@ -45,7 +44,9 @@ import { DxAutocompleteModule } from 'devextreme-angular';
     ObserversModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    DxAutocompleteModule
+    DxAutocompleteModule,
+    RouterModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -4,5 +4,6 @@ export interface userData{
   lastName: string;
   phone:number;
   email:string;
-  password:number;
+  password:string;
+  role : string[];
 }

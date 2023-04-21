@@ -7,10 +7,10 @@ import { concertService } from 'src/app/service/add-concert.service';
 
 @Component({
   selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss'],
+  templateUrl: './create-ticket.component.html',
+  styleUrls: ['./create-ticket.component.scss'],
 })
-export class AddComponent implements OnInit {
+export class CreateTicketComponent implements OnInit {
   public concertTicket: concert = {} as concert;
   private addTicket: BehaviorSubject<concert[]> = new BehaviorSubject<concert[]>([]);
   $addTicket: Observable<concert[]> = this.addTicket.asObservable();

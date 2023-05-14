@@ -6,7 +6,7 @@
       "phone": "+344 62 83 85 234",
       "email": "admin@gmail.com",
       "password": "sfghfgh2327$$",
-      "role": "ADMIN" ,
+      "role": "ADMIN",
       "id": 235234324
     },
     {
@@ -16,7 +16,7 @@
       "email": "firstperson@gmail.com",
       "password": "12345678",
       "confirm_password": "12345678",
-      "role": "USER" ,
+      "role": "USER",
       "id": 2
     },
     {
@@ -25,7 +25,7 @@
       "phone": "+3550688385255",
       "email": "secondperson@gmail.com",
       "password": "12345678",
-      "role": "USER" ,
+      "role": "USER",
       "id": 3
     },
     {
@@ -34,9 +34,21 @@
       "phone": "+344 62 83 85 234",
       "email": "person@gmail.com",
       "password": "sdfwewer3424",
-      "role": "USER" ,
+      "role": "USER",
       "id": 4
     }
   ],
-  "concert": []
+  "DataTour": [
+    {
+      "cityTourLocation": "Los Angeles",
+      "tourName": "Concert of the Valor",
+      "tourDate": "2023-05-14",
+      "priceOfTicket": "",
+      "barcode": "000001239860004",
+      "uploadedImage": "C:\\fakepath\\concert2.jpg",
+      "addressLocation": "LA Street , 04",
+      "artistName": "Rihanna",
+      "id": 1
+    }
+  ]
 }

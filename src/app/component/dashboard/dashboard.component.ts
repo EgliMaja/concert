@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { userData } from 'src/app/model/userData';
 import { UserService } from 'src/app/service/user-service.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class DashboardComponent implements OnInit {
   private userRole : string[];
   private adminRole : string[];
   role: string[] =['ADMIN','USER']
+  userData! : userData;
 
   constructor(private userService : UserService) {
     this.userRole = ['USER'];

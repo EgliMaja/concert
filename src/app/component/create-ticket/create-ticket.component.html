@@ -1,22 +1,98 @@
-<form [formGroup]="GenerateTicket" (ngSubmit)="generateTicket()">
-  <input
-    type="text"
-    placeholder="Location"
-    name="location"
-    formControlName="location"
-  />
-  <input type="date" name="date" formArrayName="date" [min]="ToDate" />
-  <input
-    type="number"
-    placeholder="Price"
-    name="price"
-    formControlName="price"
-  />
-  <input
-    type="text"
-    placeholder="Add Coment"
-    name="coment"
-    formControlName="coment"
-  />
-  <button type="submit">Generate</button>
-</form>
+<div class="container">
+  <div class="row backgorund body mt-3">
+    <div class="col-6">
+      <form [formGroup]="GenerateTicket">
+        <div class="mt-2 d-flex justify-content-center">
+          <h6 class="text-white ticket">Ticket</h6>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <!-- City Tour Location  -->
+            <label for="cityTour" class="form-label">City</label>
+            <label *ngIf="cityTourLocation?.invalid && (cityTourLocation?.dirty || cityTourLocation?.touched)"
+              class="text-danger">
+              <p *ngIf="cityTourLocation?.errors?.['required']">City is required.</p>
+              <p *ngIf="cityTourLocation?.errors?.['pattern']">City must have text characters !</p>
+            </label>
+            <input id="cityTour" class="form-control" name="cityTourLocation" formControlName="cityTourLocation">
+
+            <!-- Address of the Concert -->
+            <label for="addressLocation" class="form-label">Address</label>
+            <label *ngIf="addressLocation?.invalid && (addressLocation?.dirty || addressLocation?.touched)"
+              class="text-danger">
+              <p *ngIf="addressLocation?.errors?.['required']"> Address is required. </p>
+              <p *ngIf="addressLocation?.errors?.['pattern']"> Write th address in correct format!</p>
+            </label>
+            <input id="addressLocation" class="form-control" name="addressLocation" formControlName="addressLocation">
+
+            <!-- Tour Name for the Concert  -->
+            <label for="tourName" class="form-label">Tour Name</label>
+            <label *ngIf="tourName?.invalid && (tourName?.dirty || tourName?.touched)" class="text-danger">
+              <p *ngIf="tourName?.errors?.['required']"> Tour Name is required. </p>
+              <p *ngIf="tourName?.errors?.['pattern']"> Tour Name must have text charactes!</p>
+            </label>
+            <input id="tourName" class="form-control" name="tourName" formControlName="tourName">
+
+            <!-- Start date of the concert -->
+            <label for="data" class="form-label">Tour Date</label>
+            <label *ngIf="tourDate?.invalid && (tourDate?.dirty || tourDate?.touched)" class="text-danger">
+              <p *ngIf="tourDate?.errors?.['required']">Toour Date is required.</p>
+            </label>
+            <input id="data" type="date" class="form-control" name="tourDate" formControlName="tourDate" [min]="ToDate">
+          </div>
+
+          <div class="col-6">
+            <!-- Price of the ticket -->
+            <label for="priceOfTicket" class="form-label">Price</label>
+            <label *ngIf="priceOfTicket?.invalid && (priceOfTicket?.dirty || priceOfTicket?.touched)"
+              class="text-danger">
+              <p *ngIf="priceOfTicket?.errors?.['required']"> Price of ticket is required. </p>
+              <p *ngIf="priceOfTicket?.errors?.['pattern']"> Price must be number characters ! </p>
+              <p *ngIf="priceOfTicket?.errors?.['min']"> Price must be greater then 35$. </p>
+              <p *ngIf="priceOfTicket?.errors?.['max']"> Price must be less then 1200$. </p>
+            </label>
+            <input id="priceOfTicket" type="number" class="form-control" name="priceOfTicket"
+              formArrayName="priceOfTicket" min="35" max="1200">
+
+            <!-- Barcote of ticket to identify it -->
+            <label for="barcode" class="form-label">Barcode</label>
+            <label *ngIf="barcode?.invalid && (barcode?.dirty || barcode?.touched)" class="text-danger">
+              <p *ngIf="barcode?.errors?.['required']"> Barcode is required.</p>
+              <p *ngIf="barcode?.errors?.['pattern']"> Barcode must be number characters ! </p>
+              <p *ngIf="barcode?.errors?.['minLength']"> Barcode must have at least 15 numbers. </p>
+            </label>
+            <input id="barcode" class="form-control" name="barcode" formControlName="barcode">
+
+            <!-- Insert a picture for the ticket design-->
+            <label for="theme" class="form-label">Insert Photo</label>
+            <label *ngIf="uploadedImage?.invalid && (uploadedImage?.dirty || uploadedImage?.touched)"
+              class="text-danger">
+              <p *ngIf="uploadedImage?.errors?.['required']"> You should upload a photo! </p>
+            </label>
+            <input id="theme" class="form-control" type="file" name="uploadedImage" formControlName="uploadedImage">
+
+            <!-- Artist or Band Name that they will sing -->
+            <label for="artistName" class="form-label">Artist Name</label>
+            <label *ngIf="artistName?.invalid && (artistName?.dirty || artistName?.touched)" class="text-danger">
+              <p *ngIf="artistName?.errors?.['required']"> Artist name is required. </p>
+              <p *ngIf="artistName?.errors?.['pattern']"> Artist name must be text characters ! </p>
+            </label>
+            <input id="artistName" class="form-control" name="artistName" formControlName="artistName">
+
+
+          </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button class="btn" [disabled]="GenerateTicket.invalid" (click)="generateTicket(GenerateTicket.value)">Create</button>
+        </div>
+      </form>
+      <div *ngIf="ticetCreatedSucces" class="bg-success text-white d-flex justify-content-center">
+        <h6>Ticket is created Successfully.</h6>
+      </div>
+      <div *ngIf="ticetCreatedError" class="bg-danger text-white d-flex justify-content-center">
+        <h6>Ticket is not created !</h6>
+      </div>
+    </div>
+    <div class="col-6 "></div>
+  </div>
+</div>

@@ -1,8 +1,11 @@
 
-export interface concert{
-  location:string;
-  price:number;
-  date:Date;
-  coment:string;
-  id?:number;
+export interface DataTour{
+  tourName : string;
+  tourDate : Date;
+  priceOfTicket : number;
+  barcode : string;
+  uploadedImage : string;
+  addressLocation : string;
+  cityTourLocation : string;
+  artistName : string;
 }

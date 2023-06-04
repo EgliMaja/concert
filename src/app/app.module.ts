@@ -27,9 +27,8 @@ import { DxAutocompleteModule } from 'devextreme-angular';
     FormsModule,
     HttpClientModule,
     ObserversModule,
-    DxAutocompleteModule
+    DxAutocompleteModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -13,12 +13,8 @@ export class SidebarMenuComponent implements OnInit {
 
   menu!: SidebarMenu[];
   url!: string;
-  roles!: string[];
-  sidebar_menu!: SidebarMenu[];
-  fisrtName!: string;
-  lastName!: string;
   logedUserName! : string;
-
+  logedUser : any[]=[];
   constructor(
     private _router: Router ,
     private menuService: SidebarMenuService ,
@@ -46,9 +42,10 @@ export class SidebarMenuComponent implements OnInit {
   getUserData(){
     this.user_service.getRegisterList().subscribe({
       next:(res)=>{
-        this.fisrtName = res[0]?.firstName;
-        this.lastName = res[0]?.lastName;
-        this.logedUserName = `${this.fisrtName} ${this.lastName}`;
+        this.logedUser = Array(res.map((el=> {
+          this.logedUserName = `${el.firstName}  ${el.lastName}`;
+        })))
+
         console.log('USER', this.logedUserName);
       },
       error:(err)=> {
@@ -62,12 +59,6 @@ export class SidebarMenuComponent implements OnInit {
     this._router.navigate([route],{relativeTo: this.activatedRoute})
   }
 
-  getMenuDataByRole():void{
-    this.sidebar_menu = this.menu.filter( _ =>
-      _.roles.some(el => this.roles.includes(el.role))
-      ).map((element)=>{
-        return {...element , roles : element.roles.filter((subElement)=> subElement.role)};
-      });
-  }
+
 
 }

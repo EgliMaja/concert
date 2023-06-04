@@ -49,6 +49,94 @@
       "addressLocation": "LA Street , 04",
       "artistName": "Rihanna",
       "id": 1
+    },
+    {
+      "cityTourLocation": "Roma",
+      "tourName": "Sunny Hill",
+      "tourDate": "2023-07-29",
+      "priceOfTicket": 170,
+      "barcode": "010009892570003",
+      "uploadedImage": "C:\\fakepath\\concert.jpg",
+      "addressLocation": "Via Mazzarino, 11",
+      "artistName": "Dua Lipa",
+      "id": 2
+    },
+    {
+      "cityTourLocation": "Valencia",
+      "tourName": "Anti World Tour",
+      "tourDate": "2023-09-30",
+      "priceOfTicket": 350,
+      "barcode": "000006737900125",
+      "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
+      "addressLocation": "Carrer Llíria, 5",
+      "artistName": "Eminem",
+      "id": 3
+    },
+    {
+      "cityTourLocation": "Paris",
+      "tourName": "Good Girl Gone Bad",
+      "tourDate": "2023-10-24",
+      "priceOfTicket": 450,
+      "barcode": "001001239800096",
+      "uploadedImage": "C:\\fakepath\\concert2.jpg",
+      "addressLocation": "Jardin du Luxembourg, 75006",
+      "artistName": "Rihanna",
+      "id": 4
+    },
+    {
+      "cityTourLocation": "Brussels",
+      "tourName": "Sunny Hill",
+      "tourDate": "2023-07-29",
+      "priceOfTicket": 170,
+      "barcode": "010309792110006",
+      "uploadedImage": "C:\\fakepath\\concert.jpg",
+      "addressLocation": "Nord-Est, 1000",
+      "artistName": "Selena Gomez",
+      "id": 5
+    },
+    {
+      "cityTourLocation": "London",
+      "tourName": "Anti World Tour",
+      "tourDate": "2023-09-30",
+      "priceOfTicket": 220,
+      "barcode": "111006757900000",
+      "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
+      "addressLocation": "7 Albemarle St, London W1S 4HQ, UK",
+      "artistName": "Rita Ora",
+      "id": 6
+    },
+    {
+      "cityTourLocation": "Manchester",
+      "tourName": "Concert of the Valor",
+      "tourDate": "2023-05-14",
+      "priceOfTicket": "",
+      "barcode": "200008301860009",
+      "uploadedImage": "C:\\fakepath\\concert2.jpg",
+      "addressLocation": "23-33 Aden Cl, Manchester M12 6WH, UK",
+      "artistName": "Bebe Rexha",
+      "id": 7
+    },
+    {
+      "cityTourLocation": "Madrid",
+      "tourName": "Diamonds World Tour",
+      "tourDate": "2023-07-29",
+      "priceOfTicket": 500,
+      "barcode": "050002811170033",
+      "uploadedImage": "C:\\fakepath\\concert.jpg",
+      "addressLocation": "Palacio, 28013 Madrid, Spain",
+      "artistName": "Maluma",
+      "id": 8
+    },
+    {
+      "cityTourLocation": "Atlanta",
+      "tourName": "Loud Tour",
+      "tourDate": "2023-09-30",
+      "priceOfTicket": 350,
+      "barcode": "111002749900155",
+      "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
+      "addressLocation": "Atlanta, GA 30309, USA",
+      "artistName": "Beyonce",
+      "id": 9
     }
   ]
 }

@@ -18,8 +18,8 @@ export class CreateTicketService {
   }
 
   //  display data for DataTour
-  getTicket(): Observable<DataTour> {
-    return this.http.get<DataTour>(`${this.api}`);
+  getDataCreatedTicket(): Observable<DataTour[]> {
+    return this.http.get<DataTour[]>(`${this.api}`);
   }
 
   // create new data for DataTour

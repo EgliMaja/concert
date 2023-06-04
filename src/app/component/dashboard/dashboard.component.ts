@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { userData } from 'src/app/model/userData';
+import { appRoles, userData } from 'src/app/model/userData';
 import { UserService } from 'src/app/service/user-service.service';
 
 @Component({
@@ -9,15 +9,12 @@ import { UserService } from 'src/app/service/user-service.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private userRole : string[];
-  private adminRole : string[];
-  role: string[] =['ADMIN','USER']
-  userData! : userData;
+  userData! : userData[];
+  userRole! : appRoles;
+  roleAdmin : any;
+  roleUser : any;
 
-  constructor(private userService : UserService) {
-    this.userRole = ['USER'];
-    this.adminRole = ['ADMIN'];
-   }
+  constructor(private userService : UserService) {}
 
   ngOnInit(): void {
     this.getUserData();
@@ -26,18 +23,13 @@ export class DashboardComponent implements OnInit {
   getUserData(){
     this.userService.getRegisterList().subscribe({
       next:(res)=>{
-        if(this.adminRole = res[0].role){
-          this.role[0];
-          console.log(this.role , 'Admin Role')
-        }
-        else{
-          this.role[1];
-          console.log(this.role , 'User Role')
-        }
+        this.userData = res;
+        this.roleAdmin = this.userData[0].role[0];
+        this.roleUser = this.userData[0].role[1];
       },
-      error : (err) => {
+      error:(err)=>{
         console.log(err)
-      },
+      }
     })
   }
 

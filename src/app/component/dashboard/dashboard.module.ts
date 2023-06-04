@@ -14,6 +14,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import { MatDialogModule } from "@angular/material/dialog";
+import {HasRolesDirective} from "../../user-role.directive";
+import {SearchPipe} from "../../pipes/search.pipe";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations : [
@@ -21,6 +24,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     SidebarMenuComponent,
     NavbarComponent,
     CreateTicketComponent,
+    HasRolesDirective,
+    SearchPipe,
   ],
   imports : [
     CommonModule,
@@ -35,8 +40,9 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatButtonModule,
     MatSelectModule,
     MatDialogModule,
+    NgxPaginationModule,
   ],
-  bootstrap :[CreateTicketComponent]
+  bootstrap: [CreateTicketComponent]
 })
 
 export class DashboardModule {}

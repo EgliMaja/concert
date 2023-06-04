@@ -1,51 +1,51 @@
-.body{
+.body {
   background-image: url('https://wallpapercave.com/wp/wp4035876.jpg');
   width: 100%;
   height: 100%;
-  background-size:cover;
-  background-repeat:no-repeat;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.backgorund{
+.backgorund {
   margin-left: 120px;
 }
 
-.create-ticketForm , .ticket-list{
+.create-ticketForm, .ticket-list {
   border: 1px solid #B5ACAC;
-  background-color:  #B5ACAC;
+  background-color: #B5ACAC;
   margin-top: 50px;
   margin-left: 20px;
   box-sizing: border-box;
   box-shadow: #B5ACAC 1px 1px 2px,
-              #B5ACAC 1px 3px 5px;
+  #B5ACAC 1px 3px 5px;
   width: 100%;
   height: 480px;
   border-radius: 15px;
   position: relative;
 }
 
-input{
+input {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
 }
 
-.form-label{
+.form-label {
   text-transform: initial;
   font-weight: 400;
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.btn{
+.btn {
   color: white;
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background-color: #322121;
   font-weight: 400;
   text-transform: uppercase;
 }
 
-.ticket , .price{
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+.ticket, .price {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -53,20 +53,60 @@ input{
   text-transform: uppercase;
 }
 
-.bg-success , .bg-danger{
+.bg-success, .bg-danger {
   margin-left: 35px;
 }
 
-.text-danger{
+.text-danger {
   margin-left: 15px;
 }
 
-.bi-info-circle{
+.bi-info-circle {
   height: 20px;
   width: 20px;
 }
 
-.input-group-text{
+.input-group-text {
   background-color: #B5ACAC;
   border: 1px solid #B5ACAC;
 }
+
+//design for paginator
+::ng-deep {
+  .ngx-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .ngx-pagination li {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: black;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ngx-pagination li.current {
+    background-color: #322121 ;
+  }
+
+  li.small-screen {
+    display: none !important;
+  }
+
+  .pagination-previous,
+  .pagination-next {
+    a, span {
+      display: none !important;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+}
+

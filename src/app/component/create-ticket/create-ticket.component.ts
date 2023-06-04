@@ -24,6 +24,9 @@ export class CreateTicketComponent implements OnInit {
   ticetCreatedError: boolean = false;
   selectedFile: any;
   ticket!: "";
+  page: number = 1;
+  ticketPerPage: number = 5;
+  totalTickets: any;
   constructor(private service: CreateTicketService) {}
 
   ngOnInit(): void {
@@ -80,6 +83,7 @@ export class CreateTicketComponent implements OnInit {
     this.service.getDataCreatedTicket().subscribe({
       next: (res) => {
         this.ticketDetails = res;
+        this.totalTickets = res.length;
         console.log(res, 'Tour Tickets');
       },
       error: (err) => {

@@ -1,5 +1,7 @@
 <div class="container">
   <div class="row backgorund body mt-3">
+
+<!--  Create Ticket Form  -->
     <div class="col-6">
       <form [formGroup]="GenerateTicket" class="create-ticketForm">
         <div class="mt-2 d-flex justify-content-center">
@@ -96,70 +98,33 @@
       </div>
     </div>
 
-
+<!--List Of Ticket Form-->
     <div class="col-6 ">
       <ul class="list-group ticket-list" *ngIf="ticketDetails.length >= 1">
         <form [formGroup]="searchTicket">
           <div class=" input-group">
             <input type="search" placeholder="Search for Ticket" class="form-control mt-1" name="cityTourLocation"
                    formControlName="cityTourLocation" [(ngModel)]="ticket">
-<!--            <div class="input-group-append">-->
-<!--              <span class="input-group-text">-->
-<!--                <button class="btn" (click)="searchToTicket(searchTicket.value)">-->
-<!--                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-<!--                       class="bi bi-search"-->
-<!--                       viewBox="0 0 16 16">-->
-<!--                  <path-->
-<!--                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>-->
-<!--                </svg>-->
-<!--              </button>-->
-<!--            </span>-->
-<!--            </div>-->
           </div>
         </form>
-
-        <div class="table  table-responsive-sm table-bordered table-striped">
-          <table class="table">
-            <tbody>
-            <tr *ngFor="let item of ticketDetails | searchCityTourLocationFilter : ticket" class="table-light">
-              <td>{{item.barcode}}</td>
-              <td>{{item.tourName}}</td>
-              <td>{{item.cityTourLocation}}</td>
-              <td>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                     height="16" fill="currentColor"
-                     class="bi bi-three-dots-vertical"
-                     viewBox="0 0 16 16">
-                  <path
-                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                </svg>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngFor="let item of ticketDetails | searchCityTourLocationFilter : ticket | paginate: {itemsPerPage : ticketPerPage , currentPage : page}">
+          <p class="d-flex justify-content-start">{{item.barcode}}</p>
+          <p class="d-flex justify-content-start">{{item.tourName}}</p>
+          <p class="d-flex justify-content-start">{{item.cityTourLocation}}</p>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16"
+               height="16" fill="currentColor"
+               class="bi bi-three-dots-vertical"
+               viewBox="0 0 16 16">
+            <path
+              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+          </svg>
+        </li>
+        <div class="mt-3">
+        <div class="py-5 flex justify-center align-center">
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
         </div>
-<!--        <li class="list-group-item d-flex justify-content-between align-items-center"-->
-<!--            *ngFor="let item of ticketDetails  ">-->
-
-<!--          <p class="d-flex justify-content-start">{{item.barcode}}</p>-->
-<!--          <p class="d-flex justify-content-start">{{item.tourName}}</p>-->
-<!--          <p class="d-flex justify-content-start">{{item.cityTourLocation}}</p>-->
-<!--          <svg xmlns="http://www.w3.org/2000/svg" width="16"-->
-<!--               height="16" fill="currentColor"-->
-<!--               class="bi bi-three-dots-vertical"-->
-<!--               viewBox="0 0 16 16">-->
-<!--            <path-->
-<!--              d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>-->
-<!--          </svg>-->
-<!--        </li>-->
-
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item active">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-        </ul>
+        </div>
       </ul>
     </div>
 

@@ -12,9 +12,13 @@ const routes: Routes = [
     loadChildren: ()=> import('src/app/component/register/register.module').then((m) => m.RegisterModule)
   },
   {
-    path: 'rihanna',
+    path: 'home',
     loadChildren: ()=> import('src/app/component/dashboard/dashboard.module').then((m)=> m.DashboardModule)
   },
+  {
+    path: '**',
+    loadChildren :()=> import('src/app/component/signin/signin.module').then((m)=> m.SigninModule)
+  }
 ];
 
 @NgModule({

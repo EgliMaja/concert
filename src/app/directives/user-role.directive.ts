@@ -1,4 +1,4 @@
-import { userData , appRoles } from "./model/userData";
+import { userData , ERoles } from "../model/userData";
 import { Directive , Input , OnChanges ,TemplateRef , ViewContainerRef  }from '@angular/core';
 
 @Directive({
@@ -8,10 +8,10 @@ import { Directive , Input , OnChanges ,TemplateRef , ViewContainerRef  }from '@
 export class HasRolesDirective implements OnChanges{
 
   private visible! : boolean;
-  private roles! : appRoles[];
+  private roles! : ERoles[];
   private account! : userData;
 
-  @Input() set hasRoles(roles : appRoles[]) {
+  @Input() set hasRoles(roles : ERoles[]) {
     this.roles = roles;
   }
 

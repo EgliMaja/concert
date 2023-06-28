@@ -54,7 +54,7 @@ export class SigninComponent implements OnInit {
         })
         if(user){
           this.login.reset();
-          this.route.navigate(['rihanna'])
+          this.route.navigate(['home/rihanna'])
         }
       },
       error : (err) => {

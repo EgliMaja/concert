@@ -1,8 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {tap} from 'rxjs';
-import {DataTour} from 'src/app/model/concert';
-import {CreateTicketService} from 'src/app/service/create-ticket.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
+import { DataTour } from 'src/app/model/concert';
+import { CreateTicketService } from 'src/app/service/create-ticket.service';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-ticket',
@@ -27,7 +28,18 @@ export class CreateTicketComponent implements OnInit {
   page: number = 1;
   ticketPerPage: number = 5;
   totalTickets: any;
-  constructor(private service: CreateTicketService) {}
+  barcodePaths!: any[];
+  // id: number;
+  choosenBarcode: any;
+  constructor(
+    private service: CreateTicketService ,
+    private activatedRoute : ActivatedRoute,
+    private route : Router,
+    ) {
+    // this.choosenBarcode = this.activatedRoute.snapshot.paramMap.get('barcode');
+    this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
+
+  }
 
   ngOnInit(): void {
     this.validateGenerateTicketForm();
@@ -84,6 +96,7 @@ export class CreateTicketComponent implements OnInit {
       next: (res) => {
         this.ticketDetails = res;
         this.totalTickets = res.length;
+        this.barcodePaths = Array(res.map((el)=>{el.barcode}))
         console.log(res, 'Tour Tickets');
       },
       error: (err) => {
@@ -167,5 +180,9 @@ export class CreateTicketComponent implements OnInit {
     }
   }
 
+
+  navigateDetailsOfTicker(tour: DataTour){
+    this.route.navigate(['rihanna/ticket/'+ this.choosenBarcode])
+  }
 
 }

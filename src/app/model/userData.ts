@@ -5,10 +5,10 @@ export interface userData{
   phone:number;
   email:string;
   password:string;
-  role : appRoles[];
+  role : ERoles[];
 }
 
-export enum appRoles {
+export enum ERoles {
   admin = 'ADMIN',
   user = 'USER',
 }

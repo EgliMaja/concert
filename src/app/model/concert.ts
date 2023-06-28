@@ -8,4 +8,5 @@ export interface DataTour{
   addressLocation : string;
   cityTourLocation : string;
   artistName : string;
+  id?: number;
 }

@@ -49,7 +49,7 @@ export class CreateTicketService {
 
 
   // get the details of created ticket by barcode param
-  getTicketDetils(barcode : string):Observable<DataTour> {
+  getTicketDetails(barcode : string):Observable<DataTour> {
     return  this.http.get<DataTour>(`${this.api}`+  barcode).pipe(
       tap(_ => this.log(`fetched DataTour barcode=${barcode}`)),
       catchError(this.handleError<DataTour>(`getDataTour  barcode=${barcode}`))

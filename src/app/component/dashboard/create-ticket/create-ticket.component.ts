@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { ActivatedRoute, Router } from "@angular/router";
@@ -9,6 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
   styleUrls: ['./create-ticket.component.scss'],
+  providers: [CreateTicketService]
 })
 export class CreateTicketComponent implements OnInit {
 
@@ -173,16 +173,17 @@ export class CreateTicketComponent implements OnInit {
 
 // check if the value is null or not
   isNull(value: any) {
-    if (value === null || value === '' || value === undefined) {
-      return false;
-    } else {
-      return true;
+    return !(value === null || value === '' || value === undefined);
+  }
+
+  onItemClick(event: any , barcode: string){
+    if(event.listener.selected){
+      this.navigateDetailsOfTicker(barcode);
     }
   }
 
-
-  navigateDetailsOfTicker(tour: DataTour){
-    this.route.navigate(['rihanna/ticket/'+ this.choosenBarcode])
+  navigateDetailsOfTicker(barcode: string){
+    this.route.navigate(['rihanna/ticket/'+ barcode])
   }
 
 }

@@ -23,7 +23,7 @@ export class SidebarMenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMenu();
-    this.getUserData();
+    // this.getUserData();
   }
 
   getMenu():void{
@@ -39,20 +39,20 @@ export class SidebarMenuComponent implements OnInit {
     })
   }
 
-  getUserData(){
-    this.user_service.getRegisterList().subscribe({
-      next:(res)=>{
-        this.logedUser = Array(res.map((el=> {
-          this.logedUserName = `${el.firstName}  ${el.lastName}`;
-        })))
-
-        console.log('USER', this.logedUserName);
-      },
-      error:(err)=> {
-        console.log(err)
-      },
-    })
-  }
+  // getUserData(){
+  //   this.user_service.getRegisterList().subscribe({
+  //     next:(res)=>{
+  //       this.logedUser = Array(res.map((el=> {
+  //         this.logedUserName = `${el.firstName}  ${el.lastName}`;
+  //       })))
+  //
+  //       console.log('USER', this.logedUserName);
+  //     },
+  //     error:(err)=> {
+  //       console.log(err)
+  //     },
+  //   })
+  // }
 
   navigateToComponent(route: string){
     this.url = route;

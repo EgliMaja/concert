@@ -1,16 +1,16 @@
 export interface SidebarMenu{
-  id : number;
-  title : string;
+  id: number;
+  title: string;
   action: string;
-  roles : Role[];
+  roles: Role[];
 }
 
 export interface Role{
   id: number;
-  role : string;
+  role: string;
 }
 
 export interface DataSidebarMenu{
-  data : SidebarMenu[];
+  data: SidebarMenu[];
 }
 

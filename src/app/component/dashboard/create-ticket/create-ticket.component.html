@@ -112,8 +112,9 @@
           <p class="d-flex justify-content-start">{{item.barcode}}</p>
           <p class="d-flex justify-content-start">{{item.tourName}}</p>
           <p class="d-flex justify-content-center">{{item.cityTourLocation}}</p>
-<!--          <div  [routerLink]="['rihanna/ticket/' , item.barcode]" >-->
-          <div  (click)="navigateDetailsOfTicker(choosenBarcode)">
+<!--          <div  [routerLink]="['/rihanna/ticket/' , item.barcode]" >-->
+          <div  (click)="onItemClick($event , item.barcode)">
+<!--          <div  (click)="navigateDetailsOfTicker()">-->
           <svg xmlns="http://www.w3.org/2000/svg" width="16"
                height="16" fill="currentColor"
                class="bi bi-three-dots-vertical"

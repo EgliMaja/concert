@@ -11,6 +11,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     ReactiveFormsModule,
     FormsModule,
   ],
-
+  exports: [DetailsTicketComponent]
 })
 export class DetailsTicketModule {}

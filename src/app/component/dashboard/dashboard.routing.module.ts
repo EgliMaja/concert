@@ -8,6 +8,11 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
+        path: 'home',
+        loadChildren: ()=>
+          import('src/app/component/dashboard/dashboard.module').then((m)=> m.DashboardModule),
+      },
+      {
         path: 'rihanna',
         loadChildren: () =>
           import('./create-ticket/create-ticket.module').then((m) => m.CreateTicketModule)
@@ -22,13 +27,12 @@ const routes: Routes = [
         loadChildren: () =>
           import('src/app/component/signin/signin.module').then((m) => m.SigninModule)
       }
-    ]
-  }
+      ]
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule {
-}
+export class DashboardRoutingModule {}

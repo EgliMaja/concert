@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { userData } from 'src/app/model/userData';
+import {ERoles, userData} from 'src/app/model/userData';
 import { UserService } from 'src/app/service/user-service.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,12 +14,12 @@ import { environment } from 'src/environments/environment';
 
 export class SigninComponent implements OnInit {
 
-  user: userData = {} as userData;
   login! : FormGroup;
   private api: string;
-  dataUser! : userData;
-  private role : string[];
-
+  userRole:any[] = [
+      ERoles.admin,
+      ERoles.user
+  ];
   constructor(
     private route: Router ,
     private httpClient : HttpClient ,
@@ -28,7 +28,6 @@ export class SigninComponent implements OnInit {
     )
     {
     this.api = environment.api + 'userDataData/';
-    this.role = ['ADMIN','USER'];
     }
 
   ngOnInit(): void {
@@ -56,6 +55,11 @@ export class SigninComponent implements OnInit {
           this.login.reset();
           this.route.navigate(['home/rihanna'])
         }
+        // This check should be functional when firstly
+        // a person who registered in the app should be by default user 'USER'
+        // else if (user?.role == this.userRole[1]){
+        //   this.route.navigate(['path to navigate '])
+        // }
       },
       error : (err) => {
         console.log(err , 'This user Not Found');

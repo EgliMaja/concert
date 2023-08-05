@@ -1,20 +1,17 @@
 .body {
-  background-image: url('https://wallpapercave.com/wp/wp4035876.jpg');
+  //background-image: url('https://wallpapercave.com/wp/wp4035876.jpg');
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.backgorund {
-  margin-left: 120px;
+  background-repeat: repeat;
+  background-color: #d0d0d0;
+  margin: 10px 120px 100px 120px;
 }
 
 .create-ticketForm, .ticket-list {
   border: 1px solid #B5ACAC;
   background-color: #B5ACAC;
   margin-top: 50px;
-  margin-left: 20px;
   box-sizing: border-box;
   box-shadow: #B5ACAC 1px 1px 2px,
   #B5ACAC 1px 3px 5px;

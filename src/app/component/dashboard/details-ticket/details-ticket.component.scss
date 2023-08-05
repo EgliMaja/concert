@@ -1,9 +1,10 @@
 .body {
-  background-image: url('https://conc.art/files/2015/04/rihanna_ncaa_final_four_march_madness_indianapolis_2015-008-1200x675-cropped.jpg');
+  //background-image: url('https://conc.art/files/2015/04/rihanna_ncaa_final_four_march_madness_indianapolis_2015-008-1200x675-cropped.jpg');
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+  background-color: #d0d0d0;
   margin: 10px 120px 100px 120px;
 }
 
@@ -29,4 +30,6 @@
   rotate: 270deg;
   margin-left: 70px;
   font-weight: bold;
+  letter-spacing: 9px;
+  margin-top: 25px;
 }

@@ -7,27 +7,27 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     children: [
+      { path: '', pathMatch: "full", redirectTo: 'home' },
       {
         path: 'home',
-        loadChildren: ()=>
-          import('src/app/component/dashboard/dashboard.module').then((m)=> m.DashboardModule),
+        loadChildren: () => import('./dashboard.module').then((m) => m.DashboardModule),
       },
       {
         path: 'rihanna',
         loadChildren: () =>
-          import('./create-ticket/create-ticket.module').then((m) => m.CreateTicketModule)
+          import('./create-ticket/create-ticket.module').then((m) => m.CreateTicketModule),
       },
       {
-        path: 'rihanna/ticket/:barcode',
+        path: 'ticket/:barcode',
         loadChildren: () =>
-          import('./details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule)
+          import('./details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
       },
       {
         path: '**',
         loadChildren: () =>
-          import('src/app/component/signin/signin.module').then((m) => m.SigninModule)
-      }
-      ]
+          import('../signin/signin.module').then((m) => m.SigninModule),
+      },
+    ],
   },
 ];
 

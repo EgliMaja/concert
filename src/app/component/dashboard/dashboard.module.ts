@@ -7,8 +7,6 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { HasRolesDirective } from "../../directives/user-role.directive";
 import { HttpClientModule } from "@angular/common/http";
 import { ObserversModule } from "@angular/cdk/observers";
-import { CreateTicketService } from "src/app/service/create-ticket.service";
-import { UserService } from "src/app/service/user-service.service";
 
 @NgModule({
   declarations : [
@@ -23,11 +21,12 @@ import { UserService } from "src/app/service/user-service.service";
     HttpClientModule,
     ObserversModule,
    ],
-  providers: [
-    CreateTicketService,
-    UserService,
+  exports: [
+    DashboardComponent ,
+    SidebarMenuComponent,
+    NavbarComponent,
+    HasRolesDirective,
   ],
-  bootstrap: [DashboardComponent],
 })
 
 export class DashboardModule {}

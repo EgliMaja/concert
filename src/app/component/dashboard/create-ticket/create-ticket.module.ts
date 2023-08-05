@@ -5,6 +5,8 @@ import { CreateTicektRoutingModule } from "./create-ticekt.routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SearchPipe } from "../../../pipes/search.pipe";
 import { NgxPaginationModule } from "ngx-pagination";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     NgxPaginationModule,
     ReactiveFormsModule,
     FormsModule,
+    MatProgressSpinnerModule,
   ],
   exports: [CreateTicketComponent]
 })

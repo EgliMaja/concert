@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="row backgorund body mt-3">
+<div class="container body">
+  <div class="row   mt-3">
 
 <!--  Create Ticket Form  -->
     <div class="col-6">
@@ -61,9 +61,9 @@
             <label *ngIf="barcode?.invalid && (barcode?.dirty || barcode?.touched)" class="text-danger">
               <p *ngIf="barcode?.errors?.['required']"> Barcode is required.</p>
               <p *ngIf="barcode?.errors?.['pattern']"> Barcode must be number characters ! </p>
-              <p *ngIf="barcode?.errors?.['minLength']"> Barcode must have at least 15 numbers. </p>
+              <p *ngIf="barcode?.errors?.['min']"> Barcode must have at least 16 numbers. </p>
             </label>
-            <input id="barcode" class="form-control" name="barcode" formControlName="barcode">
+            <input id="barcode" class="form-control" name="barcode" formControlName="barcode" [maxlength]="16" [minlength]="16">
 
             <!-- Insert a picture for the ticket design-->
             <label for="wallpaper" class="form-label">Insert Photo</label>
@@ -103,18 +103,20 @@
       <ul class="list-group ticket-list" *ngIf="ticketDetails.length >= 1">
         <form [formGroup]="searchTicket">
           <div class=" input-group">
-            <input type="search" placeholder="Search for Ticket From City Name" class="form-control mt-1" name="cityTourLocation"
+            <input type="search" placeholder="Search for Ticket" class="form-control mt-1" name="cityTourLocation"
                    formControlName="cityTourLocation" [(ngModel)]="ticket">
           </div>
         </form>
-        <li class="list-group-item d-flex justify-content-between align-items-center"
+
+        <div *ngIf="loadingSpinner; else listOfTicket">
+          <mat-spinner></mat-spinner>
+        </div>
+        <li #listOfTickets class="list-group-item d-flex justify-content-between align-items-center"
             *ngFor="let item of ticketDetails | searchCityTourLocationFilter : ticket | paginate: {itemsPerPage : ticketPerPage , currentPage : page}">
           <p class="d-flex justify-content-start">{{item.barcode}}</p>
           <p class="d-flex justify-content-start">{{item.tourName}}</p>
           <p class="d-flex justify-content-center">{{item.cityTourLocation}}</p>
-<!--          <div  [routerLink]="['/rihanna/ticket/' , item.barcode]" >-->
-          <div  (click)="onItemClick($event , item.barcode)">
-<!--          <div  (click)="navigateDetailsOfTicker()">-->
+          <div  (click)="navigateDetailsOfTicker(item?.barcode)">
           <svg xmlns="http://www.w3.org/2000/svg" width="16"
                height="16" fill="currentColor"
                class="bi bi-three-dots-vertical"

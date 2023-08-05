@@ -10,9 +10,9 @@ import { DataTour } from "../../../model/concert";
 })
 export class DetailsTicketComponent implements OnInit {
 
-  // id: number;
   choosenBarcode: any;
   dataTour! : DataTour;
+
 
   constructor(
     private service : CreateTicketService,
@@ -28,20 +28,22 @@ export class DetailsTicketComponent implements OnInit {
 
   getDetailsOfTicketByBarcode(){
     this.service.getTicketDetails(this.choosenBarcode).subscribe({
-      next:(res)=>{
+      next:(resp)=>{
+        if(this.choosenBarcode){
           this.dataTour = {
-            tourName: res.tourName,
-            tourDate: res.tourDate,
-            priceOfTicket: res.priceOfTicket,
-            barcode: res.barcode,
-            uploadedImage: res.uploadedImage,
-            addressLocation: res.addressLocation,
-            cityTourLocation: res.cityTourLocation,
-            artistName: res.artistName,
-            id: res.id
+            tourName: resp.tourName,
+            tourDate: resp.tourDate,
+            priceOfTicket: resp.priceOfTicket,
+            barcode: resp.barcode,
+            uploadedImage: resp.uploadedImage,
+            addressLocation: resp.addressLocation,
+            cityTourLocation: resp.cityTourLocation,
+            artistName: resp.artistName,
+            id: resp.id
           } as DataTour;
+        }
           console.log(this.service.$creatTicket , ' Ticket');
-          console.log(res , ' Choosen Ticket');
+          console.log(resp , ' Choosen Ticket');
       },
       error:(err)=>{
         console.log(err)

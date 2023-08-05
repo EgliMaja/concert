@@ -1,17 +1,19 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, AfterViewInit, ViewChild, OnDestroy} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { ActivatedRoute, Router } from "@angular/router";
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
   styleUrls: ['./create-ticket.component.scss'],
   providers: [CreateTicketService]
 })
-export class CreateTicketComponent implements OnInit {
+export class CreateTicketComponent implements OnInit , AfterViewInit , OnDestroy{
 
+  @ViewChild('listOfTickets') listOfTicket : any;
+  subscription!: Subscription;
   GenerateTicket!: FormGroup;
   searchTicket!: FormGroup;
   tourDatas!: DataTour;
@@ -29,25 +31,32 @@ export class CreateTicketComponent implements OnInit {
   ticketPerPage: number = 5;
   totalTickets: any;
   barcodePaths!: any[];
-  // id: number;
   choosenBarcode: any;
+  loadingSpinner: boolean = true;
   constructor(
     private service: CreateTicketService ,
     private activatedRoute : ActivatedRoute,
     private route : Router,
     ) {
-    // this.choosenBarcode = this.activatedRoute.snapshot.paramMap.get('barcode');
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
-
   }
 
   ngOnInit(): void {
     this.validateGenerateTicketForm();
     this.searchValidator();
-    this.getDataTicket();
   }
 
-  validateGenerateTicketForm() {
+  ngAfterViewInit() {
+    this.loadingTickets();
+  }
+
+  ngOnDestroy() {
+    if(this.subscription){
+        this.subscription.unsubscribe();
+    }
+  }
+
+    validateGenerateTicketForm() {
     this.GenerateTicket = new FormGroup({
 
       cityTourLocation: new FormControl(
@@ -72,7 +81,7 @@ export class CreateTicketComponent implements OnInit {
 
       barcode: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(this.numberPattern), Validators.minLength(15)]),
+        [Validators.required, Validators.min(1000000000000000) , Validators.max(9999999999999999) ,Validators.pattern(this.numberPattern)]),
 
       uploadedImage: new FormControl(
         {value: '', disabled: false}, [Validators.required]),
@@ -81,6 +90,18 @@ export class CreateTicketComponent implements OnInit {
         {value: '', disabled: false},
         [Validators.required, Validators.pattern(this.textPattern)]),
     });
+  }
+
+  // loading indicator
+  loadingTickets(){
+    setTimeout(()=>{
+      if(this.listOfTicket){
+          this.loadingSpinner = true;
+      }else {
+        this.getDataTicket();
+        this.loadingSpinner = false;
+      }
+    } , 1000);
   }
 
   // search form validator
@@ -92,15 +113,16 @@ export class CreateTicketComponent implements OnInit {
 
 // Get All Created Tickets
   getDataTicket() {
-    this.service.getDataCreatedTicket().subscribe({
+    this.subscription = this.service.getDataCreatedTicket().subscribe({
       next: (res) => {
         this.ticketDetails = res;
         this.totalTickets = res.length;
-        this.barcodePaths = Array(res.map((el)=>{el.barcode}))
-        console.log(res, 'Tour Tickets');
+        this.barcodePaths = Array(res.map((el)=>{el.barcode}));
+        this.loadingSpinner = false;
       },
       error: (err) => {
         console.log(err);
+        this.loadingSpinner = false;
       },
     });
   }
@@ -116,6 +138,7 @@ export class CreateTicketComponent implements OnInit {
       uploadedImage: Data.uploadedImage,
       addressLocation: Data.addressLocation,
       artistName: Data.artistName,
+      id: Data.id
     } as DataTour;
     this.service.createTour(this.tourDatas).subscribe({
       next: (res) => {
@@ -155,35 +178,8 @@ export class CreateTicketComponent implements OnInit {
     }
   }
 
-// Search ticket from the name of city
-  searchToTicket(Value: any) {
-    let CITY = Value.cityTourLocation;
-
-    if(!this.isNull(Value)){
-      CITY = Value.cityTourLocation.trim();
-    }
-
-    this.ticketDetails.filter(
-      (value: DataTour) => {
-        ((!this.isNull(CITY)) || value?.cityTourLocation.includes(value?.cityTourLocation?.toLowerCase()))
-        console.log(CITY)
-      }
-    )
-  }
-
-// check if the value is null or not
-  isNull(value: any) {
-    return !(value === null || value === '' || value === undefined);
-  }
-
-  onItemClick(event: any , barcode: string){
-    if(event.listener.selected){
-      this.navigateDetailsOfTicker(barcode);
-    }
-  }
-
-  navigateDetailsOfTicker(barcode: string){
-    this.route.navigate(['rihanna/ticket/'+ barcode])
+  navigateDetailsOfTicker(barcode: any){
+    this.route.navigate(['home/ticket/'+ barcode])
   }
 
 }

@@ -1,16 +1,55 @@
 <div class="body">
   <div class="container">
-    <div class="row">
-      <div class="body-ticket">
-      <div class="col-2">
-        <img alt="" src="https://www.labelsandlabeling.com/sites/labels/lnl/files/Books/figure_1.1_-_barcodes_-_a_pattern_of_black_and_white_lines.png" class="image-barcode"> <br>
-          <div class="barcode">
-            {{choosenBarcode}}
-          </div>
-        </div>
-      <div class="col-5"></div>
-      <div class="col-5"></div>
+    <div class="row d-flex justify-content-center">
+      <div *ngIf="loadingSpinner; else loadindicator" class="body-ticket d-flex justify-content-center">
+        <mat-spinner></mat-spinner>
       </div>
+      <ng-template #loadindicator>
+        <form [formGroup]="ticket" class="body-ticket">
+          <div class="row">
+            <div class="col-2 backgound-img">
+              <div class="col d-flex justify-content-end">
+                  <button class="btn bg-white text-black fw-bold" (click)="goBackButton()">Go Back</button>
+              </div>
+              <div class="col d-flex justify-content-start">
+                  <img alt="" src="./assets/images/barcode.png" class="image-barcode">
+              </div>
+                  <input class="form-control barcode" formControlName="barcode" [readonly]="isReadonlyInput">
+            </div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-5">
+                <h5 class="text-black"></h5>
+                <label for="cityTour" class="form-label mt-1">City</label>
+                <input class="form-control" formControlName="cityTourLocation"
+                       [readonly]="isReadonlyInput" id="cityTour">
+
+                <label for="artistName" class="form-label mt-1">Artist</label>
+                <input class="form-control"  formControlName="artistName"
+                       [readonly]="isReadonlyInput" id="artistName">
+
+                <label for="date" class="form-label mt-1">Tour Date</label>
+                <input class="form-control"  formControlName="tourDate"
+                       [readonly]="isReadonlyInput" id="date">
+              </div>
+
+              <div class="col-5">
+                <h5 class="text-black"></h5>
+                <label for="tourName" class="form-label mt-1">Tour Name</label>
+                <input class="form-control"  formControlName="tourName"
+                       [readonly]="isReadonlyInput" id="tourName">
+
+                <label for="price" class="form-label mt-1">Price</label>
+                <input class="form-control"  formControlName="priceOfTicket"
+                       [readonly]="isReadonlyInput" id="price">
+
+                <label for="address" class="form-label mt-1">Tour Date</label>
+                <input class="form-control" formControlName="addressLocation"
+                       [readonly]="isReadonlyInput" id="address">
+              </div>
+            </div>
+          </div>
+        </form>
+      </ng-template>
     </div>
   </div>
 </div>

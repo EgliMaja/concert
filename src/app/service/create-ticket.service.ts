@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import {BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DataTour } from '../model/concert';
 @Injectable({
@@ -9,8 +9,7 @@ import { DataTour } from '../model/concert';
 
 export class CreateTicketService {
 
-  private api: string;
-  private message: any;
+  private readonly api: string;
   private createTicket: BehaviorSubject<DataTour[]> = new BehaviorSubject<DataTour[]>([]);
   $creatTicket: Observable<DataTour[]> = this.createTicket.asObservable();
 
@@ -18,35 +17,26 @@ export class CreateTicketService {
     this.api = environment.api + 'DataTour';
   }
 
-  private log(message: string) {
-    this.message.add(`HeroService: ${message}`);
-  }
 
-  //  display data for DataTour
+  //  Display data for DataTour
   getDataCreatedTicket(): Observable<DataTour[]> {
     return this.http.get<DataTour[]>(`${this.api}`);
   }
 
-  // get the data for ticket without []
-  getCreatedTicketDetail(): Observable<DataTour> {
-    return this.http.get<DataTour>(`${this.api}`);
-  }
-
-  // create new data for DataTour
+  // Create new data for DataTour
   createTour(DataTour: Omit<DataTour, 'id'>): Observable<DataTour> {
     return this.http.post<DataTour>(`${this.api}`, DataTour);
   }
 
 
-  // get the details of created ticket by barcode param
-  getTicketDetails(id: string): Observable<DataTour> {
-    const url = `${this.api}?id=${id}`;
-    return this.http.get<DataTour>(url).pipe(
-      catchError((error)=>{
-        console.log(error);
-        return throwError(error)
-      })
-    );
+  // Get the details of created ticket by barcode param
+  getTicketDetails(barcode: string ): Observable<DataTour[]> {
+    return this.http.get<DataTour[]>(`${this.api}?barcode=${barcode}`);
   }
+
+//  Modify the tour by barcode param
+    updateSelectedTicket(barcode: string , body:DataTour): Observable<DataTour>{
+    return this.http.put<DataTour>(`${this.api}?barcode=${barcode}` , body);
+    }
 
 }

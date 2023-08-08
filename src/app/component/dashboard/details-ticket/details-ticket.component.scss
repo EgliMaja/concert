@@ -1,5 +1,4 @@
 .body {
-  //background-image: url('https://conc.art/files/2015/04/rihanna_ncaa_final_four_march_madness_indianapolis_2015-008-1200x675-cropped.jpg');
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -9,27 +8,37 @@
 }
 
 .body-ticket{
-  margin-left: 200px;
   border-radius: 30px;
   background-color: white;
-  margin-top: 150px;
-  height: 350px;
-  width: 700px;
+  margin-top: 50px;
+  height: 500px;
+  width: 80%;
   box-sizing: border-box;
   box-shadow: #252525 1px 3px 5px 3px,
               #252525 2px 3px 3px;
 }
-
+.backgound-img{
+  background-image: url('~src/assets/images/concert2.jpg');
+  background-size: cover;
+  width: 100%;
+  box-sizing: border-box;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
 .image-barcode{
-  rotate: 90deg;
   width: 287px;
-  margin-top: 90px;
-  margin-left: -100px;
 }
 .barcode{
-  rotate: 270deg;
-  margin-left: 70px;
-  font-weight: bold;
+  font-weight: 700;
   letter-spacing: 9px;
-  margin-top: 25px;
+  color: white;
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn{
+  margin-top: 1px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 11px;
+  border-end-end-radius: 0px;
+  width: 100px;
 }

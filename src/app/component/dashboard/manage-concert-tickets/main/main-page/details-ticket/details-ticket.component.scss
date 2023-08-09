@@ -18,8 +18,9 @@
               #252525 2px 3px 3px;
 }
 .backgound-img{
-  //background-image: url('assets/images/concert2.jpg');
-  background-size: cover;
+  background-image: url('~src/assets/images/concert2.jpg');
+  background-size: contain;
+  background-repeat: repeat;
   width: 100%;
   box-sizing: border-box;
   border-top-left-radius: 30px;

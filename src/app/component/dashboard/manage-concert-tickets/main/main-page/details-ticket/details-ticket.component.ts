@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "src/app/service/create-ticket.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { DataTour } from "../../../model/concert";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { DataTour } from "../../../../../../model/concert";
 
 @Component({
     selector: 'app-details-ticket',

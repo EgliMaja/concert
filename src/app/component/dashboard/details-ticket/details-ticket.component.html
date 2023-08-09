@@ -5,46 +5,91 @@
         <mat-spinner></mat-spinner>
       </div>
       <ng-template #loadindicator>
-        <form [formGroup]="ticket" class="body-ticket">
+        <form [formGroup]="ticketFormGroup" class="body-ticket">
           <div class="row">
-            <div class="col-2 backgound-img">
-              <div class="col d-flex justify-content-end">
-                  <button class="btn bg-white text-black fw-bold" (click)="goBackButton()">Go Back</button>
-              </div>
+            <div class="backgound-img">
               <div class="col d-flex justify-content-start">
                   <img alt="" src="./assets/images/barcode.png" class="image-barcode">
               </div>
-                  <input class="form-control barcode" formControlName="barcode" [readonly]="isReadonlyInput">
+                <!--Barcode-->
+                  <input class="barcode" formControlName="barcode" [readonly]="!isReadonlyInput">
+                  <label *ngIf="barcode?.invalid || (barcode?.dirty || barcode?.touched)" class="text-danger bg-light">
+                    <p *ngIf="barcode?.errors?.['required']"> Barcode is required.</p>
+                    <p *ngIf="barcode?.errors?.['pattern']"> Barcode must be number characters ! </p>
+                    <p *ngIf="barcode?.errors?.['minLength']"> Barcode must have at least 16 numbers. </p>
+                    <p *ngIf="barcode?.errors?.['maxLength']"> Barcode must have at least 16 numbers. </p>
+                  </label>
             </div>
             <div class="row d-flex justify-content-center">
-              <div class="col-5">
+              <div class="col-6">
                 <h5 class="text-black"></h5>
+
+                <!--City-->
                 <label for="cityTour" class="form-label mt-1">City</label>
-                <input class="form-control" formControlName="cityTourLocation"
-                       [readonly]="isReadonlyInput" id="cityTour">
+                <label *ngIf="cityTourLocation?.invalid || (cityTourLocation?.dirty || cityTourLocation?.touched)"
+                       class="text-danger">
+                  <p *ngIf="cityTourLocation?.errors?.['required']">  is required.</p>
+                  <p *ngIf="cityTourLocation?.errors?.['pattern']">  must have text characters !</p>
+                </label>
+                <input class="form-control" name="cityTourLocation" formControlName="cityTourLocation" id="cityTour">
 
-                <label for="artistName" class="form-label mt-1">Artist</label>
-                <input class="form-control"  formControlName="artistName"
-                       [readonly]="isReadonlyInput" id="artistName">
+                <!--Artist Name-->
+                <label for="artistName" class="form-label mt-1">Artist Name</label>
+                <label *ngIf="artistName?.invalid || (artistName?.dirty || artistName?.touched)" class="text-danger">
+                  <p *ngIf="artistName?.errors?.['required']"> is required. </p>
+                  <p *ngIf="artistName?.errors?.['pattern']"> must be text characters ! </p>
+                </label>
+                <input class="form-control" name="artistName"  formControlName="artistName" id="artistName" [readonly]="!isReadonlyInput">
 
+                <!--Tour Date-->
                 <label for="date" class="form-label mt-1">Tour Date</label>
-                <input class="form-control"  formControlName="tourDate"
-                       [readonly]="isReadonlyInput" id="date">
+                <label *ngIf="tourDate?.invalid || (tourDate?.dirty || tourDate?.touched)" class="text-danger">
+                  <p *ngIf="tourDate?.errors?.['required']"> is required.</p>
+                </label>
+                <input class="form-control" name="tourDate" formControlName="tourDate" type="date"  id="date">
               </div>
 
-              <div class="col-5">
+              <div class="col-6">
                 <h5 class="text-black"></h5>
+
+                <!--Tour Name-->
                 <label for="tourName" class="form-label mt-1">Tour Name</label>
-                <input class="form-control"  formControlName="tourName"
-                       [readonly]="isReadonlyInput" id="tourName">
+                <label *ngIf="tourName?.invalid || (tourName?.dirty || tourName?.touched)" class="text-danger">
+                  <p *ngIf="tourName?.errors?.['required']">  is required. </p>
+                  <p *ngIf="tourName?.errors?.['pattern']">  must have text charactes!</p>
+                </label>
+                <input class="form-control" name="tourName" formControlName="tourName" id="tourName">
 
+                <!--Address-->
+                <label for="address" class="form-label mt-1">Address</label>
+                <label *ngIf="addressLocation?.invalid || (addressLocation?.dirty || addressLocation?.touched)"
+                       class="text-danger">
+                  <p *ngIf="addressLocation?.errors?.['required']">  is required. </p>
+                  <p *ngIf="addressLocation?.errors?.['pattern']">  should have correct format!</p>
+                </label>
+                <input class="form-control" name="addressLocation" formControlName="addressLocation"  id="address" >
+
+                <!--Price-->
                 <label for="price" class="form-label mt-1">Price</label>
-                <input class="form-control"  formControlName="priceOfTicket"
-                       [readonly]="isReadonlyInput" id="price">
+                <label *ngIf="priceOfTicket?.invalid || (priceOfTicket?.dirty || priceOfTicket?.touched)"
+                       class="text-danger">
+                  <p *ngIf="priceOfTicket?.errors?.['required']">  is required. </p>
+                  <p *ngIf="priceOfTicket?.errors?.['pattern']">  must be number characters ! </p>
+                  <p *ngIf="priceOfTicket?.errors?.['min']"> must be greater then 34$. </p>
+                  <p *ngIf="priceOfTicket?.errors?.['max']">  must be less then 1200$. </p>
+                </label>
+                <input class="form-control" id="price" placeholder="$" name="priceOfTicket" formControlName="priceOfTicket"
+                type="number" [readonly]="isReadonlyInput">
 
-                <label for="address" class="form-label mt-1">Tour Date</label>
-                <input class="form-control" formControlName="addressLocation"
-                       [readonly]="isReadonlyInput" id="address">
+                <div *ngIf="!isCheckedModify" class="col mt-3 d-flex justify-content-end">
+                  <button class="btn bg-black text-white fw-bold" (click)="goBackButton()">Go Back</button>
+                  <button class="btn bg-primary text-black fw-bold" (click)="onClickModify()">Modify</button>
+                </div>
+                <div *ngIf="isCheckedModify" class="col mt-3 d-flex justify-content-end">
+                  <button class="btn bg-black text-white fw-bold" (click)="onClickCancel()">Cancel</button>
+                  <button class="btn bg-danger text-white fw-bold">Delete</button>
+                  <button class="btn bg-primary text-black fw-bold" [disabled]="ticketFormGroup.invalid" (click)="modifyTicket(ticketFormGroup.value)">Save</button>
+                </div>
               </div>
             </div>
           </div>

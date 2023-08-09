@@ -4,7 +4,7 @@ export interface DataTour{
   tourDate: Date;
   priceOfTicket: number;
   barcode: string;
-  uploadedImage: string;
+  uploadedImage?: string;
   addressLocation: string;
   cityTourLocation: string;
   artistName: string;

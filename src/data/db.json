@@ -51,24 +51,24 @@
       "id": 1
     },
     {
-      "cityTourLocation": "Roma",
       "tourName": "Sunny Hill",
-      "tourDate": "2023-07-29",
-      "priceOfTicket": 170,
+      "tourDate": "2023-11-29",
+      "priceOfTicket": 432,
       "barcode": "0100098925700032",
       "uploadedImage": "C:\\fakepath\\concert.jpg",
-      "addressLocation": "Via Mazzarino, 11",
+      "addressLocation": "Rruga Dervish Hima 24-21",
+      "cityTourLocation": "Tirana",
       "artistName": "Dua Lipa",
       "id": 2
     },
     {
-      "cityTourLocation": "Valencia",
       "tourName": "Anti World Tour",
       "tourDate": "2023-09-30",
-      "priceOfTicket": 350,
+      "priceOfTicket": 280,
       "barcode": "0000067379001253",
       "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
-      "addressLocation": "Carrer Llíria, 5",
+      "addressLocation": "Carrer Lliria , 52",
+      "cityTourLocation": "Valencia",
       "artistName": "Eminem",
       "id": 3
     },

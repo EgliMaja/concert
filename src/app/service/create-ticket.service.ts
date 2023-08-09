@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DataTour } from '../model/concert';
 @Injectable({
@@ -34,9 +34,9 @@ export class CreateTicketService {
     return this.http.get<DataTour[]>(`${this.api}?barcode=${barcode}`);
   }
 
-//  Modify the tour by barcode param
-    updateSelectedTicket(barcode: string , body:DataTour): Observable<DataTour>{
-    return this.http.put<DataTour>(`${this.api}?barcode=${barcode}` , body);
+//  Modify the ticket
+    updateSelectedTicket(dataTour:DataTour): Observable<DataTour>{
+    return this.http.put<DataTour>((this.api)+'/'+dataTour.id , dataTour );
     }
 
 }

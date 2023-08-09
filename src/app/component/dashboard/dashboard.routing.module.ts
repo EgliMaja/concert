@@ -15,12 +15,12 @@ const routes: Routes = [
       {
         path: 'rihanna',
         loadChildren: () =>
-          import('./create-ticket/create-ticket.module').then((m) => m.CreateTicketModule),
+          import('./manage-concert-tickets/main/main-page/main-page.module').then((m)=> m.MainPageModule),
       },
       {
         path: 'ticket/:barcode',
         loadChildren: () =>
-          import('./details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
+          import('./manage-concert-tickets/main/main-page/details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
       },
       {
         path: '**',

@@ -1,8 +1,7 @@
-import {Component, OnInit, Input, AfterViewInit, ViewChild, OnDestroy} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
-import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-create-ticket',
@@ -10,14 +9,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./create-ticket.component.scss'],
   providers: [CreateTicketService]
 })
-export class CreateTicketComponent implements OnInit , AfterViewInit , OnDestroy{
+export class CreateTicketComponent implements OnInit {
 
-  @ViewChild('listOfTickets') listOfTicket : any;
   subscription!: Subscription;
   GenerateTicket!: FormGroup;
-  searchTicket!: FormGroup;
   tourDatas!: DataTour;
-  ticketDetails: DataTour[] = [];
   @Input() ToDate = new Date().toISOString().split('T')[0];
   textPattern = '^[a-zA-ZÀ-ÖØ-öø-ÿ\\s\\-\\+\\&\\,\\.\']+';
   numberPattern = '^-?[0-9]\\d*(\\,\\d{1,2})?$';
@@ -26,34 +22,11 @@ export class CreateTicketComponent implements OnInit , AfterViewInit , OnDestroy
   ticetCreatedSucces: boolean = false;
   ticetCreatedError: boolean = false;
   selectedFile: any;
-  ticket!: "";
-  page: number = 1;
-  ticketPerPage: number = 5;
-  totalTickets: any;
-  barcodePaths!: any[];
-  choosenBarcode: any;
-  loadingSpinner: boolean = true;
-  constructor(
-    private service: CreateTicketService ,
-    private activatedRoute : ActivatedRoute,
-    private route : Router,
-    ) {
-    this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
-  }
+
+  constructor(  private service: CreateTicketService ) { }
 
   ngOnInit(): void {
     this.validateGenerateTicketForm();
-    this.searchValidator();
-  }
-
-  ngAfterViewInit() {
-    this.loadingTickets();
-  }
-
-  ngOnDestroy() {
-    if(this.subscription){
-        this.subscription.unsubscribe();
-    }
   }
 
     validateGenerateTicketForm() {
@@ -89,41 +62,6 @@ export class CreateTicketComponent implements OnInit , AfterViewInit , OnDestroy
       artistName: new FormControl(
         {value: '', disabled: false},
         [Validators.required, Validators.pattern(this.textPattern)]),
-    });
-  }
-
-  // loading indicator
-  loadingTickets(){
-    setTimeout(()=>{
-      if(this.listOfTicket){
-          this.loadingSpinner = true;
-      }else {
-        this.getDataTicket();
-        this.loadingSpinner = false;
-      }
-    } , 1000);
-  }
-
-  // search form validator
-  searchValidator() {
-    this.searchTicket = new FormGroup({
-      cityTourLocation: new FormControl('', Validators.required),
-    })
-  }
-
-// Get All Created Tickets
-  getDataTicket() {
-    this.subscription = this.service.getDataCreatedTicket().subscribe({
-      next: (res) => {
-        this.ticketDetails = res;
-        this.totalTickets = res.length;
-        this.barcodePaths = Array(res.map((el)=>{el.barcode}));
-        this.loadingSpinner = false;
-      },
-      error: (err) => {
-        console.log(err);
-        this.loadingSpinner = false;
-      },
     });
   }
 
@@ -176,10 +114,6 @@ export class CreateTicketComponent implements OnInit , AfterViewInit , OnDestroy
         this.selectedFile = selectedFile;
       }
     }
-  }
-
-  navigateDetailsOfTicker(barcode: any){
-    this.route.navigate(['home/ticket/'+ barcode])
   }
 
 }

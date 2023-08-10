@@ -129,29 +129,26 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  }
 
  onClickModify() {
-    this.isCheckedModify = true;
-    this.isReadonlyInput = false;
-    this.ticketFormGroup.get('cityTourLocation')?.enable();
-    this.ticketFormGroup.get('addressLocation')?.enable();
-    this.ticketFormGroup.get('tourName')?.enable();
-    this.ticketFormGroup.get('tourDate')?.enable();
-    this.ticketFormGroup.get('priceOfTicket')?.enable();
-    this.ticketFormGroup.get('barcode')?.enable();
-    this.ticketFormGroup.get('uploadedImage')?.enable();
-    this.ticketFormGroup.get('artistName')?.enable();
+  this.isCheckedModify = true;
+  this.isReadonlyInput = false;
+  this.cityTourLocation?.enable();
+  this.addressLocation?.enable();
+  this.tourName?.enable();
+  this.tourDate?.enable();
+  this.priceOfTicket?.enable();
+  this.artistName?.enable();
  }
 
  onClickCancel() {
-    this.isCheckedModify = false;
-    this.isReadonlyInput = true;
-    this.ticketFormGroup.get('cityTourLocation')?.disable();
-    this.ticketFormGroup.get('addressLocation')?.disable();
-    this.ticketFormGroup.get('tourName')?.disable();
-    this.ticketFormGroup.get('tourDate')?.disable();
-    this.ticketFormGroup.get('barcode')?.disable();
-    this.ticketFormGroup.get('uploadedImage')?.disable();
-    this.ticketFormGroup.get('artistName')?.disable();
-    this.formGroupValidationTicket();
+  this.isCheckedModify = false;
+  this.isReadonlyInput = true;
+  this.cityTourLocation?.disable();
+  this.addressLocation?.disable();
+  this.tourName?.disable();
+  this.tourDate?.disable();
+  this.priceOfTicket?.disable();
+  this.artistName?.disable();
+  this.formGroupValidationTicket();
  }
 
 //Update the ticket

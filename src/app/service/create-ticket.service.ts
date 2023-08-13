@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DataTour } from '../model/concert';
 @Injectable({
@@ -10,11 +10,15 @@ import { DataTour } from '../model/concert';
 export class CreateTicketService {
 
   private readonly api: string;
-  private createTicket: BehaviorSubject<DataTour[]> = new BehaviorSubject<DataTour[]>([]);
-  $creatTicket: Observable<DataTour[]> = this.createTicket.asObservable();
-
-  constructor(private http: HttpClient) {
+    private createTicket: BehaviorSubject<DataTour[]>;
+    $ticket : Observable<DataTour[]>;
+    dataTour!: DataTour;
+  constructor(
+    private http: HttpClient,
+  ) {
     this.api = environment.api + 'DataTour';
+    this.createTicket = new BehaviorSubject<DataTour[]>([]);
+    this.$ticket = this.createTicket.asObservable();
   }
 
 
@@ -35,8 +39,14 @@ export class CreateTicketService {
   }
 
 //  Modify the ticket
-    updateSelectedTicket(dataTour:DataTour): Observable<DataTour>{
-    return this.http.put<DataTour>((this.api)+'/'+dataTour.id , dataTour );
-    }
+  updateSelectedTicket(dataTour:DataTour): Observable<DataTour>{
+  return this.http.put<DataTour>((this.api)+'/'+dataTour.id , dataTour );
+  }
+
+// Delete the ticket
+  deleteTicket(dataTour: DataTour): Observable<DataTour[]> {
+    return this.http.delete<DataTour[]>((this.api)+'/'+dataTour.id)
+  }
 
 }
+

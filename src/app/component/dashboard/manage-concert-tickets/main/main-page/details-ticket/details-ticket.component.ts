@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { CreateTicketService } from "src/app/service/create-ticket.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Subscription } from "rxjs";
+import {Subject, Subscription, takeUntil} from "rxjs";
 import { DataTour } from "../../../../../../model/concert";
+import { MatDialog } from "@angular/material/dialog";
+import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
+import {DataSharingService} from "../../../../../../service/data-sharing.service";
 
 @Component({
     selector: 'app-details-ticket',
@@ -14,7 +17,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 
  @ViewChild('loadindicator') loadindicator!: any;
  ticketFormGroup!: FormGroup;
- ticketDetailsSubscription!: Subscription;
+ ticketDetailsSubject: Subject<boolean> = new Subject<boolean>();
  choosenBarcode: any;
  dataTour!: DataTour;
  loadingSpinner: boolean = true;
@@ -24,12 +27,13 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  numberPattern = '^-?[0-9]\\d*(\\,\\d{1,2})?$';
  addressPattern = '^[A-Za-z0-9 ,.-]+$';
  cityPattern!: '^[a-zA-Z ]{1,19}$';
-
  constructor(
     private service: CreateTicketService,
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
+    private dialog: MatDialog,
+    private dataSharingService: DataSharingService,
  )
  {
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
@@ -45,9 +49,8 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  }
 
  ngOnDestroy() {
-    if (this.ticketDetailsSubscription) {
-        this.ticketDetailsSubscription.unsubscribe();
-    }
+     this.ticketDetailsSubject.next(true);
+     this.ticketDetailsSubject.unsubscribe();
  }
 
  formGroupValidationTicket() {
@@ -86,19 +89,20 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  }
 
  getDetailsOfTicketByBarcode() {
-    this.ticketDetailsSubscription = this.service.getTicketDetails(this.choosenBarcode).subscribe({
-        next: (resp) => {
-            this.dataTour = {
-                tourName: resp[0]?.tourName,
-                tourDate: resp[0]?.tourDate,
-                priceOfTicket: resp[0]?.priceOfTicket,
-                barcode: resp[0]?.barcode,
-                uploadedImage: resp[0]?.uploadedImage,
-                addressLocation: resp[0]?.addressLocation,
-                cityTourLocation: resp[0]?.cityTourLocation,
-                artistName: resp[0]?.artistName,
-                id: resp[0]?.id
-            } as DataTour;
+     this.service.getTicketDetails(this.choosenBarcode).pipe(
+         takeUntil(this.ticketDetailsSubject)).subscribe({
+         next: (resp) => {
+          this.dataTour = {
+              tourName: resp[0]?.tourName,
+              tourDate: resp[0]?.tourDate,
+              priceOfTicket: resp[0]?.priceOfTicket,
+              barcode: resp[0]?.barcode,
+              uploadedImage: resp[0]?.uploadedImage,
+              addressLocation: resp[0]?.addressLocation,
+              cityTourLocation: resp[0]?.cityTourLocation,
+              artistName: resp[0]?.artistName,
+              id: resp[0]?.id
+          } as DataTour;
             this.loadingSpinner = false;
             console.log(resp, ' Choosen Ticket');
         },
@@ -125,7 +129,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  }
 
  goBackButton() {
-    this.router.navigate(['home/rihanna'])
+   return  this.router.navigate(['home/rihanna'])
  }
 
  onClickModify() {
@@ -186,6 +190,12 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  get priceOfTicket() { return this.ticketFormGroup.get('priceOfTicket') };
  get artistName() { return this.ticketFormGroup.get('artistName') };
  get barcode() { return this.ticketFormGroup.get('barcode') };
+
+
+  openDialog(){
+      this.dialog.open(DeleteTicketComponent);
+      this.dataSharingService.setData(this.dataTour);
+  }
 
 
 }

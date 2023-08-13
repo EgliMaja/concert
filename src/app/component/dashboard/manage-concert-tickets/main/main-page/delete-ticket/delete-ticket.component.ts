@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreateTicketService } from "../../../../../../service/create-ticket.service";
 import { Router } from "@angular/router";
 import { DataTour } from "../../../../../../model/concert";
-import {DataSharingService} from "../../../../../../service/data-sharing.service";
-import {MatDialogRef} from "@angular/material/dialog";
+import { DataSharingService } from "../../../../../../service/data-sharing.service";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-delete-ticket',
@@ -46,7 +46,6 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class DeleteTicketComponent implements OnInit {
 
   dataTour!: DataTour;
-  deletedDataTour!: DataTour[];
 
   constructor(
     private service: CreateTicketService ,

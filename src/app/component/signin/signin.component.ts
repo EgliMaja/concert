@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {ERoles, userData} from 'src/app/model/userData';
-import { UserService } from 'src/app/service/user-service.service';
+import { ERoles, UserData } from 'src/app/model/userData';
+import { AuthUserService } from '../../service/auth-user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,17 +14,18 @@ import { environment } from 'src/environments/environment';
 
 export class SigninComponent implements OnInit {
 
-  login! : FormGroup;
+  loginFormGroup! : FormGroup;
   private api: string;
   userRole:any[] = [
       ERoles.admin,
       ERoles.user
   ];
+  user!: UserData | undefined;
   constructor(
     private route: Router ,
     private httpClient : HttpClient ,
     private fb : FormBuilder,
-    private userService : UserService
+    private userService : AuthUserService,
     )
     {
     this.api = environment.api + 'userDataData/';
@@ -35,7 +36,7 @@ export class SigninComponent implements OnInit {
   }
 
   validatorForm(){
-    this.login = this.fb.group({
+    this.loginFormGroup = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', [Validators.required , Validators.minLength(8) , Validators.maxLength(15)])
     })
@@ -46,24 +47,29 @@ export class SigninComponent implements OnInit {
   }
 
   signin(login : FormGroup){
-    this.httpClient.get<userData[]>(this.api).subscribe({
+    this.userService.getRegisterList().subscribe({
       next:(res)=>{
-        const user = res.find((userType: userData)=> {
-          return userType.email === this.login.value.email && userType.password === this.login.value.password;
-        })
-        if(user){
-          this.login.reset();
-          this.route.navigate(['home/rihanna'])
+        this.user = res.find((userType: UserData)=>{
+          return userType.email === login.value.email && userType.password === login.value.password;
+        });
+        if(this.user){
+          this.loginFormGroup.reset();
+          this.route.navigate(['home/rihanna']);
+          //     // This check should be functional when firstly
+          //     // a person who registered in the app should be by default user 'USER'
+          //     // else if (user?.role == this.userRole[1]){
+          //     //   this.route.navigate(['path to navigate '])
+          //     // }
         }
-        // This check should be functional when firstly
-        // a person who registered in the app should be by default user 'USER'
-        // else if (user?.role == this.userRole[1]){
-        //   this.route.navigate(['path to navigate '])
-        // }
       },
-      error : (err) => {
-        console.log(err , 'This user Not Found');
-      },
+      error:(error)=>{
+        if(!this.user){
+            console.log('User Not Found')
+          if (error.status == 401 || error.status == 403){
+            // console.log('User Not Found')
+          }
+        }
+      }
     })
   }
 

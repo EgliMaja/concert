@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SidebarMenu } from 'src/app/model/sidebar-menu-model';
-import { UserService } from 'src/app/service/user-service.service';
+import { AuthUserService } from '../../../service/auth-user.service';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
-import { userData } from "../../../model/userData";
+import { UserData } from "../../../model/userData";
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -20,7 +20,7 @@ export class SidebarMenuComponent implements OnInit {
     private _router: Router ,
     private menuService: SidebarMenuService ,
     private activatedRoute : ActivatedRoute,
-    private user_service : UserService )  { }
+    private user_service : AuthUserService )  { }
 
   ngOnInit(): void {
     this.getMenu();
@@ -42,7 +42,7 @@ export class SidebarMenuComponent implements OnInit {
   getUserData(){
     this.user_service.getRegisterList().subscribe({
       next:(res)=>{
-        const logedUser = res.find((user:userData)=>{
+        const logedUser = res.find((user:UserData)=>{
           this.logedUserName = user.firstName;
           this.logedLastName = user.lastName;
           return user.firstName || user.lastName;

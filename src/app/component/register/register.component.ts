@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { UserService } from 'src/app/service/user-service.service';
-import { userData } from 'src/app/model/userData';
+import { AuthUserService } from '../../service/auth-user.service';
+import { UserData } from 'src/app/model/userData';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +12,13 @@ import { userData } from 'src/app/model/userData';
 })
 export class RegisterComponent implements OnInit {
 
-  public personRegist: userData = {} as userData
-  private userDatas: BehaviorSubject<userData[]> = new BehaviorSubject<userData[]>([]);
-  userDatas$: Observable<userData[]> = this.userDatas.asObservable()
+  public personRegist: UserData = {} as UserData
+  private userDatas: BehaviorSubject<UserData[]> = new BehaviorSubject<UserData[]>([]);
+  userDatas$: Observable<UserData[]> = this.userDatas.asObservable()
   registerPerson!: FormGroup;
 
 
-  constructor(private service: UserService , private route: Router, private fb: FormBuilder) { }
+  constructor(private service: AuthUserService , private route: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.validatorForm();
@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
 
   createAccount() {
     this.service.adduserData(this.personRegist).subscribe({
-      next: (data: userData[]) => {
+      next: (data: UserData[]) => {
         console.log(data)
         alert('You are registered Sucessfully');
         this.route.navigate(['/signin'])

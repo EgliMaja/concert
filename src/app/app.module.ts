@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ObserversModule } from '@angular/cdk/observers';
-import { AuthUserService } from "./service/auth-user.service";
+import { UserService } from "./service/user-service.service";
 import { CreateTicketService } from "./service/create-ticket.service";
 
 @NgModule({
@@ -24,7 +24,7 @@ import { CreateTicketService } from "./service/create-ticket.service";
     ObserversModule,
   ],
   providers:[
-    AuthUserService,
+    UserService,
     CreateTicketService,
   ],
   bootstrap: [AppComponent],

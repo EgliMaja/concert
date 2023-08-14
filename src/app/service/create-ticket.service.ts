@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,7 @@ export class CreateTicketService {
   private readonly api: string;
     private createTicket: BehaviorSubject<DataTour[]>;
     $ticket : Observable<DataTour[]>;
+    dataTour!: DataTour;
   constructor(
     private http: HttpClient,
   ) {

@@ -1,39 +1,45 @@
-.container{
+.container {
   background-color: #eceeef;
   margin-left: 120px;
 }
-.header{
+
+.header {
   margin-top: 50px;
   display: flex;
   justify-content: center;
   font-size: 50px;
   font-family: Arial, Helvetica, sans-serif;
 }
-.warning-msg{
+
+.warning-msg {
   display: flex;
   justify-content: center;
   margin: 12px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 35px;
 }
-.error-status{
+
+.error-status {
   display: flex;
   justify-content: center;
   margin: 10px;
   font-weight: 900;
   font-size: 50px;
 }
-.error-message{
+
+.error-message {
   display: flex;
   justify-content: center;
   font-family: fangsong;
   font-size: 18px;
   margin: 10px;
 }
-.btn{
+
+.btn {
   width: 200px;
 }
-.image{
+
+.image {
   width: 500px;
   height: 500px;
 }

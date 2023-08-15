@@ -40,7 +40,7 @@ export class SidebarMenuComponent implements OnInit {
   }
 
   getUserData(){
-    this.user_service.getRegisterList().subscribe({
+    this.user_service.getAllUsersList().subscribe({
       next:(res)=>{
         const logedUser = res.find((user:UserData)=>{
           this.logedUserName = user.firstName;

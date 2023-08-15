@@ -10,10 +10,21 @@
         </div>
         <div class="text-center text-secondary">The Faster you fill up, the faster you get a ticket</div>
 
+        <div *ngIf="loadingSpinner"  class="d-flex justify-content-center">
+          <mat-spinner  color="warn" (progress)="signinLoading()"></mat-spinner>
+        </div>
+
+        <div *ngIf="displayErrorMsg" >
+          <div class="error-message d-flex justify-content-center">
+            {{errormsg}}
+          </div>
+        </div>
+
+
         <form [formGroup]="loginFormGroup">
           <mat-form-field class="example-full-width">
             <mat-label>Email</mat-label>
-            <input matInput type="email" name="email" formControlName="email" placeholder="Ex. pat@example.com" >
+            <input matInput type="email" name="email" formControlName="email" placeholder="Ex. pat@example.com">
             <i class="fa-solid fa-envelope"></i>
             <mat-hint *ngIf="loginFormGroup.get('required')?.errors">
               Email is <strong>required</strong>
@@ -25,19 +36,19 @@
 
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
-            <input matInput  type="password" name="password"  formControlName="password"
-              placeholder="The Password You Used During Registration">
+            <input matInput type="password" name="password" formControlName="password"
+                   placeholder="The Password You Used During Registration">
             <i class="fa-solid fa-key"></i>
             <mat-error *ngIf="loginFormGroup.get('required')?.errors">
               Password is <strong>required</strong>
             </mat-error>
             <mat-error *ngIf="loginFormGroup.get('password')?.errors">
-              Password is not  <strong>correct</strong>
+              Password is not <strong>correct</strong>
             </mat-error>
           </mat-form-field>
+          <button class="btn btn-dark" [disabled]="loginFormGroup.invalid" (click)="signin(loginFormGroup)">Sign in</button>
         </form>
 
-        <button class="btn btn-dark" (click)="signin(loginFormGroup)">Sign in</button>
 
         <div class="row">
           <div class="col text-center">

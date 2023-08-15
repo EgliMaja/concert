@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { AuthUserService } from '../../service/auth-user.service';
-import { environment } from 'src/environments/environment';
+import { DataSharingService } from "../../service/data-sharing.service";
 
 @Component({
   selector: 'app-signin',
@@ -12,27 +12,32 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./signin.component.scss']
 })
 
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit , AfterViewInit{
 
+  @ViewChild('displayErrorMsg') displayErrorMsg!: boolean;
+  loadingSpinner!: boolean;
   loginFormGroup! : FormGroup;
-  private api: string;
-  userRole:any[] = [
+  form:boolean = true;
+  errormsg!: string;
+  user!: UserData;
+  userRoles :any = [
       ERoles.admin,
       ERoles.user
   ];
-  user!: UserData | undefined;
+
   constructor(
     private route: Router ,
-    private httpClient : HttpClient ,
     private fb : FormBuilder,
     private userService : AuthUserService,
-    )
-    {
-    this.api = environment.api + 'userDataData/';
-    }
+    private dataShared: DataSharingService,
+  ) { }
 
   ngOnInit(): void {
     this.validatorForm();
+  }
+
+  ngAfterViewInit() {
+    this.signinLoading();
   }
 
   validatorForm(){
@@ -46,31 +51,75 @@ export class SigninComponent implements OnInit {
     this.route.navigate(['signup'])
   }
 
-  signin(login : FormGroup){
-    this.userService.getRegisterList().subscribe({
+  signin(login: FormGroup){
+    this.loadingSpinner = true;
+    this.userService.login(login.value.email , login.value.password).subscribe({
       next:(res)=>{
-        this.user = res.find((userType: UserData)=>{
-          return userType.email === login.value.email && userType.password === login.value.password;
+        const userType = res.find((user: UserData) => {
+          return user.password === login.value.password && user.email === login.value.email;
         });
-        if(this.user){
+
+        if (!userType) {
+          return;
+        }
+
+        this.user = {
+          email: userType.email,
+          password: userType.password,
+          firstName: userType.firstName,
+          lastName: userType.lastName,
+          role: userType.role,
+          phone: userType.phone
+        };
+
+        this.dataShared.setDataUser(this.user);
+
+        if (userType.role === this.userRoles[0]) {
           this.loginFormGroup.reset();
           this.route.navigate(['home/rihanna']);
-          //     // This check should be functional when firstly
-          //     // a person who registered in the app should be by default user 'USER'
-          //     // else if (user?.role == this.userRole[1]){
-          //     //   this.route.navigate(['path to navigate '])
-          //     // }
+        }
+
+        else if (userType.role === this.userRoles[1]) {
+          this.route.navigate(['**']);
+          this.loginFormGroup.reset();
         }
       },
-      error:(error)=>{
-        if(!this.user){
-            console.log('User Not Found')
-          if (error.status == 401 || error.status == 403){
-            // console.log('User Not Found')
+      error:(error: HttpErrorResponse)=>{
+        this.loadingSpinner = false;
+        this.displayErrorMsg = true;
+          if(error.status === 404 || !this.user){
+              this.errormsg = "This account does not exist!";
           }
-        }
+          if (error.status === 401){
+              this.errormsg = "This account has temporarily  blocked!";
+          }
+          if(error.status === 403){
+            this.errormsg = "Bad credentials";
+          }
+          if(error.status === 405){
+            this.errormsg = "Server connection error.";
+          }
+          if(error.status === 409){
+            this.errormsg = "Server conflict. Please retry again later!" ;
+          }
+          else {
+            this.errormsg = "Server connection refused."
+          }
+      },
+      complete:()=>{
+        this.loadingSpinner = false;
+        this.displayErrorMsg = false;
       }
-    })
+    });
+  }
+
+  // loading indicator
+ signinLoading() {
+    setTimeout(() => {
+      if (this.displayErrorMsg) {
+        this.loadingSpinner = false;
+      }
+    }, 100);
   }
 
 }

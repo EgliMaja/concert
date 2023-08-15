@@ -7,18 +7,20 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
 declarations : [SigninComponent],
 imports: [
   CommonModule,
+  SigninRoutingModule,
+  FormsModule,
+  ReactiveFormsModule,
   MatInputModule,
   MatFormFieldModule,
   MatButtonModule,
   MatIconModule,
-  FormsModule,
-  ReactiveFormsModule,
-  SigninRoutingModule
+  MatProgressSpinnerModule,
 ]
 })
 

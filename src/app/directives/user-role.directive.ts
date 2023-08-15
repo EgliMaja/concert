@@ -1,4 +1,4 @@
-import { userData , ERoles } from "../model/userData";
+import { UserData , ERoles } from "../model/userData";
 import { Directive , Input , OnChanges ,TemplateRef , ViewContainerRef  }from '@angular/core';
 
 @Directive({
@@ -9,13 +9,13 @@ export class HasRolesDirective implements OnChanges{
 
   private visible! : boolean;
   private roles! : ERoles[];
-  private account! : userData;
+  private account! : UserData;
 
   @Input() set hasRoles(roles : ERoles[]) {
     this.roles = roles;
   }
 
-  @Input('hasRolesFor') set hasRolesFor(account : userData){
+  @Input('hasRolesFor') set hasRolesFor(account : UserData){
     this.account = account;
   }
 
@@ -32,7 +32,9 @@ export class HasRolesDirective implements OnChanges{
       return;
     }
     // check if account roles include at least one of the input roles
-    if(this.account.role.some(role => this.roles.includes(role))){
+    if(this.account.role.some((role:any) => {
+      this.roles.includes(role)
+    })){
       this.viewContainer.clear();
       this.viewContainer.createEmbeddedView(this.templateRef);
       this.visible = true;

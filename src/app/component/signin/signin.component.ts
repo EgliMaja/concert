@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit , AfterViewInit{
   }
 
   validatorForm(){
-    this.login = this.fb.group({
+    this.loginFormGroup = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', [Validators.required , Validators.minLength(8) , Validators.maxLength(15)])
     })
@@ -83,14 +83,6 @@ export class SigninComponent implements OnInit , AfterViewInit{
           this.route.navigate(['**']);
           this.loginFormGroup.reset();
         }
-        // This check should be functional when firstly
-        // a person who registered in the app should be by default user 'USER'
-        // else if (user?.role == this.userRole[1]){
-        //   this.route.navigate(['path to navigate '])
-        // }
-      },
-      error : (err) => {
-        console.log(err , 'This user Not Found');
       },
       error:(error)=>{
         this.loadingSpinner = false;

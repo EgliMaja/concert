@@ -15,10 +15,10 @@ const routes: Routes = [
       path: 'home',
       loadChildren: () => import('src/app/component/dashboard/dashboard.module').then((m) => m.DashboardModule)
     },
-    {
-      path: '**',
-      loadChildren: () => import('src/app/error/error-page/error-page.module').then((m) => m.ErrorPageModule)
-    }
+    // {
+    //   path: '**',
+    //   loadChildren: () => import('src/app/error/error-page/error-page.module').then((m) => m.ErrorPageModule)
+    // }
 ];
 
 @NgModule({

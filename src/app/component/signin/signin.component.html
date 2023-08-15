@@ -26,10 +26,10 @@
             <mat-label>Email</mat-label>
             <input matInput type="email" name="email" formControlName="email" placeholder="Ex. pat@example.com">
             <i class="fa-solid fa-envelope"></i>
-            <mat-hint *ngIf="login.get('required')?.errors">
+            <mat-hint *ngIf="loginFormGroup.get('required')?.errors">
               Email is <strong>required</strong>
             </mat-hint>
-            <mat-hint *ngIf="login.get('email')?.errors">
+            <mat-hint *ngIf="loginFormGroup.get('email')?.errors">
               Please enter a valid email address
             </mat-hint>
           </mat-form-field>
@@ -39,7 +39,7 @@
             <input matInput type="password" name="password" formControlName="password"
                    placeholder="The Password You Used During Registration">
             <i class="fa-solid fa-key"></i>
-            <mat-error *ngIf="login.get('required')?.errors">
+            <mat-error *ngIf="loginFormGroup.get('required')?.errors">
               Password is <strong>required</strong>
             </mat-error>
             <mat-error *ngIf="loginFormGroup.get('password')?.errors">
@@ -48,8 +48,6 @@
           </mat-form-field>
           <button class="btn btn-dark" [disabled]="loginFormGroup.invalid" (click)="signin(loginFormGroup)">Sign in</button>
         </form>
-
-        <button class="btn btn-dark" (click)="signin(login)">Sign in</button>
 
         <div class="row">
           <div class="col text-center">

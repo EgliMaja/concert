@@ -75,8 +75,8 @@ export class SigninComponent implements OnInit , AfterViewInit{
         this.dataShared.setDataUser(this.user);
 
         if (userType.role === this.userRoles[0]) {
-          this.loginFormGroup.reset();
           this.route.navigate(['home/rihanna']);
+          this.loginFormGroup.reset();
         }
 
         else if (userType.role === this.userRoles[1]) {
@@ -84,22 +84,22 @@ export class SigninComponent implements OnInit , AfterViewInit{
           this.loginFormGroup.reset();
         }
       },
-      error:(error: HttpErrorResponse)=>{
+      error:(error)=>{
         this.loadingSpinner = false;
         this.displayErrorMsg = true;
-          if(error.status === 404 || !this.user){
-              this.errormsg = "This account does not exist!";
-          }
-          if (error.status === 401){
+          if (error.status == 401){
               this.errormsg = "This account has temporarily  blocked!";
           }
-          if(error.status === 403){
+          if(error.status == 403){
             this.errormsg = "Bad credentials";
           }
-          if(error.status === 405){
+          if(error.status == 404){
+              this.errormsg = "This account does not exist!";
+          }
+          if(error.status == 405){
             this.errormsg = "Server connection error.";
           }
-          if(error.status === 409){
+          if(error.status == 409){
             this.errormsg = "Server conflict. Please retry again later!" ;
           }
           else {

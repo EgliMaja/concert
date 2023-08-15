@@ -1,8 +1,8 @@
 {
-  "userDataData": [
+  "userDataa": [
     {
-      "firstName": "Admin",
-      "lastName": "Admin",
+      "firstName": "Egli",
+      "lastName": "Maja",
       "phone": "+344 62 83 85 234",
       "email": "admin@gmail.com",
       "password": "sfghfgh2327$$",
@@ -10,32 +10,14 @@
       "id": 235234324
     },
     {
-      "firstName": "Egli",
-      "lastName": "Maja",
+      "firstName": "Person",
+      "lastName": "User",
       "phone": "0688185255",
       "email": "firstperson@gmail.com",
       "password": "12345678",
       "confirm_password": "12345678",
       "role": "USER",
       "id": 2
-    },
-    {
-      "firstName": "Migena",
-      "lastName": "Losha",
-      "phone": "+3550688385255",
-      "email": "secondperson@gmail.com",
-      "password": "12345678",
-      "role": "USER",
-      "id": 3
-    },
-    {
-      "firstName": "Ina",
-      "lastName": "Maja",
-      "phone": "+344 62 83 85 234",
-      "email": "person@gmail.com",
-      "password": "sdfwewer3424",
-      "role": "USER",
-      "id": 4
     }
   ],
   "DataTour": [

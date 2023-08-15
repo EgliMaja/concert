@@ -17,7 +17,7 @@ export class AuthUserService {
   }
 
   login(email: string, password: string): Observable<UserData[]> {
-    return this.http.get<UserData[]>(`${this.api}?email=${email}&password${password}`);
+    return this.http.get<UserData[]>(`${this.api}?email=${email}&password=${password}`);
   }
 
   // get all registered users

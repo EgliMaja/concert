@@ -1,6 +1,6 @@
-<div class="container-fluid">
+  <div class="container-fluid">
   <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-center">
       <div class="col-5">
         <img src="https://wallpaperaccess.com/full/2151594.png" alt="">
       </div>
@@ -11,92 +11,99 @@
           personal account and being setting up your profile.
         </p>
 
-        <form [formGroup]="registerPerson">
-          <div class="row">
-            <div class="col-sm-6">
+          <form [formGroup]="registerFormGroup">
+              <div class="row">
+                  <div class="col-sm-6">
+                      <!--First Name-->
+                      <mat-form-field class="example-full-width">
+                          <mat-label>First Name</mat-label>
+                          <input matInput type="text" placeholder="Your Name" name="firstName" formControlName="firstName">
+                          <mat-hint  *ngIf="firstName?.invalid && (firstName?.touched ||  firstName?.dirty)"
+                                     class="text-danger fw-bold">
+                              <div *ngIf="firstName?.errors?.['required']">First Name is Required</div>
+                              <div *ngIf="firstName?.errors?.['minlength']">First Name should have at least 3 characters</div>
+                              <div *ngIf="firstName?.errors?.['maxlength']">First Name should have less than 21 characters</div>
+                              <div *ngIf="firstName?.errors?.['pattern']">Not Allowed Number Characters </div>
+                          </mat-hint>
+                      </mat-form-field>
 
-              <mat-form-field class="example-full-width">
-                <mat-label>First Name</mat-label>
-                <input matInput type="text" placeholder="Your Name" name="firstName" formControlName="firstName"
-                  [(ngModel)]="personRegist.firstName">
-              </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('required')?.errors">
-                First Name is Required
-              </mat-hint>
-            </div>
+                      <!--Phone Number -->
+                      <mat-form-field class="example-full-width">
+                          <mat-label>Telephone</mat-label>
+                          <input matInput type="phone" placeholder="+355 06X 123 1234" name="phone" formControlName="phone">
+                          <i class="fa-solid fa-phone"></i>
+                          <mat-hint  *ngIf="phoneNumber?.invalid && (phoneNumber?.touched ||  phoneNumber?.dirty)"
+                                     class="text-danger fw-bold">
+                              <div *ngIf="phoneNumber?.errors?.['required']">Phone Number is Required</div>
+                              <div *ngIf="phoneNumber?.errors?.['minlength']">Phone Number should have at least 12 characters</div>
+                              <div *ngIf="phoneNumber?.errors?.['pattern']">Phone Number Format is not Correct! </div>
+                          </mat-hint>
+                      </mat-form-field>
 
-            <div class="col-sm-6">
-              <mat-form-field class="example-full-width">
-                <mat-label>Last Name</mat-label>
-                <input matInput type="text" placeholder="Your Name" name="lastName" formControlName="lastName"
-                  [(ngModel)]="personRegist.lastName">
-              </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('required')?.errors">
-                Last Name is Invalid
-              </mat-hint>
-            </div>
-          </div>
+                      <!--Password-->
+                      <mat-form-field class="example-full-width">
+                          <mat-label>Password</mat-label>
+                          <input matInput type="password" placeholder=" Password " name="password" formControlName="password">
+                          <i class="fa-solid fa-key"></i>
+                          <mat-hint  *ngIf="password?.invalid && (password?.touched ||  password?.dirty)"
+                                     class="text-danger fw-bold">
+                              <div *ngIf="password?.errors?.['required']">Password is Required</div>
+                              <div *ngIf="password?.errors?.['minlength']">Password should have at least 8 characters</div>
+                              <div *ngIf="password?.errors?.['maxlength']">Password should have less than 16 characters</div>
+                          </mat-hint>
+                      </mat-form-field>
+                  </div>
 
-          <div class="row">
+                  <div class="col-sm-6">
+                      <!--Last Name-->
+                      <mat-form-field class="example-full-width">
+                          <mat-label>Last Name</mat-label>
+                          <input matInput type="text" placeholder="Your Name" name="lastName" formControlName="lastName">
+                          <mat-hint  *ngIf="lastName?.invalid && (lastName?.touched ||  lastName?.dirty)"
+                                     class="text-danger fw-bold">
+                              <div *ngIf="lastName?.errors?.['required']">Last Name is Required</div>
+                              <div *ngIf="lastName?.errors?.['minlength']">Last Name should have at least 3 characters</div>
+                              <div *ngIf="lastName?.errors?.['maxlength']">Last Name should have less than 21 characters</div>
+                              <div *ngIf="lastName?.errors?.['pattern']">Not Allowed Number Characters </div>
+                          </mat-hint>
+                      </mat-form-field>
 
-            <div class="col-sm-6">
-              <mat-form-field class="example-full-width">
-                <mat-label>Telephone</mat-label>
-                <input matInput type="phone" placeholder="+355 06X 765 4321" name="phone" formControlName="phone"
-                  [(ngModel)]="personRegist.phone">
-                <i class="fa-solid fa-phone"></i>
-              </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('required')?.errors">
-                Make sure you put phone number
-              </mat-hint>
-            </div>
+                      <!-- Email-->
+                      <mat-form-field class="example-full-width">
+                          <mat-label>Email</mat-label>
+                          <input matInput type="email" placeholder="Ex. pat@example.com" name="email" formControlName="email">
+                          <i class="fa-solid fa-envelope"></i>
+                          <mat-hint  *ngIf="email?.invalid && (email?.touched ||  email?.dirty)"
+                                     class="text-danger fw-bold">
+                              <div *ngIf="email?.errors?.['required']">Email is Required</div>
+                              <div *ngIf="email?.errors?.['email']">Missing @ character</div>
+                          </mat-hint>
+                      </mat-form-field>
 
-            <div class="col-sm-6">
-              <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" placeholder="Ex. pat@example.com" name="email" formControlName="email"
-                  [(ngModel)]="personRegist.email">
-                <i class="fa-solid fa-envelope"></i>
-              </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('required')?.errors">
-                Invalid e-mail
-              </mat-hint>
-            </div>
-          </div>
+                      <!-- Confirm Password-->
+                      <mat-form-field class="example-full-width">
+                          <mat-label>Confirm Password</mat-label>
+                          <input matInput type="password" placeholder="Repeat Password" name="confirm_password"
+                                 formControlName="confirm_password">
+                          <i class="fa-solid fa-key"></i>
+                          <mat-hint  *ngIf="confrimPassword?.invalid && (confrimPassword?.touched ||  confrimPassword?.dirty)"
+                                     class="text-danger fw-bold">
+                              <div *ngIf="confrimPassword?.errors?.['required']; ">Rewrite password!</div>
+                          </mat-hint>
+                      </mat-form-field>
+                  </div>
+              </div>
 
-          <div class="row">
-            <div class="col-sm-6">
-              <mat-form-field class="example-full-width">
-                <mat-label>Password</mat-label>
-                <input matInput type="password" placeholder=" Password " name="password" formControlName="password"
-                  [(ngModel)]="personRegist.password">
-                <i class="fa-solid fa-key"></i>
-              </mat-form-field>
-              <mat-hint *ngIf="registerPerson.get('required')?.errors">
-                Invalid Password
-              </mat-hint>
-            </div>
+              <button mat-button color="primary" [disabled]="registerFormGroup.invalid" (click)="createAccount(registerFormGroup.value)">Create Account</button>
 
-            <div class="col-sm-6">
-              <mat-form-field class="example-full-width">
-                <mat-label>Confirm Password</mat-label>
-                <input matInput type="password" placeholder="Repeat Password" name="confirm_password"
-                  formControlName="confirm_password">
-                <i class="fa-solid fa-key"></i>
-              </mat-form-field>
-              <mat-hint
-                *ngIf="registerPerson.get('required')?.errors">
-                Password is not equal
-              </mat-hint>
-            </div>
-          </div>
-
-          <button mat-button color="primary" (click)="createAccount()">Create Account</button>
-        </form>
+              <div *ngIf="invalidRegistration" class="d-flex justify-content-center">
+                 <div class="text-danger fw-bold">{{errorMessage}}</div>
+              </div>
+          </form>
 
         <h5 class="text-secondary text-center">Alredy have an account?</h5>
         <button (click)="goToSigninPage()">Log in</button>
       </div>
     </div>
   </div>
-</div>
+  </div>

@@ -45,6 +45,16 @@ button{
   margin-top: 35px;
 }
 
+.error-message{
+  color: #c10505 ;
+  background-color: #eaa4a4
+}
+.mat-spinner{
+  height: 35px !important;
+  width: 100% !important;
+  margin-left: 250px;
+}
+
 @media screen and (max-width:600px)  {
 .img-riri{
   opacity: 0;

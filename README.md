@@ -10,7 +10,6 @@ Run `json-server --watch src/data/db.json` to start running the fake api. Withou
 
 ##### Login access users:
 ###### email                  password
-person@gmail.com              sdfwewer3424
 firstperson@gmail.com         12345678
 admin@gmail.com               sfghfgh2327$$
 

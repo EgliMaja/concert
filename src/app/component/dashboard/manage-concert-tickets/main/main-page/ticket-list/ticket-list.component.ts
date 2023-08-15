@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { DataTour } from "../../../../../../model/concert";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
+import {ErrorHandleService} from "../../../../../../service/error-handle.service";
 
 @Component({
   selector: 'app-ticket-list',
@@ -28,6 +29,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
       private service: CreateTicketService,
       private router: Router,
       private activatedRoute : ActivatedRoute,
+      private errorService: ErrorHandleService,
       )
   {
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
@@ -58,7 +60,9 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
         // this.loadingSpinner = false;
       },
       error: (err) => {
+        this.errorService.getErrorMessage(err)
         console.log(err);
+
         // this.loadingSpinner = false;
       }
     });

@@ -24,9 +24,8 @@ const routes: Routes = [
       },
       {
         path: '**',
-        loadChildren: () =>
-          import('../signin/signin.module').then((m) => m.SigninModule),
-      },
+        loadChildren: () => import('src/app/error/error-page/error-page.module').then((m) => m.ErrorPageModule)
+      }
     ],
   },
 ];

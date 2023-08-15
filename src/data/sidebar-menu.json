@@ -19,7 +19,7 @@
     {
       "id":2,
       "title":"Music",
-      "action": "/",
+      "action": "**",
       "roles":[
         {
           "id":2.1,
@@ -35,7 +35,7 @@
     {
       "id":3,
       "title":"Bio",
-      "action": "/",
+      "action": "**",
       "roles":[
         {
           "id":3.1,
@@ -51,7 +51,7 @@
     {
       "id":4,
       "title":"News",
-      "action": "/",
+      "action": "**",
       "roles":[
         {
           "id":4.1,
@@ -67,7 +67,7 @@
     {
       "id":5,
       "title":"Photo",
-      "action": "/",
+      "action": "**",
       "roles":[
         {
           "id":5.1,
@@ -83,7 +83,7 @@
     {
       "id":6,
       "title":"Video",
-      "action": "/",
+      "action": "**",
       "roles":[
         {
           "id":6.1,

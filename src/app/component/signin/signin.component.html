@@ -26,25 +26,23 @@
             <mat-label>Email</mat-label>
             <input matInput type="email" name="email" formControlName="email" placeholder="Ex. pat@example.com">
             <i class="fa-solid fa-envelope"></i>
-            <mat-hint *ngIf="loginFormGroup.get('required')?.errors">
-              Email is <strong>required</strong>
-            </mat-hint>
-            <mat-hint *ngIf="loginFormGroup.get('email')?.errors">
-              Please enter a valid email address
-            </mat-hint>
+              <mat-hint  *ngIf="email?.invalid && (email?.touched || email?.dirty)"
+                         class="text-danger fw-bold">
+                <div *ngIf="email?.errors?.['required']">Email is Required</div>
+                <div *ngIf="email?.errors?.['email']">Missing @ character</div>
+              </mat-hint>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Password</mat-label>
             <input matInput type="password" name="password" formControlName="password"
-                   placeholder="The Password You Used During Registration">
+                   placeholder="The Password You Used During Registration" [maxlength]="15">
             <i class="fa-solid fa-key"></i>
-            <mat-error *ngIf="loginFormGroup.get('required')?.errors">
-              Password is <strong>required</strong>
-            </mat-error>
-            <mat-error *ngIf="loginFormGroup.get('password')?.errors">
-              Password is not <strong>correct</strong>
-            </mat-error>
+              <mat-hint  *ngIf="password?.invalid && (password?.touched ||  password?.dirty)"
+                         class="text-danger fw-bold">
+                <div *ngIf="password?.errors?.['required']">Password is Required</div>
+                <div *ngIf="password?.errors?.['minlength']">Password should have at least 8 characters</div>
+              </mat-hint>
           </mat-form-field>
           <button class="btn btn-dark" [disabled]="loginFormGroup.invalid" (click)="signin(loginFormGroup)">Sign in</button>
         </form>

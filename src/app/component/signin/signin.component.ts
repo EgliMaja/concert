@@ -43,13 +43,13 @@ export class SigninComponent implements OnInit , AfterViewInit{
   validatorForm(){
     this.loginFormGroup = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
-      password : new FormControl('', [Validators.required , Validators.minLength(8) , Validators.maxLength(15)])
+      password : new FormControl('', [Validators.required , Validators.minLength(8)])
     })
   }
 
-  goToRegisterPage(){
-    this.route.navigate(['signup'])
-  }
+  // Reactive prop for validation validatorForm()
+  get email() { return this.loginFormGroup.get('email') };
+  get password() { return this.loginFormGroup.get('password') };
 
   signin(login: FormGroup){
     this.loadingSpinner = true;
@@ -120,6 +120,11 @@ export class SigninComponent implements OnInit , AfterViewInit{
         this.loadingSpinner = false;
       }
     }, 100);
+  }
+
+
+  goToRegisterPage(){
+    this.route.navigate(['signup'])
   }
 
 }

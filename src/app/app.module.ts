@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ObserversModule } from '@angular/cdk/observers';
 import { CreateTicketService } from "./service/create-ticket.service";
 import { AuthUserService } from "./service/auth-user.service";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthUserService } from "./service/auth-user.service";
     FormsModule,
     HttpClientModule,
     ObserversModule,
+    MatSnackBarModule
   ],
   providers:[
     CreateTicketService,

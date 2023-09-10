@@ -159,11 +159,12 @@ export class MyProfileComponent implements OnInit , AfterViewInit , OnDestroy{
      complete:()=>{
        this.formGroupProfile.disable();
        this.getMyProfileData();
+       this.isBtnChangeDataClicked = true;
      }
    })
  }
 
-  // Notifications
+  // Notificationss
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
   }

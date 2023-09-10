@@ -7,7 +7,8 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { HasRolesDirective } from "../../directives/user-role.directive";
 import { HttpClientModule } from "@angular/common/http";
 import { ObserversModule } from "@angular/cdk/observers";
-import {MatSidenavModule} from "@angular/material/sidenav";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   declarations : [
@@ -16,13 +17,14 @@ import {MatSidenavModule} from "@angular/material/sidenav";
     NavbarComponent,
     HasRolesDirective,
   ],
-    imports: [
-        CommonModule,
-        DashboardRoutingModule,
-        HttpClientModule,
-        ObserversModule,
-        MatSidenavModule,
-    ],
+  imports: [
+    CommonModule,
+    DashboardRoutingModule,
+    HttpClientModule,
+    ObserversModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+  ],
   exports: [
     DashboardComponent ,
     SidebarMenuComponent,

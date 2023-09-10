@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthUserService } from '../../service/auth-user.service';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { ValidatorsRegexPatterns } from "../../function/function-validator";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
     constructor(
         private service: AuthUserService,
         private router: Router,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private  _snackBar: MatSnackBar,
     ) { }
 
     ngOnInit(): void {
@@ -78,20 +80,24 @@ export class RegisterComponent implements OnInit {
         this.service.adduserData(this.userRegist).subscribe({
             next: (data: UserData[]) => {
                 console.log(data)
-                alert('You are registered Sucessfully');
+              this.openSnackBar('You are registered Sucessfully!' , "Close");
                 this.registerFormGroup.reset();
                 this.router.navigate(['/signin'])
             },
             error: (err) => {
-                this.invalidRegistration = true;
-                if (err){
-                    this.errorMessage = "Something went wrong";
-                }
+              this.invalidRegistration = true;
+              this.openSnackBar( err.message , "Close")
             }
         });
     }
 
-    goToSigninPage() {
+  // Notifications
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
+
+  goToSigninPage() {
         this.router.navigate(['/signin'])
     }
 }

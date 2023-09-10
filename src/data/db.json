@@ -12,12 +12,29 @@
     {
       "firstName": "Person",
       "lastName": "User",
-      "phone": "0688185255",
+      "phone": "+340688185266",
       "email": "firstperson@gmail.com",
       "password": "12345678",
-      "confirm_password": "sfghfgh2327$@",
       "role": "USER",
       "id": 2
+    },
+    {
+      "firstName": "Egli",
+      "lastName": "maja",
+      "phone": "+344698185255",
+      "email": "firstperson2@gmail.com",
+      "password": "12345678",
+      "role": "USER",
+      "id": 235234325
+    },
+    {
+      "firstName": "Person",
+      "lastName": "Egli",
+      "phone": "+344698185255",
+      "email": "firstpee2rson@gmail.com",
+      "password": "76543211",
+      "role": "USER",
+      "id": 235234326
     }
   ],
   "DataTour": [
@@ -49,7 +66,7 @@
       "priceOfTicket": 280,
       "barcode": "0000067379001253",
       "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
-      "addressLocation": "Carrer Lliria , 52",
+      "addressLocation": "Carrer Lliria , 56",
       "cityTourLocation": "Madrid",
       "artistName": "Eminem",
       "id": 3
@@ -119,6 +136,17 @@
       "addressLocation": "Atlanta, GA 30309, USA",
       "artistName": "Beyonce",
       "id": 9
+    },
+    {
+      "cityTourLocation": "Sevilla",
+      "tourName": " Rhythm Revelations",
+      "tourDate": "2023-12-28",
+      "priceOfTicket": 456,
+      "barcode": "1111029345000012",
+      "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
+      "addressLocation": "Luis Montoto, 16",
+      "artistName": "Taylor Swift",
+      "id": 10
     }
   ]
 }

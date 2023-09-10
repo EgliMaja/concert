@@ -85,3 +85,15 @@ a{
     margin-left: 100px;
   }
 }
+
+::ng-deep{
+  .mat-snack-bar-container{
+    background-color: #2fc925;
+    color: white;
+    font-weight: 550;
+  }
+
+  .mat-simple-snackbar-action button{
+    color: white;
+  }
+}

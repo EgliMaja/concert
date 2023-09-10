@@ -7,6 +7,7 @@ import { DataTour } from "../../../../../../model/concert";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
 import { DataSharingService } from "../../../../../../service/data-sharing.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-details-ticket',
@@ -35,6 +36,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
     private router: Router,
     private dialog: MatDialog,
     private dataSharingService: DataSharingService,
+    private  _snackBar: MatSnackBar,
  )
  {
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
@@ -171,16 +173,22 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
     } as DataTour;
     this.service.updateSelectedTicket(this.dataTour).subscribe({
         next: () => {
-            alert("Ticket with barcode:" + this.choosenBarcode + " is Updated Sucessfuly");
+          this.openSnackBar("Ticket with barcode:" + this.choosenBarcode + " is Updated Sucessfuly" , "Close");
         },
         error: (err) => {
-            alert(err + "System Error");
+          this.openSnackBar( err.message , "Close")
         },
         complete:()=>{
             this.onClickCancel();
         }
     })
  }
+
+
+  // Notifications
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
 
 
 // Get Validation Properties to show the error for UI

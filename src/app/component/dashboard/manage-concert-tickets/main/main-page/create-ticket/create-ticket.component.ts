@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { Subscription } from 'rxjs';
+import { MatSnackBar } from "@angular/material/snack-bar";
 @Component({
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
@@ -23,7 +24,7 @@ export class CreateTicketComponent implements OnInit {
   ticetCreatedError: boolean = false;
   selectedFile: any;
 
-  constructor(  private service: CreateTicketService ) { }
+  constructor(  private service: CreateTicketService , private  _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.validateGenerateTicketForm();
@@ -81,14 +82,20 @@ export class CreateTicketComponent implements OnInit {
     this.service.createTour(this.tourDatas).subscribe({
       next: (res) => {
         this.ticetCreatedSucces = true;
-        console.log(res, 'Ticket : ')
+        this.openSnackBar('Data Updated Successfully!' , "Close");
       },
       error: (err) => {
         this.ticetCreatedError = true;
-        console.log(err, 'Something went Weong');
+        this.openSnackBar( err.message , "Close")
       },
     });
   }
+
+  // Notifications
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
 
   // Get Validation Properties to show the error for UI
   get cityTourLocation() { return this.GenerateTicket.get('cityTourLocation') };

@@ -47,24 +47,31 @@
   border-right: 2px solid gray;
 }
 
-a{
-  text-decoration: none;
-  font-style: normal;
-  color: gray;
-  cursor: pointer;
-  font-size: 18px;
-}
+::ng-deep{
+  a{
+    text-decoration: none;
+    color: gray;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
 
-a:hover{
-  font-weight: bold;
-}
+  a:hover{
+    font-weight: bold;
+  }
 
-a:active{
-  font-weight: bold;
-  color: black;
-}
+  a:active{
+    font-weight: bold;
+    color: black;
+  }
 
-a:visited{
-  font-weight: bold;
-  color: black;
+  a:visited{
+    font-weight: bold;
+    color: black;
+  }
+
+  a:focus{
+    font-weight: 600;
+    background-color: #c07e7e;
+  }
 }

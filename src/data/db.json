@@ -14,24 +14,24 @@
       "lastName": "User",
       "phone": "+340688185266",
       "email": "firstperson@gmail.com",
-      "password": "12345678",
+      "password": "sfghfgh2327$$",
       "role": "USER",
       "id": 2
     },
     {
-      "firstName": "Egli",
-      "lastName": "maja",
+      "firstName": "Second",
+      "lastName": "Person",
       "phone": "+344698185255",
-      "email": "firstperson2@gmail.com",
+      "email": "secondperson@gmail.com",
       "password": "12345678",
       "role": "USER",
       "id": 235234325
     },
     {
-      "firstName": "Person",
-      "lastName": "Egli",
+      "firstName": "Third",
+      "lastName": "Person",
       "phone": "+344698185255",
-      "email": "firstpee2rson@gmail.com",
+      "email": "thirdperson@gmail.com",
       "password": "76543211",
       "role": "USER",
       "id": 235234326

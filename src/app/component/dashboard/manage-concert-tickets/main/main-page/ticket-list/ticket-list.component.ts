@@ -56,7 +56,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
    ).subscribe({
       next: (res) => {
         this.ticketDetails = res;
-        this.totalTickets = res.length;
+        this.totalTickets = res?.length;
         this.barcodePaths = Array(res.map((el)=>{el.barcode}));
         this.loadingSpinner = false;
       },
@@ -77,7 +77,14 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
   // loading indicator
   loadingTickets(){
     setTimeout(()=>{
-      this.loadingSpinner = !this.listOfTicket;
+      if(this.listOfTicket){
+        this.loadingSpinner = false;
+        return  this.totalTickets;
+      }
+      else {
+        this.loadingSpinner = true;
+      }
+      //!this.listOfTicket;
     } , 500);
   }
 

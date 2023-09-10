@@ -1,9 +1,9 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component , OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
 import { SidebarMenu } from 'src/app/model/sidebar-menu-model';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
 import { AuthUserService } from "../../../service/auth-user.service";
-import { UserData } from "../../../model/userData";
+import { ERoles, UserData } from "../../../model/userData";
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -17,7 +17,10 @@ export class SidebarMenuComponent implements OnInit  {
   logedUserName! : string;
   logedLastName! : string;
   userData!: UserData;
-  showFiller = true;
+  userRoles :any = [
+    ERoles.admin,
+    ERoles.user
+  ];
 
   constructor(
     private _router: Router,
@@ -59,7 +62,11 @@ export class SidebarMenuComponent implements OnInit  {
   }
 
   goToProfileSettings(){
-    this._router.navigate(['home/my-profile/'+ this.userData.id])
+    if(this.userData.role == this.userRoles[1]){
+      this._router.navigate(['home/my-area/'+ this.userData.id]);
+    } else{
+      this._router.navigate(['home/my-area/'+this.userData.id+ '/my-profile/'+ this.userData.id]);
+    }
   }
 
   // Do not allow return back

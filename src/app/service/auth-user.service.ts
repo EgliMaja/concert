@@ -46,4 +46,8 @@ export class AuthUserService {
     window.history.pushState(null , '' , window.location.href);
   }
 
+  // modify personal data
+  updateUserProfile(userDatas: UserData): Observable<UserData>{
+    return this.http.put<UserData>((this.api)+'/'+ userDatas.id , userDatas);
+  }
 }

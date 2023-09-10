@@ -23,7 +23,7 @@ const routes: Routes = [
           import('./manage-concert-tickets/main/main-page/details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
       },
       {
-        path: 'my-profile/:id',
+        path: 'my-area/:id',
         loadChildren: ()=> import('./User/user-profile-settings/user-profile-settings.module').then((m)=> m.UserProfileSettingsModule)
       },
       {

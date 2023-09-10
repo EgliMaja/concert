@@ -1,10 +1,10 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { AuthUserService } from "../../../../service/auth-user.service";
 import { Subject, takeUntil } from "rxjs";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ValidatorsRegexPatterns } from "../../../../function/function-validator";
-import { UserData } from "../../../../model/userData";
+import {ERoles, UserData} from "../../../../model/userData";
 
 @Component({
   selector: 'app-user-profile-settings',
@@ -20,18 +20,22 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
   @ViewChild('userProfile') userProfile :any;
   loadingSpinner: boolean = true;
   isVisiblePassword: boolean = false;
-
+  userRoles :any = [
+    ERoles.admin,
+    ERoles.user
+  ];
   constructor(
       private authorService : AuthUserService,
       private activatedRoute: ActivatedRoute,
       private formBuilder: FormBuilder,
+      private _router: Router,
   ) {
     this.id = activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
     this.getUserProfileByID();
-    // this.validatorsForm();
+    this.validatorsForm();
   }
 
   ngAfterViewInit() {
@@ -45,29 +49,13 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
 
   validatorsForm(){
     this.userProfileFormGroup = this.formBuilder.group({
-  //     firstName: new FormControl(
-  //         {value: this.userData.firstName , disabled: false},
-  // [Validators.required, Validators.minLength(3),
-  //               Validators.maxLength(20), Validators.pattern(validationsPattern.textPattern)] ),
-  //     lastName: new FormControl(
-  //         {value: this.userData.lastName , disabled: false},
-  // [Validators.required, Validators.minLength(3),
-  //               Validators.maxLength(20), Validators.pattern(validationsPattern.textPattern)] ),
-  //     phone: new FormControl(
-  //         {value: this.userData.phone , disabled: false},
-  // [Validators.required, Validators.minLength(12),
-  //               Validators.pattern(validationsPattern.phoneNumberPattern)] ),
       email: new FormControl(
-          {value: this.userData.email , disabled: true},
-          [Validators.required, Validators.email]  ),
+          {value: this.userData?.email , disabled: true},
+          Validators.compose([Validators.required, Validators.email])),
 
       password: new FormControl(
-          {value: this.userData.password , disabled: true},
-          [Validators.required, Validators.minLength(8), Validators.maxLength(15)] ),
-
-      // confirm_password: new FormControl(
-      //     {value: this.userData.firstName , disabled: false},
-      //     [Validators.required, validationsPattern.MatchValidator('password')] )
+          {value: this.userData?.password , disabled: true},
+          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(15)])),
     })
   }
 
@@ -80,13 +68,13 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
     ).subscribe({
       next:(res)=>{
         this.userData = {
-          email: res[0].email,
-          password: res[0].password,
-          firstName: res[0].firstName,
-          lastName: res[0].lastName,
-          role: res[0].role,
-          phone: res[0].phone,
-          id: res[0].id
+          email: res[0]?.email,
+          password: res[0]?.password,
+          firstName: res[0]?.firstName,
+          lastName: res[0]?.lastName,
+          role: res[0]?.role,
+          phone: res[0]?.phone,
+          id: res[0]?.id
         } as UserData;
         this.loadingSpinner = false;
       },
@@ -95,8 +83,7 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
         this.loadingSpinner = false;
       },
       complete:()=>{
-        // this.userProfileFormGroup.patchValue(this.userData);
-        this.validatorsForm();
+        this.userProfileFormGroup.patchValue(this.userData);
       }
     })
   }
@@ -113,6 +100,14 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
 
   hidePassword(){
     this.isVisiblePassword = false;
+  }
+
+  navigateToMyPtofile(){
+    this._router.navigate(['home/my-area/'+this.userData.id+ '/my-profile/'+ this.userData.id]);
+  }
+
+  navigateToMyTicketStore(){
+    this._router.navigate(['home/my-area/'+this.userData.id+ '/my-ticket-store/'+ this.userData.id]);
   }
 
 }

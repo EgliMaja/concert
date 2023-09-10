@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import {DataTour} from "../model/concert";
-import {UserData} from "../model/userData";
+import { DataTour } from "../model/concert";
 
 @Injectable({
     providedIn: "root"
@@ -8,7 +7,6 @@ import {UserData} from "../model/userData";
 
 export class DataSharingService {
     private dataTour!: DataTour;
-    private loginUserData!: UserData;
 
     setData(data:DataTour){
         this.dataTour = data;
@@ -18,11 +16,4 @@ export class DataSharingService {
         return this.dataTour;
     }
 
-    setDataUser(userData: UserData){
-        this.loginUserData = userData;
-    }
-
-    getUserData(){
-        return this.loginUserData;
-    }
 }

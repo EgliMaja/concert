@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { AuthUserService } from '../../service/auth-user.service';
 import { DataSharingService } from "../../service/data-sharing.service";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: 'app-signin',
@@ -12,7 +13,7 @@ import { DataSharingService } from "../../service/data-sharing.service";
   styleUrls: ['./signin.component.scss']
 })
 
-export class SigninComponent implements OnInit , AfterViewInit{
+export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
 
   @ViewChild('displayErrorMsg') displayErrorMsg!: boolean;
   loadingSpinner!: boolean;
@@ -20,6 +21,7 @@ export class SigninComponent implements OnInit , AfterViewInit{
   form:boolean = true;
   errormsg!: string;
   user!: UserData;
+  private destroy$: Subject<void> = new Subject<void>();
   userRoles :any = [
       ERoles.admin,
       ERoles.user
@@ -40,6 +42,11 @@ export class SigninComponent implements OnInit , AfterViewInit{
     this.signinLoading();
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   validatorForm(){
     this.loginFormGroup = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
@@ -53,7 +60,9 @@ export class SigninComponent implements OnInit , AfterViewInit{
 
   signin(login: FormGroup){
     this.loadingSpinner = true;
-    this.userService.login(login.value.email , login.value.password).subscribe({
+    this.userService.login(login.value.email , login.value.password).pipe(
+      takeUntil(this.destroy$.asObservable())
+    ).subscribe({
       next:(res)=>{
         const userType = res.find((user: UserData) => {
           return user.password === login.value.password && user.email === login.value.email;
@@ -69,22 +78,23 @@ export class SigninComponent implements OnInit , AfterViewInit{
           firstName: userType.firstName,
           lastName: userType.lastName,
           role: userType.role,
-          phone: userType.phone
+          phone: userType.phone,
+          id: userType.id
         };
 
-        this.dataShared.setDataUser(this.user);
+        this.userService.storeUserData(this.user);
 
         if (userType.role === this.userRoles[0]) {
-          this.route.navigate(['home/rihanna']);
+          this.route.navigate(['home/rihanna'], {state: this.user});
           this.loginFormGroup.reset();
         }
 
         else if (userType.role === this.userRoles[1]) {
-          this.route.navigate(['**']);
+          this.route.navigate(['home/rihanna'], {state: this.user});
           this.loginFormGroup.reset();
         }
       },
-      error:(error)=>{
+      error:(error: HttpErrorResponse)=>{
         this.loadingSpinner = false;
         this.displayErrorMsg = true;
           if (error.status == 401){

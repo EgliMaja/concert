@@ -19,7 +19,7 @@
     {
       "id":2,
       "title":"Music",
-      "action": "**",
+      "action": "music",
       "roles":[
         {
           "id":2.1,
@@ -35,7 +35,7 @@
     {
       "id":3,
       "title":"Bio",
-      "action": "**",
+      "action": "biography",
       "roles":[
         {
           "id":3.1,
@@ -51,7 +51,7 @@
     {
       "id":4,
       "title":"News",
-      "action": "**",
+      "action": "news",
       "roles":[
         {
           "id":4.1,
@@ -67,7 +67,7 @@
     {
       "id":5,
       "title":"Photo",
-      "action": "**",
+      "action": "photos",
       "roles":[
         {
           "id":5.1,
@@ -83,7 +83,7 @@
     {
       "id":6,
       "title":"Video",
-      "action": "**",
+      "action": "videos",
       "roles":[
         {
           "id":6.1,
@@ -91,22 +91,6 @@
         },
         {
           "id":6.2,
-          "role":"USER"
-        }
-      ]
-    },
-
-    {
-      "id":7,
-      "title":"Sign out",
-      "action": "/signin",
-      "roles":[
-        {
-          "id":7.1,
-          "role":"ADMIN"
-        },
-        {
-          "id":7.2,
           "role":"USER"
         }
       ]

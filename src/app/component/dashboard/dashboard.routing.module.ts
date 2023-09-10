@@ -23,6 +23,10 @@ const routes: Routes = [
           import('./manage-concert-tickets/main/main-page/details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
       },
       {
+        path: 'my-profile/:id',
+        loadChildren: ()=> import('./User/user-profile-settings/user-profile-settings.module').then((m)=> m.UserProfileSettingsModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('src/app/error/error-page/error-page.module').then((m) => m.ErrorPageModule)
       }

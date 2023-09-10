@@ -10,7 +10,7 @@ Run `json-server --watch src/data/db.json` to start running the fake api. Withou
 
 ##### Login access users:
 ###### email                  password
-firstperson@gmail.com         12345678
+firstperson@gmail.com         sfghfgh2327$@
 admin@gmail.com               sfghfgh2327$$
 
 You can register and make a login to. Here `http://localhost:3000/userDataData` you can find your data after registration.

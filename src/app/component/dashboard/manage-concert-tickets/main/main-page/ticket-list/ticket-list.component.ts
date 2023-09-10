@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "../../../../../../service/create-ticket.service";
-import { Subscription } from "rxjs";
+import { Subject,takeUntil } from "rxjs";
 import { DataTour } from "../../../../../../model/concert";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import {ErrorHandleService} from "../../../../../../service/error-handle.service";
+import { ErrorHandleService } from "../../../../../../service/error-handle.service";
 
 @Component({
   selector: 'app-ticket-list',
@@ -22,7 +22,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
   ticketPerPage: number = 5;
   loadingSpinner: boolean = true;
   ticketDetails: DataTour[] = [];
-  subscriptionList!: Subscription;
+  private destroy$: Subject<boolean> = new Subject<boolean>();
   searchTicket!: FormGroup;
 
   constructor(
@@ -45,25 +45,24 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.subscriptionList){
-      this.subscriptionList.unsubscribe();
-    }
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   // Get All Created Tickets
   getDataTicket() {
-    this.subscriptionList = this.service.getDataCreatedTicket().subscribe({
+   this.service.getDataCreatedTicket().pipe(
+       takeUntil(this.destroy$)
+   ).subscribe({
       next: (res) => {
         this.ticketDetails = res;
         this.totalTickets = res.length;
         this.barcodePaths = Array(res.map((el)=>{el.barcode}));
-        // this.loadingSpinner = false;
+        this.loadingSpinner = false;
       },
       error: (err) => {
         this.errorService.getErrorMessage(err)
-        console.log(err);
-
-        // this.loadingSpinner = false;
+        this.loadingSpinner = false;
       }
     });
   }
@@ -78,11 +77,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
   // loading indicator
   loadingTickets(){
     setTimeout(()=>{
-      if(this.listOfTicket){
-        this.loadingSpinner = false;
-      }else {
-        this.loadingSpinner = true;
-      }
+      this.loadingSpinner = !this.listOfTicket;
     } , 500);
   }
 

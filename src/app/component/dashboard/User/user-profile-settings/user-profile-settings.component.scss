@@ -1,0 +1,53 @@
+.container{
+  width: 100%;
+  height: 100%;
+  margin: 10px 120px 100px 120px;
+}
+
+.needed-space{
+  height: 150px;
+}
+
+.person-user-image{
+  border-radius: 50%;
+  height: 80px;
+  width: 80px;
+  margin-top: 150px;
+  margin-bottom: 90px;
+  display: block;
+}
+
+.profile-container{
+  background-image: url("~src/assets/images/istockphoto.png");
+  border-radius: 15px 0px 15px 15px;
+  background-size: contain;
+}
+
+.matInput{
+  width: 100%;
+}
+
+.userProfileFormGroup{
+  background-color: #F2F0F0;
+  border-radius: 15px 15px 0px 15px;
+  margin-top: -136px;
+}
+
+#userProfile{
+  margin-right: 150px;
+}
+
+.headerTitle{
+  color: #707070;
+}
+
+.fa-solid{
+  cursor: pointer;
+}
+
+.border-box{
+  box-sizing: border-box;
+  border: 1px solid gray;
+  box-shadow: gray 1px 3px 5px,
+              gray 2px 3px 5px;
+}

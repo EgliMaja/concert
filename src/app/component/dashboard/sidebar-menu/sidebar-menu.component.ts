@@ -1,27 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute , Router } from '@angular/router';
 import { SidebarMenu } from 'src/app/model/sidebar-menu-model';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
-import { UserData } from "../../../model/userData";
 import { AuthUserService } from "../../../service/auth-user.service";
+import { UserData } from "../../../model/userData";
 
 @Component({
   selector: 'app-sidebar-menu',
   templateUrl: './sidebar-menu.component.html',
   styleUrls: ['./sidebar-menu.component.scss']
 })
-export class SidebarMenuComponent implements OnInit {
+export class SidebarMenuComponent implements OnInit  {
 
   menu!: SidebarMenu[];
   url!: string;
   logedUserName! : string;
   logedLastName! : string;
+  userData!: UserData;
+  showFiller = true;
+
   constructor(
-    private _router: Router ,
+    private _router: Router,
     private menuService: SidebarMenuService ,
-    private activatedRoute : ActivatedRoute,
-    private user_service : AuthUserService,
-    )  { }
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthUserService,
+    )  {
+    const storeUser = localStorage.getItem('userData');
+    if(storeUser){
+      this.userData = JSON.parse(storeUser);
+    }
+  }
 
   ngOnInit(): void {
     this.getMenu();
@@ -41,23 +49,8 @@ export class SidebarMenuComponent implements OnInit {
   }
 
   getUserData(){
-    this.user_service.getAllUsersList().subscribe({
-      next:(res)=>{
-        const logedUser = res.find((user:UserData)=>{
-          this.logedUserName = user.firstName;
-          this.logedLastName = user.lastName;
-          return user.firstName || user.lastName;
-        })
-        if (logedUser){
-        logedUser.firstName = this.logedUserName;
-        logedUser.lastName = this.logedLastName;
-        }
-        console.log('USER', this.logedUserName);
-      },
-      error:(err)=> {
-        console.log(err)
-      },
-    })
+    this.logedUserName = this.userData.firstName;
+    this.logedLastName = this.userData.lastName;
   }
 
   navigateToComponent(route: string){
@@ -65,6 +58,14 @@ export class SidebarMenuComponent implements OnInit {
     this._router.navigate([route],{relativeTo: this.activatedRoute})
   }
 
+  goToProfileSettings(){
+    this._router.navigate(['home/my-profile/'+ this.userData.id])
+  }
 
+  // Do not allow return back
+ logout(){
+    this.authService.unstoreUserData();
+    this._router.navigate(['signin']);
+  }
 
 }

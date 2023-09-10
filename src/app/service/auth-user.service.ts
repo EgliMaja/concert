@@ -25,8 +25,25 @@ export class AuthUserService {
     return this.http.get<UserData[]>(`${this.api}`);
   }
 
-  //create new user ,while registered
+  // create new user ,while registered
   adduserData(userDatas: Omit<UserData, 'id'>): Observable<UserData[]> {
     return this.http.post<UserData[]>(`${this.api}`, userDatas)
   }
+
+  // Get the Details of the user profile
+  getUserProfileByID(id:number):Observable<UserData[]>{
+    return this.http.get<UserData[]>(`${this.api}?id=${id}`);
+  }
+
+ // store the user in local storage
+  storeUserData(user: UserData){
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+ // unstore the user from local storage
+  unstoreUserData(){
+    localStorage.removeItem('userData');
+    window.history.pushState(null , '' , window.location.href);
+  }
+
 }

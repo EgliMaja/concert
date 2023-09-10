@@ -1,12 +1,12 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "src/app/service/create-ticket.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import {Subject, Subscription, takeUntil} from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 import { DataTour } from "../../../../../../model/concert";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
-import {DataSharingService} from "../../../../../../service/data-sharing.service";
+import { DataSharingService } from "../../../../../../service/data-sharing.service";
 
 @Component({
     selector: 'app-details-ticket',
@@ -15,7 +15,7 @@ import {DataSharingService} from "../../../../../../service/data-sharing.service
 })
 export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy {
 
- @ViewChild('loadindicator') loadindicator!: any;
+ @ViewChild('ticketDetails') ticket!: any;
  ticketFormGroup!: FormGroup;
  ticketDetailsSubject: Subject<boolean> = new Subject<boolean>();
  choosenBarcode: any;
@@ -27,6 +27,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  numberPattern = '^-?[0-9]\\d*(\\,\\d{1,2})?$';
  addressPattern = '^[A-Za-z0-9 ,.-]+$';
  cityPattern!: '^[a-zA-Z ]{1,19}$';
+
  constructor(
     private service: CreateTicketService,
     private activatedRoute: ActivatedRoute,
@@ -50,7 +51,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 
  ngOnDestroy() {
      this.ticketDetailsSubject.next(true);
-     this.ticketDetailsSubject.unsubscribe();
+     this.ticketDetailsSubject.complete();
  }
 
  formGroupValidationTicket() {
@@ -119,7 +120,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 // loading indicator
  loadingTicket() {
     setTimeout(() => {
-        if (this.loadindicator) {
+        if (this.ticket) {
             this.formGroupValidationTicket()
             this.loadingSpinner = false;
         } else {

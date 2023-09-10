@@ -1,10 +1,21 @@
+.mat-drawer-side{
+  background-color: black;
+}
 
-.fa-regular{
+.fa-circle-user{
   font-size: 50px;
   margin-top: 50px;
   margin-left: 85px;
   color: rgb(253, 253, 253);
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+:host ::ng-deep .fa-circle-user :hover{
+  color: gray;
+  box-sizing: border-box;
+  box-shadow: gray 15px 23px 15px,
+              gray 20px 13px 15px;
 }
 .submenu{
   color: rgb(255, 255, 255) !important;
@@ -37,5 +48,3 @@ li {
 .fullName{
 text-align: center;
 }
-
-

@@ -5,11 +5,12 @@ import { DataTour } from "../../../../../../model/concert";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ErrorHandleService } from "../../../../../../service/error-handle.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
-  styleUrls: ['./ticket-list.component.scss']
+  styleUrls: ['./ticket-list.component.scss'],
 })
 export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
@@ -30,6 +31,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
       private router: Router,
       private activatedRoute : ActivatedRoute,
       private errorService: ErrorHandleService,
+      private  _snackBar: MatSnackBar,
       )
   {
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
@@ -63,6 +65,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
       error: (err) => {
         this.errorService.getErrorMessage(err)
         this.loadingSpinner = false;
+        this.openSnackBar(err.message , "Close")
       }
     });
   }
@@ -88,8 +91,14 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
     } , 500);
   }
 
-  navigateDetailsOfTicker(barcode: any){
+  navigateDetailsOfTicket(barcode: any){
     this.router.navigate(['home/ticket/'+ barcode])
   }
+
+  // Notifications
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
 
 }

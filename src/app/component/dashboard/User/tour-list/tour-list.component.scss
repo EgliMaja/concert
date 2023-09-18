@@ -1,0 +1,54 @@
+.container{
+  margin-top: 50px;
+  background-color: #F5F3F3;
+}
+.example-card {
+  max-width: 250px;
+  box-sizing: border-box;
+  box-shadow: gray 1px 3px 5px,
+              gray 2px 3px 5px;
+  position: relative;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+//design for paginator
+::ng-deep {
+  .ngx-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .ngx-pagination li {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    color: black;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ngx-pagination li.current {
+    background-color: #3F51B5 ;
+  }
+
+  li.small-screen {
+    display: none !important;
+  }
+
+  .pagination-previous,
+  .pagination-next {
+    a, span {
+      display: none !important;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+  }
+}

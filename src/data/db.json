@@ -147,6 +147,30 @@
       "addressLocation": "Luis Montoto, 16",
       "artistName": "Taylor Swift",
       "id": 10
+    },
+    {
+      "cityTourLocation": "Turkey",
+      "tourName": "Rhythm Revelations Two",
+      "tourDate": "2023-09-15",
+      "priceOfTicket": 500,
+      "barcode": "1212123333333333",
+      "uploadedImage": {
+        "0": {}
+      },
+      "addressLocation": "Keseciler Cd. 254-28",
+      "artistName": "Justin Biber",
+      "id": 11
+    },
+    {
+      "cityTourLocation": "Istanbul",
+      "tourName": "Rhythm Revelations Two",
+      "tourDate": "2023-09-30",
+      "priceOfTicket": 400,
+      "barcode": "1210000054332000",
+      "uploadedImage": "C:\\Users\\user\\Pictures\\Camera Roll\\374306-4k-wallpaper.jpg",
+      "addressLocation": "Merkezefendi, 34015 Zeytinburnu",
+      "artistName": "Justin Biber",
+      "id": 13
     }
   ]
 }

@@ -90,7 +90,7 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
         }
 
         else if (userType.role === this.userRoles[1]) {
-          this.route.navigate(['home/rihanna'], {state: this.user});
+          this.route.navigate(['home/tour-list'], {state: this.user});
           this.loginFormGroup.reset();
         }
       },

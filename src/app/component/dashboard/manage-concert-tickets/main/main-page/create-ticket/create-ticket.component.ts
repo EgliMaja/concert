@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
-import { Subscription } from 'rxjs';
 import { MatSnackBar } from "@angular/material/snack-bar";
 @Component({
   selector: 'app-create-ticket',
@@ -12,26 +11,26 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class CreateTicketComponent implements OnInit {
 
-  subscription!: Subscription;
-  GenerateTicket!: FormGroup;
-  tourDatas!: DataTour;
   @Input() ToDate = new Date().toISOString().split('T')[0];
+  generateTicketForm!: FormGroup;
+  tourDatas!: DataTour;
   textPattern = '^[a-zA-ZÀ-ÖØ-öø-ÿ\\s\\-\\+\\&\\,\\.\']+';
   numberPattern = '^-?[0-9]\\d*(\\,\\d{1,2})?$';
-  addressPattern = '^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:\\s[a-zA-ZÀ-ÖØ-öø-ÿ]+),\\s\\d{1,4}(?:\\/\\d{1,4})?\\s*[a-zA-ZÀ-ÖØ-öø-ÿ]*$';
   cityPattern!: '^[a-zA-Z ]{1,19}$';
   ticetCreatedSucces: boolean = false;
   ticetCreatedError: boolean = false;
-  selectedFile: any;
+  image!: File[];
+  allowedFileExtension = ['.jpg', '.png', '.jpeg'].toString();
 
   constructor(  private service: CreateTicketService , private  _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.validateGenerateTicketForm();
+    this.initializeFormGroup();
   }
 
-    validateGenerateTicketForm() {
-    this.GenerateTicket = new FormGroup({
+
+    initializeFormGroup() {
+    this.generateTicketForm = new FormGroup({
 
       cityTourLocation: new FormControl(
         {value: '', disabled: false},
@@ -39,7 +38,7 @@ export class CreateTicketComponent implements OnInit {
 
       addressLocation: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(this.addressPattern)]),
+        [Validators.required]),
 
       tourName: new FormControl(
         {value: '', disabled: false},
@@ -74,7 +73,7 @@ export class CreateTicketComponent implements OnInit {
       tourDate: Data.tourDate,
       priceOfTicket: Data.priceOfTicket,
       barcode: Data.barcode,
-      uploadedImage: Data.uploadedImage,
+      uploadedImage: this.image,
       addressLocation: Data.addressLocation,
       artistName: Data.artistName,
       id: Data.id
@@ -82,12 +81,15 @@ export class CreateTicketComponent implements OnInit {
     this.service.createTour(this.tourDatas).subscribe({
       next: (res) => {
         this.ticetCreatedSucces = true;
-        this.openSnackBar('Data Updated Successfully!' , "Close");
+        this.openSnackBar('Data Created Successfully!' , "Close");
       },
       error: (err) => {
         this.ticetCreatedError = true;
         this.openSnackBar( err.message , "Close")
       },
+      complete:()=>{
+        this.generateTicketForm.reset();
+    }
     });
   }
 
@@ -98,28 +100,21 @@ export class CreateTicketComponent implements OnInit {
 
 
   // Get Validation Properties to show the error for UI
-  get cityTourLocation() { return this.GenerateTicket.get('cityTourLocation') };
-  get addressLocation() { return this.GenerateTicket.get('addressLocation') };
-  get tourName() { return this.GenerateTicket.get('tourName') };
-  get tourDate() { return this.GenerateTicket.get('tourDate') };
-  get priceOfTicket() { return this.GenerateTicket.get('priceOfTicket') };
-  get barcode() { return this.GenerateTicket.get('barcode') };
-  get uploadedImage() {  return this.GenerateTicket.get('uploadedImage') };
-  get artistName() { return this.GenerateTicket.get('artistName') };
+  get cityTourLocation() { return this.generateTicketForm.get('cityTourLocation') };
+  get addressLocation() { return this.generateTicketForm.get('addressLocation') };
+  get tourName() { return this.generateTicketForm.get('tourName') };
+  get tourDate() { return this.generateTicketForm.get('tourDate') };
+  get priceOfTicket() { return this.generateTicketForm.get('priceOfTicket') };
+  get barcode() { return this.generateTicketForm.get('barcode') };
+  get uploadedImage() {  return this.generateTicketForm.get('uploadedImage') };
+  get artistName() { return this.generateTicketForm.get('artistName') };
 
 
 // Function Format Controler | Validator of Uploadet Image
   handleImgFormat(event: any) {
-    const files: FileList = event.target.files;
-    if (files && files.length > 0) {
-      const selectedFile = files.item(0);
-      const fileExtension = this.selectedFile.name.split('.').pop()?.toLowerCase();
-      if (fileExtension !== 'jpg' || fileExtension !== 'jpeg' || fileExtension !== 'png') {
-        // Display an error message or handle the invalid file type
-        console.log('Invalid file type. Please select a JPG or PNG file.');
-      } else {
-        this.selectedFile = selectedFile;
-      }
+    const uploadedImage = this.generateTicketForm.get('uploadedImage')?.value.replace( "fakepath",`Users${"\\user\\Pictures\\Camera Roll"}`);
+    if (uploadedImage && event.target.files) {
+      this.image = uploadedImage;
     }
   }
 

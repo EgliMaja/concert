@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: ()=> import('./User/user-profile-settings/user-profile-settings.module').then((m)=> m.UserProfileSettingsModule)
       },
       {
+        path:'tour-list',
+        loadChildren: ()=> import('./User/tour-list/tour-list.module').then((m)=>m.TourListModule)
+      },
+      {
         path: '**',
         loadChildren: () => import('src/app/error/error-page/error-page.module').then((m) => m.ErrorPageModule)
       }

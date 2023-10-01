@@ -1,12 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { AuthUserService } from '../../service/auth-user.service';
-import { DataSharingService } from "../../service/data-sharing.service";
-import {map, Observable, Subject, take, takeUntil} from "rxjs";
-import {AuthenticationService} from "../../service/authentication.service";
+import { Subject, takeUntil } from "rxjs";
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthenticationService } from "../../service/authentication.service";
 
 @Component({
   selector: 'app-signin',

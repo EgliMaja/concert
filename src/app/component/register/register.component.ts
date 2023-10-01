@@ -5,7 +5,7 @@ import { AuthUserService } from '../../service/auth-user.service';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { ValidatorsRegexPatterns } from "../../function/function-validator";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import {map, Observable, take} from "rxjs";
+import { map, Observable, take } from "rxjs";
 
 @Component({
     selector: 'app-register',

@@ -6,7 +6,7 @@ import { AuthUserService } from "../../../../../service/auth-user.service";
 import { UserData } from "../../../../../model/userData";
 import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import {HttpErrorResponse} from "@angular/common/http";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-my-profile',

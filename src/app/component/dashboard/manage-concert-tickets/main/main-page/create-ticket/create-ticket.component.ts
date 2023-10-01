@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
-import {ValidatorsRegexPatterns} from "../../../../../../function/function-validator";
+import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";
 @Component({
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
@@ -65,18 +65,8 @@ export class CreateTicketComponent implements OnInit {
   }
 
   // Generate | Create Ticket
-  generateTicket(Data: any) {
-    this.tourDatas = {
-      cityTourLocation: Data.cityTourLocation,
-      tourName: Data.tourName,
-      tourDate: Data.tourDate,
-      priceOfTicket: Data.priceOfTicket,
-      barcode: Data.barcode,
-      uploadedImage: this.image,
-      addressLocation: Data.addressLocation,
-      artistName: Data.artistName,
-      id: Data.id
-    } as DataTour;
+  generateTicket() {
+    this.tourDatas = {...this.generateTicketForm.value};
     this.service.createTour(this.tourDatas).subscribe({
       next: (res) => {
         this.ticetCreatedSucces = true;

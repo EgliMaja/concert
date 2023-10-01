@@ -8,7 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
 import { DataSharingService } from "../../../../../../service/data-sharing.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import {ValidatorsRegexPatterns} from "../../../../../../function/function-validator";
+import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";
 
 @Component({
     selector: 'app-details-ticket',

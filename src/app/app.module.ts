@@ -5,11 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ObserversModule } from '@angular/cdk/observers';
-import { CreateTicketService } from "./service/create-ticket.service";
 import { AuthUserService } from "./service/auth-user.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { PendingChangesGuard } from "./guard/can-deactivate.guard";
+import { CanActivateRoleGuard } from "./guard/can-activate-role.guard";
+import { AuthUserInterceptor } from "./guard/core/authUser-interceptor";
+import { ErrorCatchingInterceptor } from "./guard/core/error-catching-interceptor";
 
 @NgModule({
   declarations: [
@@ -26,8 +29,20 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatSnackBarModule
   ],
   providers:[
-    CreateTicketService,
     AuthUserService,
+    PendingChangesGuard,
+    CanActivateRoleGuard,
+    AuthUserInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthUserInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorCatchingInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

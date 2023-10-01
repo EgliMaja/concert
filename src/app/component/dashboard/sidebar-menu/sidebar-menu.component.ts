@@ -71,8 +71,7 @@ export class SidebarMenuComponent implements OnInit  {
 
   // Do not allow return back
  logout(){
-    this.authService.unstoreUserData();
-    this._router.navigate(['signin']);
+    this.authService.logout();
   }
 
 }

@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject , Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserData } from '../model/userData';
+import { Router } from "@angular/router";
+import { AuthenticationService } from "./authentication.service";
 
 
 @Injectable({
@@ -10,44 +12,49 @@ import { UserData } from '../model/userData';
 })
 export class AuthUserService {
 
+  private userSubject: BehaviorSubject<UserData | null>;
+  public personLogedIn: Observable<UserData | null>;
   private readonly api: string;
+  user!: UserData;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient ,
+    private router: Router ,
+    private authetificationService: AuthenticationService,
+  ) {
     this.api = environment.api + 'userData';
+    this.userSubject = new BehaviorSubject(authetificationService.isAuthetnicated);
+    this.personLogedIn = this.userSubject.asObservable();
   }
 
   login(email: string, password: string): Observable<UserData[]> {
     return this.http.get<UserData[]>(`${this.api}?email=${email}&password=${password}`);
   }
 
-  // get all registered users
+  logout(){
+    this.authetificationService.unstoreUserData();
+    this.userSubject.next(null);
+    this.router.navigate(['signin']);
+  }
+
+  /** Get all registered users **/
   getAllUsersList(): Observable<UserData[]> {
     return this.http.get<UserData[]>(`${this.api}`);
   }
 
-  // create new user ,while registered
+  /** Create new user ,while registered **/
   adduserData(userDatas: Omit<UserData, 'id'>): Observable<UserData[]> {
     return this.http.post<UserData[]>(`${this.api}`, userDatas)
   }
 
-  // Get the Details of the user profile
+  /** Get the Details of the user profile **/
   getUserProfileByID(id:number):Observable<UserData[]>{
     return this.http.get<UserData[]>(`${this.api}?id=${id}`);
   }
 
- // store the user in local storage
-  storeUserData(user: UserData){
-    localStorage.setItem('userData', JSON.stringify(user));
-  }
-
- // unstore the user from local storage
-  unstoreUserData(){
-    localStorage.removeItem('userData');
-    window.history.pushState(null , '' , window.location.href);
-  }
-
-  // modify personal data
+  /** Modify personal data **/
   updateUserProfile(userDatas: UserData): Observable<UserData>{
     return this.http.put<UserData>((this.api)+'/'+ userDatas.id , userDatas);
   }
+
 }

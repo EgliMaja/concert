@@ -77,6 +77,7 @@
                                      class="text-danger fw-bold">
                               <div *ngIf="email?.errors?.['required']">Email is Required</div>
                               <div *ngIf="email?.errors?.['email']">Missing @ character</div>
+                              <div *ngIf="email?.errors?.['emailTaken']">This email already exist! </div>
                           </mat-hint>
                       </mat-form-field>
 

@@ -2,7 +2,7 @@
     <form [formGroup]="searchTicket">
         <div class=" input-group">
             <input type="search" placeholder="Search for Ticket" class="form-control mt-1" name="cityTourLocation"
-                   formControlName="cityTourLocation" [(ngModel)]="ticket">
+                   formControlName="cityTourLocation"    [ngModel]="ticket" (ngModelChange)="ticket = $event">
         </div>
     </form>
 

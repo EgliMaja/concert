@@ -1,6 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./dashboard.component";
+import { CanActivateRoleGuard } from "../../guard/can-activate-role.guard";
+import { ERoles } from "../../model/userData";
 
 const routes: Routes = [
   {
@@ -14,13 +16,12 @@ const routes: Routes = [
       },
       {
         path: 'rihanna',
-        loadChildren: () =>
-          import('./manage-concert-tickets/main/main-page/main-page.module').then((m)=> m.MainPageModule),
+        loadChildren: () => import('./manage-concert-tickets/main/main-page/main-page.module').then((m)=> m.MainPageModule),
+        canActivate: [CanActivateRoleGuard],
       },
       {
         path: 'ticket/:barcode',
-        loadChildren: () =>
-          import('./manage-concert-tickets/main/main-page/details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
+        loadChildren: () => import('./manage-concert-tickets/main/main-page/details-ticket/details-ticket.module').then((m) => m.DetailsTicketModule),
       },
       {
         path: 'my-area/:id',
@@ -28,7 +29,8 @@ const routes: Routes = [
       },
       {
         path:'tour-list',
-        loadChildren: ()=> import('./User/tour-list/tour-list.module').then((m)=>m.TourListModule)
+        loadChildren: ()=> import('./User/tour-list/tour-list.module').then((m)=>m.TourListModule) ,
+        canActivate: [CanActivateRoleGuard],
       },
       {
         path: '**',

@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { AuthUserService } from '../../service/auth-user.service';
 import { DataSharingService } from "../../service/data-sharing.service";
-import { Subject, takeUntil } from "rxjs";
+import {map, Observable, Subject, take, takeUntil} from "rxjs";
+import {AuthenticationService} from "../../service/authentication.service";
 
 @Component({
   selector: 'app-signin',
@@ -31,11 +32,11 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
     private route: Router ,
     private fb : FormBuilder,
     private userService : AuthUserService,
-    private dataShared: DataSharingService,
+    private authenticationService : AuthenticationService,
   ) { }
 
   ngOnInit(): void {
-    this.validatorForm();
+    this.loginForm();
   }
 
   ngAfterViewInit() {
@@ -47,7 +48,7 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
     this.destroy$.complete();
   }
 
-  validatorForm(){
+  loginForm(){
     this.loginFormGroup = this.fb.group({
       email : new FormControl('', [Validators.required, Validators.email]),
       password : new FormControl('', [Validators.required , Validators.minLength(8)])
@@ -82,7 +83,7 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
           id: userType.id
         };
 
-        this.userService.storeUserData(this.user);
+        this.authenticationService.storeUserData(this.user);
 
         if (userType.role === this.userRoles[0]) {
           this.route.navigate(['home/rihanna'], {state: this.user});
@@ -117,6 +118,7 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
           }
       },
       complete:()=>{
+        this.loginFormGroup.updateValueAndValidity();
         this.loadingSpinner = false;
         this.displayErrorMsg = false;
       }

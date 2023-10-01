@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "../../../../../../service/create-ticket.service";
 import { Subject,takeUntil } from "rxjs";
 import { DataTour } from "../../../../../../model/concert";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ErrorHandleService } from "../../../../../../service/error-handle.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
@@ -15,13 +14,13 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   @ViewChild('listOfTickets') listOfTicket : any;
+  @Input() loadingSpinner!: boolean;
   totalTickets: any;
   barcodePaths!: any[];
   choosenBarcode: any;
   ticket!: "";
   page: number = 1;
   ticketPerPage: number = 5;
-  loadingSpinner: boolean = true;
   ticketDetails: DataTour[] = [];
   private destroy$: Subject<boolean> = new Subject<boolean>();
   searchTicket!: FormGroup;
@@ -30,7 +29,6 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
       private service: CreateTicketService,
       private router: Router,
       private activatedRoute : ActivatedRoute,
-      private errorService: ErrorHandleService,
       private  _snackBar: MatSnackBar,
       )
   {
@@ -39,7 +37,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   ngOnInit(): void {
     this.getDataTicket();
-    this.searchValidator();
+    this.searchForm();
   }
 
   ngAfterViewInit() {
@@ -63,15 +61,17 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
         this.loadingSpinner = false;
       },
       error: (err) => {
-        this.errorService.getErrorMessage(err)
         this.loadingSpinner = false;
         this.openSnackBar(err.message , "Close")
-      }
+      },
+     complete:() => {
+        this.searchTicket?.patchValue(this.ticketDetails);
+     }
     });
   }
 
   // search form validator
-  searchValidator() {
+  searchForm() {
     this.searchTicket = new FormGroup({
       cityTourLocation: new FormControl('', Validators.required),
     })
@@ -80,14 +80,7 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
   // loading indicator
   loadingTickets(){
     setTimeout(()=>{
-      if(this.listOfTicket){
-        this.loadingSpinner = false;
-        return  this.totalTickets;
-      }
-      else {
-        this.loadingSpinner = true;
-      }
-      //!this.listOfTicket;
+      this.loadingSpinner = !(this.listOfTicket && this.ticketDetails);
     } , 500);
   }
 

@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
 import { DataSharingService } from "../../../../../../service/data-sharing.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import {ValidatorsRegexPatterns} from "../../../../../../function/function-validator";
 
 @Component({
     selector: 'app-details-ticket',
@@ -24,10 +25,6 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  loadingSpinner: boolean = true;
  isReadonlyInput!: boolean;
  isCheckedModify: boolean = false;
- textPattern = '^[a-zA-ZÀ-ÖØ-öø-ÿ\\s\\-\\+\\&\\,\\.\']+';
- numberPattern = '^-?[0-9]\\d*(\\,\\d{1,2})?$';
- addressPattern = '^[A-Za-z0-9 ,.-]+$';
- cityPattern!: '^[a-zA-Z ]{1,19}$';
 
  constructor(
     private service: CreateTicketService,
@@ -57,18 +54,19 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  }
 
  formGroupValidationTicket() {
+   let regex_pattern = new ValidatorsRegexPatterns();
      this.ticketFormGroup = this.formBuilder.group({
          cityTourLocation: [
              {value: this.dataTour.cityTourLocation, disabled: this.isReadonlyInput},
-             Validators.compose([Validators.required, Validators.pattern(this.cityPattern)])],
+             Validators.compose([Validators.required, Validators.pattern(regex_pattern.cityPattern)])],
 
          addressLocation: [
              {value: this.dataTour.addressLocation, disabled: this.isReadonlyInput},
-             Validators.compose([Validators.required, Validators.pattern(this.addressPattern)])],
+             Validators.compose([Validators.required, Validators.pattern(regex_pattern.addressPattern)])],
 
          tourName: [
              {value: this.dataTour.tourName, disabled: this.isReadonlyInput},
-             Validators.compose([Validators.required, Validators.pattern(this.textPattern)])],
+             Validators.compose([Validators.required, Validators.pattern(regex_pattern.textPattern)])],
 
          tourDate: [
              {value: this.dataTour.tourDate, disabled: this.isReadonlyInput},
@@ -76,7 +74,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 
          priceOfTicket: [
              {value: this.dataTour.priceOfTicket, disabled: this.isReadonlyInput},
-             Validators.compose([Validators.required, Validators.pattern(this.numberPattern),
+             Validators.compose([Validators.required, Validators.pattern(regex_pattern.numberPattern),
                  Validators.min(35), Validators.max(1200)])],
 
          artistName: [
@@ -85,7 +83,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 
          barcode: [{value: this.dataTour.barcode, disabled: this.isReadonlyInput},
              Validators.compose([Validators.required, Validators.minLength(16),
-                 Validators.maxLength(16), Validators.pattern(this.numberPattern)])],
+                 Validators.maxLength(16), Validators.pattern(regex_pattern.numberPattern)])],
 
          uploadedImage: [{value: '', disabled: this.isReadonlyInput}],
      });

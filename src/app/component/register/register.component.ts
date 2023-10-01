@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthUserService } from '../../service/auth-user.service';
 import { ERoles, UserData } from 'src/app/model/userData';
 import { ValidatorsRegexPatterns } from "../../function/function-validator";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import {map, Observable, take} from "rxjs";
 
 @Component({
     selector: 'app-register',
@@ -29,10 +30,10 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.validatorForm();
+        this.registerForm();
     }
 
-    validatorForm() {
+    registerForm() {
         let validatorPattern = new ValidatorsRegexPatterns();
         this.registerFormGroup = this.formBuilder.group({
             firstName: new FormControl('',
@@ -47,7 +48,9 @@ export class RegisterComponent implements OnInit {
                 [Validators.required, Validators.minLength(12),
                     Validators.pattern(validatorPattern.phoneNumberPattern)]),
 
-            email: new FormControl('', [Validators.required, Validators.email]),
+            email: new FormControl('', {
+              validators:[Validators.required, Validators.email] ,
+              asyncValidators: [this.validateExistingEmail.bind(this)]}),
 
             password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]),
 
@@ -79,7 +82,6 @@ export class RegisterComponent implements OnInit {
 
         this.service.adduserData(this.userRegist).subscribe({
             next: (data: UserData[]) => {
-                console.log(data)
               this.openSnackBar('You are registered Sucessfully!' , "Close");
                 this.registerFormGroup.reset();
                 this.router.navigate(['/signin'])
@@ -100,4 +102,15 @@ export class RegisterComponent implements OnInit {
   goToSigninPage() {
         this.router.navigate(['/signin'])
     }
+
+  validateExistingEmail(control: AbstractControl): Observable<ValidationErrors | null> {
+    const email = control.value as string;
+    return this.service.getAllUsersList().pipe(
+      take(1),
+      map(users => {
+        const isEmailTaken = users.some(user => user.email === email);
+        return isEmailTaken ? {emailTaken: true} : null;
+      })
+    );
+  }
 }

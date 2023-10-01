@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataTour } from 'src/app/model/concert';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
+import {ValidatorsRegexPatterns} from "../../../../../../function/function-validator";
 @Component({
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
@@ -14,9 +15,6 @@ export class CreateTicketComponent implements OnInit {
   @Input() ToDate = new Date().toISOString().split('T')[0];
   generateTicketForm!: FormGroup;
   tourDatas!: DataTour;
-  textPattern = '^[a-zA-ZÀ-ÖØ-öø-ÿ\\s\\-\\+\\&\\,\\.\']+';
-  numberPattern = '^-?[0-9]\\d*(\\,\\d{1,2})?$';
-  cityPattern!: '^[a-zA-Z ]{1,19}$';
   ticetCreatedSucces: boolean = false;
   ticetCreatedError: boolean = false;
   image!: File[];
@@ -30,11 +28,12 @@ export class CreateTicketComponent implements OnInit {
 
 
     initializeFormGroup() {
+    let regex_pattern = new ValidatorsRegexPatterns();
     this.generateTicketForm = new FormGroup({
 
       cityTourLocation: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(this.cityPattern)]),
+        [Validators.required, Validators.pattern(regex_pattern.cityPattern)]),
 
       addressLocation: new FormControl(
         {value: '', disabled: false},
@@ -42,7 +41,7 @@ export class CreateTicketComponent implements OnInit {
 
       tourName: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(this.textPattern)]),
+        [Validators.required, Validators.pattern(regex_pattern.textPattern)]),
 
       tourDate: new FormControl(
         {value: this.ToDate, disabled: false},
@@ -50,18 +49,18 @@ export class CreateTicketComponent implements OnInit {
 
       priceOfTicket: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(this.numberPattern), Validators.min(35), Validators.max(1200)]),
+        [Validators.required, Validators.pattern(regex_pattern.numberPattern), Validators.min(35), Validators.max(1200)]),
 
       barcode: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.min(1000000000000000) , Validators.max(9999999999999999) ,Validators.pattern(this.numberPattern)]),
+        [Validators.required, Validators.min(1000000000000000) , Validators.max(9999999999999999) ,Validators.pattern(regex_pattern.numberPattern)]),
 
       uploadedImage: new FormControl(
         {value: '', disabled: false}, [Validators.required]),
 
       artistName: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(this.textPattern)]),
+        [Validators.required, Validators.pattern(regex_pattern.textPattern)]),
     });
   }
 

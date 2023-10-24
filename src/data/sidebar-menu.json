@@ -4,11 +4,89 @@
       "id":1,
       "title": "Home",
       "action": "rihanna",
+      "function": "0",
       "roles": [
         {
           "id":1.1,
           "role": "ADMIN"
-        },
+        }
+      ]
+    },
+
+    {
+      "id":2,
+      "title":"Music",
+      "action": "music",
+      "function": "0",
+      "roles":[
+        {
+          "id":2.1,
+          "role":"ADMIN"
+        }
+      ]
+    },
+
+    {
+      "id":3,
+      "title":"Bio",
+      "action": "biography",
+      "function": "0",
+      "roles":[
+        {
+          "id":3.1,
+          "role":"ADMIN"
+        }
+      ]
+    },
+
+    {
+      "id":4,
+      "title":"News",
+      "action": "news",
+      "function": "0",
+      "roles":[
+        {
+          "id":4.1,
+          "role":"ADMIN"
+        }
+        ]
+    },
+
+    {
+      "id":5,
+      "title":"Photo",
+      "action": "photos",
+      "function": "0",
+      "roles":[
+        {
+          "id":5.1,
+          "role":"ADMIN"
+        }
+      ]
+    },
+
+    {
+      "id":6,
+      "title":"Video",
+      "action": "videos",
+      "function": "0",
+      "roles":[
+        {
+          "id":6.1,
+          "role":"ADMIN"
+        }
+      ]
+    },
+
+
+
+
+    {
+      "id":1,
+      "title": "Home",
+      "action": "tour-list",
+      "function": "1",
+      "roles": [
         {
           "id":1.2,
           "role": "USER"
@@ -20,11 +98,8 @@
       "id":2,
       "title":"Music",
       "action": "music",
+      "function": "1",
       "roles":[
-        {
-          "id":2.1,
-          "role":"ADMIN"
-        },
         {
           "id":2.2,
           "role":"USER"
@@ -36,11 +111,8 @@
       "id":3,
       "title":"Bio",
       "action": "biography",
+      "function": "1",
       "roles":[
-        {
-          "id":3.1,
-          "role":"ADMIN"
-        },
         {
           "id":3.2,
           "role":"USER"
@@ -52,27 +124,21 @@
       "id":4,
       "title":"News",
       "action": "news",
+      "function": "1",
       "roles":[
-        {
-          "id":4.1,
-          "role":"ADMIN"
-        },
         {
           "id":4.2,
           "role":"USER"
         }
-        ]
+      ]
     },
 
     {
       "id":5,
       "title":"Photo",
       "action": "photos",
+      "function": "1",
       "roles":[
-        {
-          "id":5.1,
-          "role":"ADMIN"
-        },
         {
           "id":5.2,
           "role":"USER"
@@ -84,11 +150,8 @@
       "id":6,
       "title":"Video",
       "action": "videos",
+      "function": "1",
       "roles":[
-        {
-          "id":6.1,
-          "role":"ADMIN"
-        },
         {
           "id":6.2,
           "role":"USER"

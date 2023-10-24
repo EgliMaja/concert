@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataTour } from 'src/app/model/concert';
+import { DataTour } from '../../../../../../model/concert.model';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";

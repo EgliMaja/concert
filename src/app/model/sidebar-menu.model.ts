@@ -2,6 +2,7 @@ export interface SidebarMenu{
   id: number;
   title: string;
   action: string;
+  function: string;
   roles: Role[];
 }
 

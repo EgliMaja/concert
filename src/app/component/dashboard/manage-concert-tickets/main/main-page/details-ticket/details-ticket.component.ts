@@ -3,7 +3,7 @@ import { CreateTicketService } from "src/app/service/create-ticket.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
-import { DataTour } from "../../../../../../model/concert";
+import { DataTour } from "../../../../../../model/concert.model";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
 import { DataSharingService } from "../../../../../../service/data-sharing.service";

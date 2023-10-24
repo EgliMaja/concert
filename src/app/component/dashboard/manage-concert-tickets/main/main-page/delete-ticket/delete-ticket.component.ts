@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateTicketService } from "../../../../../../service/create-ticket.service";
 import { Router } from "@angular/router";
-import { DataTour } from "../../../../../../model/concert";
+import { DataTour } from "../../../../../../model/concert.model";
 import { DataSharingService } from "../../../../../../service/data-sharing.service";
 import { MatDialogRef } from "@angular/material/dialog";
 

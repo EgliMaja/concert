@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { UserData } from "../model/userData";
+import { UserDataModel } from "../model/userData.model";
 import { Router } from "@angular/router";
 import { delay, dematerialize, materialize, throwError } from "rxjs";
 
@@ -12,7 +12,7 @@ export class AuthenticationService {
     router = inject(Router)
 
     /**  store the user in local storage **/
-    storeUserData(user: UserData){
+    storeUserData(user: UserDataModel){
         localStorage.setItem('userData', JSON.stringify(user));
     }
 

@@ -11,10 +11,13 @@
   position: relative;
 }
 
-.bi-ticket-detailed{
+.fa-ticket{
   cursor: pointer;
 }
 
+.noItemsMessage{
+  background-color: #322121;
+}
 
 //design for paginator
 ::ng-deep {

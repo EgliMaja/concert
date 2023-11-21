@@ -1,15 +1,8 @@
-<div class="col-2 px-1 position-fixed sidebar " id="sticky-sidebar">
+<div class="px-1 position-fixed sidebar " id="sticky-sidebar">
   <app-sidebar-menu></app-sidebar-menu>
 </div>
-<div class="container-fluid position-fixed  px-5 ps-5" id="nav">
+
+<div class="d-flex flex-column flex-shrink-0 p-3 mt-0" id="nav">
   <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
 </div>
-<body>
-<div class="container">
-  <div class="row">
-    <div id="create-ticket">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
-</body>

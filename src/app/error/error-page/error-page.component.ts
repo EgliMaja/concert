@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import {AuthenticationService} from "../../service/authentication.service";
+import {AuthUserService} from "../../service/auth-user.service";
 
 @Component({
     selector: 'app-error-page',
     templateUrl: './error-page.component.html',
     styleUrls: ['./error-page.component.scss']
 })
+
 export class ErrorPageComponent implements OnInit {
+    constructor(private authService: AuthUserService) {}
 
-    constructor(private router: Router) {
-    }
-
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 
     // signin button
     gotToLoginPage() {
-        return this.router.navigate(['signin'])
+        this.authService.logout();
     }
 
 }

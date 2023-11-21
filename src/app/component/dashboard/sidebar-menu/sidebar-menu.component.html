@@ -1,23 +1,36 @@
-<mat-sidenav-container class="mat-drawer-side">
-  <mat-sidenav-content>
-    <div class="nav flex-column flex-nowrap vh-100 overflow-auto p-2 sidebar-space">
-      <div (click)="goToProfileSettings()">
-        <i class="fa-regular fa-circle-user user-icon"></i>
-      </div>
-      <p class="text-white fullName mt-3">{{logedUserName}} {{logedLastName}}</p>
-      <div class="list-unstyled mt-2">
-        <li *ngFor="let link of sidebarMenu ; let i = index; ">
-          <ul *ngIf="link.title" class="submenu">
-            <hr>
-            <a
-              class="nav-link sidebar_menu text-white" (click)="navigateToComponent(link)"
-              [innerHTML]="link.title">
-              {{link.title}}</a>
-          </ul>
-        </li>
-        <hr>
-          <li class="submenu"><a class="nav-link sidebar_menu text-white"  (click)="logout()">Sign out</a></li>
-      </div>
+<div (click)="goToProfileSettings()" class="text-white">
+  <i class="fa-regular fa-circle-user user-icon"></i>
+  <p class="text-white fullName">{{logedUserName}} {{logedLastName}}</p>
+</div>
+
+<ng-container *ngIf="sidebarMenu?.length  ; else noLinkMessage">
+  <ng-container *ngFor="let link of sidebarMenu || menu ; let i = index;">
+    <ng-container *ngIf="link.title">
+      <ng-container *ngTemplateOutlet="menuLinks; context { $implicit: i + 1 , link: link }"></ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #noLinkMessage>
+  <div class="nav flex-column flex-nowrap vh-100 overflow-hidden">
+    <div class="text-center text-white mt-5 noItemsMessage">
+      <p><strong>There's no links to show in the menu !</strong></p>
+      <p><strong>"Maybe json-server is not in run"</strong></p>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+</ng-template>
+
+
+<div class="nav flex-column flex-nowrap vh-100 overflow-auto p-2 sidebar-space mt-5">
+  <ng-template #menuLinks let-link="link">
+    <hr><li (click)="navigateToComponent(link)">
+      <ul class="submenu text-white ">
+        <p class="nav-link sidebar_menu">
+          <i class="fa-solid" [linkTitle]="link.title"></i> {{link?.title}}
+        </p>
+      </ul><hr>
+    </li>
+  </ng-template>
+  <div class="d-flex flex-row log-out" (click)="logout()"><i class="fa-solid fa-door-open"></i><p class="text-white px-3">Sign out</p></div>
+</div>
+

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import { ValidatorsRegexPatterns } from "../../../../../function/function-validator";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
@@ -13,7 +13,7 @@ import { HttpErrorResponse } from "@angular/common/http";
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.scss']
 })
-export class MyProfileComponent implements OnInit , AfterViewInit , OnDestroy{
+export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , OnDestroy{
 
   @ViewChild('profileData',{static: false}) profileData: any;
   userData!: UserDataModel;
@@ -30,7 +30,11 @@ export class MyProfileComponent implements OnInit , AfterViewInit , OnDestroy{
     private activatedRoute: ActivatedRoute,
     private  _snackBar: MatSnackBar
   ) {
-    this.id = activatedRoute.snapshot.params['id'];
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
+
+  ngOnChanges() {
+    console.log(this.userData, 'Changes')
   }
 
   ngOnInit(): void {

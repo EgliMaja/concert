@@ -1,53 +1,50 @@
-.person-user-image{
+.person-user-image {
   border-radius: 50%;
   height: 80px;
   width: 80px;
-  margin-top: 150px;
+  margin-top: 30px;
   margin-bottom: 90px;
   display: block;
 }
 
-.profile-container{
-  background-image: url("~src/assets/images/istockphoto.png");
-  border-radius: 15px 0px 15px 15px;
+.profile-container {
   background-size: contain;
-  width: 23.798833%;
-}
-
-.matInput{
-  width: 100%;
-}
-
-.userProfileFormGroup{
-  background-color: #F2F0F0;
-  border-radius: 15px 15px 0px 15px;
-  margin-top: -136px;
-  width: 300px;
-  height: 427px;
-}
-
-.headerTitle{
-  color: #707070;
-}
-
-.fa-solid{
-  cursor: pointer;
-}
-
-.border-box{
-  box-sizing: border-box;
-  border: 1px solid gray;
-  box-shadow: gray 1px 3px 5px,
-              gray 2px 3px 5px;
-  background-color: #F4F4F4;
-  border-radius: 20px;
-}
-.user-profile-menu{
+  max-width: 350px;
   border-right: 2px solid gray;
 }
 
-::ng-deep{
-  a{
+.matInput {
+  width: 100%;
+}
+
+.userProfileFormGroup {
+  background-color: #F2F0F0;
+  margin-top: -136px;
+  width: 300px;
+}
+
+.headerTitle {
+  color: #707070;
+}
+
+.fa-solid {
+  cursor: pointer;
+}
+
+.border-box {
+  box-sizing: border-box;
+  border: 1px solid #b3afaf;
+  box-shadow: gray 1px 3px 5px,
+  gray 2px 3px 5px;
+  background-color: #F4F4F4;
+}
+
+.user-profile-menu {
+  border-right: 2px solid gray;
+}
+
+::ng-deep {
+  a {
     text-decoration: none;
     color: gray;
     cursor: pointer;
@@ -55,21 +52,21 @@
     font-family: Arial, Helvetica, sans-serif;
   }
 
-  a:hover{
+  a:hover {
     font-weight: bold;
   }
 
-  a:active{
-    font-weight: bold;
-    color: black;
-  }
-
-  a:visited{
+  a:active {
     font-weight: bold;
     color: black;
   }
 
-  a:focus{
+  a:visited {
+    font-weight: bold;
+    color: black;
+  }
+
+  a:focus {
     font-weight: 600;
     background-color: #c07e7e;
   }

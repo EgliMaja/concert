@@ -53,7 +53,7 @@ export class CreateTicketComponent implements OnInit {
 
       barcode: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.min(1000000000000000) , Validators.max(9999999999999999) ,Validators.pattern(regex_pattern.numberPattern)]),
+        [Validators.required, Validators.min(15) , Validators.max(16) ,Validators.pattern(regex_pattern.numberPattern)]),
 
       uploadedImage: new FormControl(
         {value: '', disabled: false}, [Validators.required]),
@@ -101,10 +101,21 @@ export class CreateTicketComponent implements OnInit {
 
 // Function Format Controler | Validator of Uploadet Image
   handleImgFormat(event: any) {
-    const uploadedImage = this.generateTicketForm.get('uploadedImage')?.value.replace( "fakepath",`Users${"\\user\\Pictures\\Camera Roll"}`);
-    if (uploadedImage && event.target.files) {
-      this.image = uploadedImage;
-    }
+      const file: File = event.target.files[0];
+
+      if (file) {
+          // Read the file as a data URL
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+              this.image = e.target.result;
+          };
+          reader.readAsDataURL(file);
+    // const uploadedImage = this.generateTicketForm.get('uploadedImage')?.value.replace( "fakepath",`Users${"\\user\\Pictures\\Camera Roll"}`);
+    // if (uploadedImage && event.target.files) {
+    //   this.image = uploadedImage;
+    // }
+      }
   }
+
 
 }

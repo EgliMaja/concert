@@ -50,12 +50,13 @@
       <input id="priceOfTicket" type="number" class="form-control" name="priceOfTicket"
              formControlName="priceOfTicket" min="35" max="1200">
 
-      <!-- Barcote of ticket to identify it -->
+      <!-- Barcode of ticket to identify it -->
       <label for="barcode" class="form-label">Barcode</label>
       <label *ngIf="barcode?.invalid && (barcode?.dirty || barcode?.touched)" class="text-danger">
         <p *ngIf="barcode?.errors?.['required']"> Barcode is required.</p>
         <p *ngIf="barcode?.errors?.['pattern']"> Barcode must be number characters ! </p>
-        <p *ngIf="barcode?.errors?.['min']"> Barcode must have at least 16 numbers. </p>
+        <p *ngIf="barcode?.errors?.['minlength']"> Barcode must have 16 numbers. </p>
+        <p *ngIf="barcode?.errors?.['maxlength']"> Barcode must have 16 numbers. </p>
       </label>
       <input id="barcode" class="form-control" name="barcode" formControlName="barcode" [maxlength]="16" [minlength]="16">
 

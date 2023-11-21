@@ -1,66 +1,48 @@
-<div class="container mt-5 border-box ">
+<div class="container border-box ">
   <div class="row">
     <div class="col-4 profile-container">
-      <form [formGroup]="userProfileFormGroup">
+      <ng-container *ngIf="loadingSpinner; else userProfile" class="body-ticket d-flex justify-content-center">
+        <mat-spinner></mat-spinner>
+      </ng-container>
 
-        <div *ngIf="loadingSpinner; else userProfile" class="body-ticket d-flex justify-content-center">
-          <mat-spinner></mat-spinner>
+      <ng-template #userProfile class="">
+        <div class="d-flex justify-content-center">
+          <img src="assets/images/person-user.png" class="person-user-image">
         </div>
 
-        <ng-template #userProfile class="">
-          <div class="d-flex justify-content-center">
-            <img src="assets/images/person-user.png" class="person-user-image">
+        <div class="userProfileFormGroup">
+          <h4 class="d-flex justify-content-center headerTitle py-5">Profile Settings</h4>
+          <!-- Email-->
+          <div class="d-flex justify-content-center mat-input">
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" placeholder="Ex. pat@example.com" name="email"
+                     value="{{userData.email}}" disabled>
+            </mat-form-field>
+          </div>
+          <br>
+          <!--Password-->
+          <div class="d-flex justify-content-center mat-input">
+            <mat-form-field class="example-full-width row">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="isVisiblePassword ? 'text' : 'password' " placeholder=" Password "
+                     name="password" value="{{userData.password}}" disabled>
+              <i *ngIf="isVisiblePassword" (click)="hidePassword()" class="fa-solid fa-eye-slash px-5 mx-5"></i>
+              <i *ngIf="!isVisiblePassword" (click)="visiblePassword()" class="fa-solid fa-eye px-5 mx-5"></i>
+            </mat-form-field>
           </div>
 
-          <div class="userProfileFormGroup ">
-            <h4 class="d-flex justify-content-center headerTitle py-5">Profile Settings</h4>
-            <!-- Email-->
-            <div class="d-flex justify-content-center mat-input">
-              <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" placeholder="Ex. pat@example.com" name="email"
-                       formControlName="email">
-                <mat-hint *ngIf="email?.invalid || (email?.touched ||  email?.dirty)"
-                          class="text-danger fw-bold">
-                  <div *ngIf="email?.errors?.['required']">Email is Required</div>
-                  <div *ngIf="email?.errors?.['email']">Missing @ character</div>
-                </mat-hint>
-              </mat-form-field>
-            </div>
+        </div>
+      </ng-template>
 
-            <br>
-
-            <!--Password-->
-            <div class="d-flex justify-content-center mat-input">
-              <mat-form-field class="example-full-width row">
-                <mat-label>Password</mat-label>
-                <input matInput [type]="isVisiblePassword ? 'text' : 'password' " placeholder=" Password "
-                       name="password"
-                       formControlName="password">
-                <i *ngIf="isVisiblePassword" (click)="hidePassword()" class="fa-solid fa-eye-slash px-5 mx-5"></i>
-                <i *ngIf="!isVisiblePassword" (click)="visiblePassword()" class="fa-solid fa-eye px-5 mx-5"></i>
-                <mat-hint *ngIf="password?.invalid ||  (password?.touched ||  password?.dirty)"
-                          class="text-danger fw-bold">
-                  <div *ngIf="password?.errors?.['required']">Password is Required</div>
-                  <div *ngIf="password?.errors?.['minlength']">Password should have at least 8
-                    characters
-                  </div>
-                  <div *ngIf="password?.errors?.['maxlength']">Password should have less than 16
-                    characters
-                  </div>
-                </mat-hint>
-              </mat-form-field>
-            </div>
-
-          </div>
-        </ng-template>
-      </form>
     </div>
     <div class="col-2 user-profile-menu">
       <h5 class="text-secondary mt-3 mb-5">General Settings&nbsp;<i class="fa-solid fa-gear"></i></h5>
       <hr>
-      <a class="mt-5 mb-5" (click)="navigateToMyPtofile()">My Profile&nbsp;<i class="fa-regular fa-address-card"></i></a> <br>
-      <div *ngIf="userData?.role == userRoles[1]"><a class="mt-5 mb-5" (click)="navigateToMyTicketStore()">My Tickets &nbsp;<i class="fa-solid fa-clipboard-list"></i></a></div>
+      <a class="mt-5 mb-5" (click)="navigateToMyPtofile()">My Profile&nbsp;<i
+        class="fa-regular fa-address-card"></i></a> <br>
+      <div *ngIf="userData?.role == userRoles[1]"><a class="mt-5 mb-5" (click)="navigateToMyTicketStore()">My Tickets
+        &nbsp;<i class="fa-solid fa-clipboard-list"></i></a></div>
     </div>
 
     <div class="col-6">

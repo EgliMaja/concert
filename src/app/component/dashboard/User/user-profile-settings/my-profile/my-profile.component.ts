@@ -3,7 +3,7 @@ import { ValidatorsRegexPatterns } from "../../../../../function/function-valida
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 import { AuthUserService } from "../../../../../service/auth-user.service";
-import { UserData } from "../../../../../model/userData";
+import { UserDataModel } from "../../../../../model/userData.model";
 import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -16,7 +16,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 export class MyProfileComponent implements OnInit , AfterViewInit , OnDestroy{
 
   @ViewChild('profileData',{static: false}) profileData: any;
-  userData!: UserData;
+  userData!: UserDataModel;
   formGroupProfile!: FormGroup;
   private destroyer$: Subject<boolean> = new Subject<boolean>();
   loadingSpinner: boolean = true;
@@ -87,7 +87,7 @@ export class MyProfileComponent implements OnInit , AfterViewInit , OnDestroy{
           password: res[0]?.password,
           role: res[0]?.role,
           id: res[0]?.id
-        } as  UserData;
+        } as  UserDataModel;
         this.loadingSpinner = false;
       },
       error:(err)=>{
@@ -148,7 +148,7 @@ export class MyProfileComponent implements OnInit , AfterViewInit , OnDestroy{
      password: data.get('password')?.value,
      role: data.get('role')?.value,
      id: this.id
-   } as  UserData;
+   } as  UserDataModel;
    this.authService.updateUserProfile(this.userData).subscribe({
      next:(res)=>{
        this.openSnackBar('Data Updated Successfully!' , "Close");

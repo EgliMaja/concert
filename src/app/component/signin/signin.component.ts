@@ -1,7 +1,7 @@
 import { AfterViewInit, Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ERoles, UserData } from 'src/app/model/userData';
+import { ERoles, UserDataModel } from '../../model/userData.model';
 import { AuthUserService } from '../../service/auth-user.service';
 import { Subject, takeUntil } from "rxjs";
 import { HttpErrorResponse } from '@angular/common/http';
@@ -20,7 +20,7 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
   loginFormGroup! : FormGroup;
   form:boolean = true;
   errormsg!: string;
-  user!: UserData;
+  user!: UserDataModel;
   private destroy$: Subject<void> = new Subject<void>();
   userRoles :any = [
       ERoles.admin,
@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
       takeUntil(this.destroy$.asObservable())
     ).subscribe({
       next:(res)=>{
-        const userType = res.find((user: UserData) => {
+        const userType = res.find((user: UserDataModel) => {
           return user.password === login.value.password && user.email === login.value.email;
         });
 

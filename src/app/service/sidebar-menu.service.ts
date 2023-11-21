@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DataSidebarMenu } from '../model/sidebar-menu-model';
+import { DataSidebarMenu } from '../model/sidebar-menu.model';
 import * as menuData from '../../data/sidebar-menu.json';
 
 @Injectable({

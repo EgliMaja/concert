@@ -6,11 +6,11 @@
       </div>
       <p class="text-white fullName mt-3">{{logedUserName}} {{logedLastName}}</p>
       <div class="list-unstyled mt-2">
-        <li *ngFor="let link of menu ; let i = index; ">
+        <li *ngFor="let link of sidebarMenu ; let i = index; ">
           <ul *ngIf="link.title" class="submenu">
             <hr>
             <a
-              class="nav-link sidebar_menu text-white" (click)="navigateToComponent(link.action)"
+              class="nav-link sidebar_menu text-white" (click)="navigateToComponent(link)"
               [innerHTML]="link.title">
               {{link.title}}</a>
           </ul>

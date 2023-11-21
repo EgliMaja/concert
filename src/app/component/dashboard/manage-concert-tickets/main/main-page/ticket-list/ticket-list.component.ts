@@ -1,8 +1,7 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "../../../../../../service/create-ticket.service";
 import { Subject,takeUntil } from "rxjs";
-import { DataTour } from "../../../../../../model/concert";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { DataTour } from "../../../../../../model/concert.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
@@ -15,21 +14,19 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   @ViewChild('listOfTickets') listOfTicket : any;
   @Input() loadingSpinner!: boolean;
-  totalTickets: any;
-  barcodePaths!: any[];
   choosenBarcode: any;
   ticket!: "";
   page: number = 1;
   ticketPerPage: number = 5;
-  ticketDetails: DataTour[] = [];
+  ticketList: DataTour[] = [];
   private destroy$: Subject<boolean> = new Subject<boolean>();
-  searchTicket!: FormGroup;
 
   constructor(
       private service: CreateTicketService,
       private router: Router,
       private activatedRoute : ActivatedRoute,
       private  _snackBar: MatSnackBar,
+      private cd: ChangeDetectorRef,
       )
   {
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
@@ -37,10 +34,10 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   ngOnInit(): void {
     this.getDataTicket();
-    this.searchForm();
   }
 
   ngAfterViewInit() {
+    this.cd.detectChanges();
     this.loadingTickets();
   }
 
@@ -51,37 +48,23 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   // Get All Created Tickets
   getDataTicket() {
-   this.service.getDataCreatedTicket().pipe(
-       takeUntil(this.destroy$)
-   ).subscribe({
+   this.service.getDataCreatedTicket().pipe( takeUntil(this.destroy$)).subscribe({
       next: (res) => {
-        this.ticketDetails = res;
-        this.totalTickets = res?.length;
-        this.barcodePaths = Array(res.map((el)=>{el.barcode}));
+        this.ticketList = res;
         this.loadingSpinner = false;
       },
       error: (err) => {
         this.loadingSpinner = false;
         this.openSnackBar(err.message , "Close")
       },
-     complete:() => {
-        this.searchTicket?.patchValue(this.ticketDetails);
-     }
     });
-  }
-
-  // search form validator
-  searchForm() {
-    this.searchTicket = new FormGroup({
-      cityTourLocation: new FormControl('', Validators.required),
-    })
   }
 
   // loading indicator
   loadingTickets(){
     setTimeout(()=>{
-      this.loadingSpinner = !(this.listOfTicket && this.ticketDetails);
-    } , 500);
+      this.loadingSpinner = !(this.ticketList && this.listOfTicket);
+    } , 1000);
   }
 
   navigateDetailsOfTicket(barcode: any){

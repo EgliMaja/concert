@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./dashboard.component";
 import { CanActivateRoleGuard } from "../../guard/can-activate-role.guard";
-import { ERoles } from "../../model/userData";
+import { ERoles } from "../../model/userData.model";
 
 const routes: Routes = [
   {

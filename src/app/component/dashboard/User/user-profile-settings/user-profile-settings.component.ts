@@ -4,7 +4,7 @@ import { Subject, takeUntil } from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { ValidatorsRegexPatterns } from "../../../../function/function-validator";
-import {ERoles, UserData} from "../../../../model/userData";
+import {ERoles, UserDataModel} from "../../../../model/userData.model";
 
 @Component({
   selector: 'app-user-profile-settings',
@@ -15,7 +15,7 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
 
   id!: number;
   userProfileFormGroup!: FormGroup;
-  userData!: UserData;
+  userData!: UserDataModel;
   private $destroy : Subject<boolean> = new Subject<boolean>();
   @ViewChild('userProfile') userProfile :any;
   loadingSpinner: boolean = true;
@@ -75,7 +75,7 @@ export class UserProfileSettingsComponent implements OnInit , AfterViewInit , On
           role: res[0]?.role,
           phone: res[0]?.phone,
           id: res[0]?.id
-        } as UserData;
+        } as UserDataModel;
         this.loadingSpinner = false;
       },
       error:(err)=>{

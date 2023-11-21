@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { Subject, takeUntil } from "rxjs";
 import { CreateTicketService } from "../../../../service/create-ticket.service";
 import { Router } from "@angular/router";
-import { DataTour } from "../../../../model/concert";
+import { DataTour } from "../../../../model/concert.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({

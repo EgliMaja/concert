@@ -10,11 +10,11 @@ export class AuthUserInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {
         if (this.authenticationService.isAuthetnicated){
-            const FAKETOKEN = this.authenticationService.token;
+            const TOKEN = this.authenticationService.token;
             const API_URL_JSONSERVER = req.url.startsWith(environment.api);
             if(API_URL_JSONSERVER){
                 const REQUEST = req.clone({
-                    setHeaders: { FAKETOKEN }
+                    setHeaders: { TOKEN }
                 })
                return  next.handle(REQUEST);
             }

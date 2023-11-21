@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { UserDataModel } from "../model/userData.model";
+import { ERoles, UserDataModel } from "../model/userData.model";
 import { Router } from "@angular/router";
 import { delay, dematerialize, materialize, throwError } from "rxjs";
 
@@ -9,9 +9,14 @@ import { delay, dematerialize, materialize, throwError } from "rxjs";
 
 export class AuthenticationService {
 
-    router = inject(Router)
+    router = inject(Router);
+    userRoles :any = [
+      ERoles.admin,
+      ERoles.user
+    ];
 
-    /**  store the user in local storage **/
+
+  /**  store the user in local storage **/
     storeUserData(user: UserDataModel){
         localStorage.setItem('userData', JSON.stringify(user));
     }
@@ -19,6 +24,7 @@ export class AuthenticationService {
     /** Unstore the user from local storage **/
     unstoreUserData(){
         localStorage.removeItem('userData');
+        localStorage.clear();
         this.router.createUrlTree(['signin']);
     }
 
@@ -33,6 +39,14 @@ export class AuthenticationService {
     public get isAuthetnicated(){
         return JSON.parse(this.token);
     }
+
+    /** Role Of Users **/
+    public get Role(){
+      if(this.isAuthetnicated){
+        return this.userRoles;
+      }
+    }
+
 
     /** Unathorized User **/
     public get isUnathorized(){

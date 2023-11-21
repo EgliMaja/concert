@@ -9,16 +9,13 @@ import { DataTour } from '../model/concert.model';
 
 export class CreateTicketService {
 
+  dataTour!: DataTour;
   private readonly api: string;
-    private createTicket: BehaviorSubject<DataTour[]>;
-    $ticket : Observable<DataTour[]>;
-    dataTour!: DataTour;
-  constructor(
-    private http: HttpClient,
-  ) {
+  private dataTourBehaviorSubject: BehaviorSubject<DataTour>  = new BehaviorSubject<DataTour>(this.dataTour);
+  $ticket = this.dataTourBehaviorSubject.asObservable();
+
+  constructor( private http: HttpClient) {
     this.api = environment.api + 'DataTour';
-    this.createTicket = new BehaviorSubject<DataTour[]>([]);
-    this.$ticket = this.createTicket.asObservable();
   }
 
 
@@ -29,6 +26,7 @@ export class CreateTicketService {
 
   // Create new data for DataTour
   createTour(DataTour: Omit<DataTour, 'id'>): Observable<DataTour> {
+    this.dataTourBehaviorSubject.next(DataTour);
     return this.http.post<DataTour>(`${this.api}`, DataTour);
   }
 

@@ -1,40 +1,43 @@
-.mat-drawer-side{
-  background-color: black;
-}
-
-.fa-circle-user{
+.fa-circle-user {
   font-size: 50px;
   margin-top: 50px;
-  margin-left: 85px;
   color: rgb(253, 253, 253);
   margin-bottom: 10px;
+  padding-left: 70px;
   cursor: pointer;
 }
 
-:host ::ng-deep .fa-circle-user :hover{
+.fa-circle-user:hover {
+  color: #B5ACAC;
+}
+
+:host ::ng-deep .fa-circle-user :hover {
   color: gray;
   box-sizing: border-box;
   box-shadow: gray 15px 23px 15px,
-              gray 20px 13px 15px;
+  gray 20px 13px 15px;
 }
-.submenu{
+
+.submenu {
   color: rgb(255, 255, 255) !important;
-  padding-left: 0px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
+  margin-bottom: 25px;
+  padding-left: 60px;
 }
-::ng-deep .submenu:hover .sidebar_menu:hover{
-  color: rgb(119, 119, 119) !important;
+
+::ng-deep .submenu:hover .sidebar_menu:hover {
+  color: #B5ACAC !important;
   cursor: pointer;
   font-weight: bolder;
 }
 
-hr{
+hr {
   width: 100%;
   font-size: 3px;
 }
 
-a{
+a {
   color: white;
   font-weight: 500;
   margin-left: 70px;
@@ -45,6 +48,32 @@ li {
   color: white;
 }
 
-.fullName{
-text-align: center;
+.fullName {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.dropdown-toggle {
+  outline: 0;
+}
+
+.log-out {
+  padding-left: 30px;
+}
+
+::ng-deep .log-out:hover {
+  color: #B5ACAC !important;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.fa-solid {
+  color: white;
+  height: 20px;
+}
+
+.fa-solid:hover {
+  color: #B5ACAC !important;
+  font-weight: bolder;
 }

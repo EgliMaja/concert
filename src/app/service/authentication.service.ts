@@ -10,11 +10,7 @@ import { delay, dematerialize, materialize, throwError } from "rxjs";
 export class AuthenticationService {
 
     router = inject(Router);
-    userRoles :any = [
-      ERoles.admin,
-      ERoles.user
-    ];
-
+    userData!: UserDataModel;
 
   /**  store the user in local storage **/
     storeUserData(user: UserDataModel){
@@ -41,10 +37,12 @@ export class AuthenticationService {
     }
 
     /** Role Of Users **/
-    public get Role(){
-      if(this.isAuthetnicated){
-        return this.userRoles;
-      }
+    public get Role(): ERoles[] {
+        if (this.isAuthetnicated){
+            this.userData = JSON.parse(this.isAuthetnicated);
+            return this.userData.role;
+        }
+        return [];
     }
 
 

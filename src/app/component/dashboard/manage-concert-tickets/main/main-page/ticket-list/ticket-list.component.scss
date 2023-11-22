@@ -20,7 +20,7 @@
 }
 
 //design for paginator
-::ng-deep {
+:host ::ng-deep {
   .ngx-pagination {
     display: flex;
     justify-content: center;
@@ -40,6 +40,7 @@
 
   .ngx-pagination li.current {
     background-color: #322121 ;
+    color: white;
   }
 
   li.small-screen {

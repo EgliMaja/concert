@@ -7,6 +7,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { NgxPaginationModule } from "ngx-pagination";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [ TourListComponent ],
@@ -18,6 +19,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     MatIconModule,
     MatButtonModule,
     NgxPaginationModule,
+    MatProgressSpinnerModule,
   ]
 })
 

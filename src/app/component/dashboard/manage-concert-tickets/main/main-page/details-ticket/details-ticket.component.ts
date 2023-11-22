@@ -9,12 +9,15 @@ import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component"
 import { DataSharingService } from "../../../../../../service/data-sharing.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";
+import { AuthenticationService } from "../../../../../../service/authentication.service";
+import { ERoles } from "../../../../../../model/userData.model";
 
 @Component({
     selector: 'app-details-ticket',
     templateUrl: './details-ticket.component.html',
     styleUrls: ['./details-ticket.component.scss']
 })
+
 export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy {
 
  @ViewChild('ticketDetails') ticket!: any;
@@ -25,6 +28,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  loadingSpinner: boolean = true;
  isReadonlyInput!: boolean;
  isCheckedModify: boolean = false;
+ userRole!: ERoles[];
 
  constructor(
     private service: CreateTicketService,
@@ -34,10 +38,12 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
     private dialog: MatDialog,
     private dataSharingService: DataSharingService,
     private  _snackBar: MatSnackBar,
+    private authenticationService: AuthenticationService,
  )
  {
     this.choosenBarcode = this.activatedRoute.snapshot.params['barcode'];
     this.isReadonlyInput = true;
+    this.userRole = this.authenticationService.Role;
  }
 
  ngOnInit(): void {
@@ -105,7 +111,6 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
               id: resp[0]?.id
           } as DataTour;
             this.loadingSpinner = false;
-            console.log(resp, ' Choosen Ticket');
         },
         error: (err) => {
             console.log(err);
@@ -130,7 +135,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  }
 
  goBackButton() {
-   return  this.router.navigate(['home/rihanna'])
+     this.userRole.includes(ERoles.admin) ? this.router.navigate(['home/rihanna']) : this.router.navigate(['home/tour-list']);
  }
 
  onClickModify() {
@@ -205,4 +210,5 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
 
+    protected readonly ERoles = ERoles;
 }

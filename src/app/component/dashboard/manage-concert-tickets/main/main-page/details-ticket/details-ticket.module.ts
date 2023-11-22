@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { DeleteTicketModule } from "../delete-ticket/delete-ticket.module";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
+import {DashboardModule} from "../../../../dashboard.module";
 @NgModule({
   declarations: [DetailsTicketComponent],
     imports: [
@@ -18,6 +19,7 @@ import { MatDialogModule } from "@angular/material/dialog";
         DeleteTicketModule,
         MatButtonModule,
         MatDialogModule,
+        DashboardModule,
     ],
 })
 export class DetailsTicketModule {}

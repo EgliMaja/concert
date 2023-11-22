@@ -1,9 +1,9 @@
 .container{
-  margin-top: 50px;
   background-color: #F5F3F3;
 }
 .example-card {
-  max-width: 250px;
+  width: 270px;
+  height: 250px;
   box-sizing: border-box;
   box-shadow: gray 1px 3px 5px,
               gray 2px 3px 5px;
@@ -15,7 +15,7 @@
 }
 
 //design for paginator
-::ng-deep {
+:host ::ng-deep {
   .ngx-pagination {
     display: flex;
     justify-content: center;
@@ -51,4 +51,10 @@
       overflow: hidden;
     }
   }
+}
+
+.noDataTourMessage {
+  padding: 25px;
+  background-color: #F5F3F3;
+  margin: 20px;
 }

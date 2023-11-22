@@ -4,6 +4,7 @@ import { SidebarMenu } from '../../../model/sidebar-menu.model';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
 import { AuthUserService } from "../../../service/auth-user.service";
 import { ERoles, UserDataModel } from "../../../model/userData.model";
+import {AuthenticationService} from "../../../service/authentication.service";
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -28,10 +29,10 @@ export class SidebarMenuComponent implements OnInit  {
     private menuService: SidebarMenuService ,
     private activatedRoute: ActivatedRoute,
     private authService: AuthUserService,
+    private authenticationService: AuthenticationService,
     )  {
-    const storeUser = localStorage.getItem('userData');
-    if(storeUser){
-      this.userData = JSON.parse(storeUser);
+    if(this.authenticationService.isAuthetnicated){
+      this.userData = JSON.parse(this.authenticationService.isAuthetnicated);
     }
   }
 

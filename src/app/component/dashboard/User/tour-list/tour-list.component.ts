@@ -13,7 +13,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 
 export class TourListComponent implements OnInit , AfterViewInit , OnDestroy{
 
-  @ViewChild('listOfTours') listOfTours : any;
+  @ViewChild('listOfTours') tourList : any;
   dataTour: DataTour[] = [];
   loadingSpinner: boolean = true;
   page: number = 1;
@@ -63,12 +63,7 @@ export class TourListComponent implements OnInit , AfterViewInit , OnDestroy{
   // loading indicator
   loadingTickets(){
     setTimeout(()=>{
-      if(this.listOfTours){
-        this.loadingSpinner = false;
-      }
-      else {
-        this.loadingSpinner = true;
-      }
+      this.loadingSpinner = !this.dataTour;
     } , 500);
   }
 

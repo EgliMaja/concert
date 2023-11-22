@@ -1,4 +1,4 @@
-# Music
+# I recomend to checkout the main branch to see the latest updates 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
 

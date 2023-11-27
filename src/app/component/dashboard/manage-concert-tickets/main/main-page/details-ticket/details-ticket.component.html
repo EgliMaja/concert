@@ -86,6 +86,9 @@
                   <div *ngIf="userRole.includes(ERoles.admin)">
                     <button class="btn bg-primary text-black fw-bold" (click)="onClickModify()">Modify</button>
                   </div>
+                  <div *ngIf="userRole.includes(ERoles.user)">
+                    <button class="btn bg-primary text-black fw-bold" (click)="navigateToBooking()">Buy</button>
+                  </div>
                 </div>
                 <div *ngIf="isCheckedModify" class="col mt-3 d-flex justify-content-end">
                   <button class="btn bg-black text-white fw-bold" (click)="onClickCancel()">Cancel</button>

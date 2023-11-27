@@ -29,6 +29,7 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
  isReadonlyInput!: boolean;
  isCheckedModify: boolean = false;
  userRole!: ERoles[];
+ protected readonly ERoles = ERoles;
 
  constructor(
     private service: CreateTicketService,
@@ -209,6 +210,9 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
       this.dataSharingService.setData(this.dataTour);
   }
 
+  navigateToBooking(){
+      this.router.navigate(['home/booking/'+ this.choosenBarcode])
+  }
 
-    protected readonly ERoles = ERoles;
+
 }

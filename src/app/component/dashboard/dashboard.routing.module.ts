@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./dashboard.component";
 import { CanActivateRoleGuard } from "../../guard/can-activate-role.guard";
-import { ERoles } from "../../model/userData.model";
 
 const routes: Routes = [
   {
@@ -31,6 +30,11 @@ const routes: Routes = [
         path:'tour-list',
         loadChildren: ()=> import('./User/tour-list/tour-list.module').then((m)=>m.TourListModule) ,
         canActivate: [CanActivateRoleGuard],
+      },
+      {
+        path:'booking/:barcode',
+        loadChildren: ()=> import('./User/booking-ticket/booking-ticket.module').then((m)=> m.BookingTicketModule),
+        canActivate: [CanActivateRoleGuard]
       },
       {
         path: '**',

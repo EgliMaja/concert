@@ -1,32 +1,19 @@
 <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel><b>Fill out your data</b></ng-template>
-            <mat-form-field>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
+        <ng-template matStepLabel><b>Fill out your data</b></ng-template>
+        <app-fill-out-ticket></app-fill-out-ticket>
+        <button mat-button (click)="stepper.next()">Next</button>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-        <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel><strong>Confirm your ticket</strong></ng-template>
-            <mat-form-field>
-                <input matInput placeholder="Address" formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
+        <ng-template matStepLabel><strong>Confirm your ticket</strong></ng-template>
+        <app-confirm-ticet></app-confirm-ticet>
+        <button mat-button (click)="stepper.next()">Next</button>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel><strong>Pay for your ticket</strong></ng-template>
-<!--        <i class="fa-solid fa-check"></i>-->
+        <app-payment-ticket></app-payment-ticket>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.previous()">Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>
         </div>
     </mat-step>

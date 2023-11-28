@@ -90,4 +90,8 @@ export class UserProfileSettingsComponent implements OnInit, AfterViewInit, OnDe
     this._router.navigate(['home/my-area/' + this.userData.id + '/my-ticket-store/' + this.userData.id]);
   }
 
+  navigateToFAQ(){
+    this._router.navigate(['home/frequently-asked-questions'])
+  }
+
 }

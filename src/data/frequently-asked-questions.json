@@ -1,0 +1,104 @@
+{
+  "faq": [
+    {
+      "id": 1,
+      "panel": "Registration",
+      "panel_description" : [
+        {
+          "id": 1.0,
+          "question": "What will happen after I sign up?",
+          "answer": "You sign up for an account. When you’re ready, you can book a ticket based on the tours/concerts. In some cases we’ll need to verify your personal data that you have added during registration for a better experience"
+        },
+        {
+          "id": 1.1,
+          "question": "Will I be able to update my registration details?",
+          "answer": "Once you’ve registered with us, you can update your details at any time. For example, if you want to change the password click the user icon at the sidebar menu and click in My profile link– you can add this information whenever you want to."
+        }
+      ]
+    },
+
+    {
+      "id": 2,
+      "panel": "Booking Ticket",
+      "panel_description": [
+        {
+          "id": 2.0,
+          "question": "What do I get for the commission I pay?",
+          "answer":"A Powerful Online Presence at Booking Ticket we actively market on search engines such as Google to make sure that it's visible to a global audience, exposing our tours to the highest possible number of potential bookers. * 24/7 Support Our round-the-clock support team is here for you to book the ticket – in up to 3 languages. "
+        },
+        {
+          "id": 2.1,
+          "question": "I’ve already ordered tickets and now want to add another one. Is it possible yet to sit together?",
+          "answer":"The E-Tickets issued by Culture Ticket are not personalized. To gain access to the venue, only the unique voucher number printed on the E-Ticket is crucial. Therefore tickets bought at Culture Ticket can be passed on easily. Please note, that it is not allowed to duplicate them though. "
+
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "panel": "Commission",
+      "panel_description": [
+        {
+          "id": 3.0,
+          "question": "How do I find out how much commission I'll pay for bookings?",
+          "answer": "A strong online presence in ticket booking we actively market our Music Concerts site on search engines such as Google to ensure it is visible to a global audience, but the commission is kept within the ticket price"
+        }
+      ]
+    },
+
+    {
+      "id": 4,
+      "panel": "Confirming Booking",
+      "panel_description": [
+        {
+          "id": 4.0,
+          "question": "Do I have to confirm all of my booking ticket?",
+          "answer": "You don’t need to confirm any of your booking ticket. When you book a ticket from your profile, it is instantly confirmed online. When your payment is successfully completed, you will automatically have your ticket in pdf format."
+        },
+        {
+          "id": 4.1,
+          "question": "Are E-Tickets transferable or are they personalized?",
+          "answer": "The E-Tickets issued by Culture Ticket are not personalized. To gain access to the venue, only the unique voucher number printed on the E-Ticket is crucial. Therefore tickets bought at Culture Ticket can be passed on easily. Please note, that it is not allowed to duplicate them though."
+
+        }
+      ]
+    },
+
+    {
+      "id": 5,
+      "panel": "Cancellations",
+      "panel_description": [
+        {
+          "id": 5.0,
+          "question": "What happens if i want to cancel my booking ticket?",
+          "answer": "In general, cancellations of already booked tickets are excluded. However, we kindly advise you to contact our Support Team as soon as possible. Culture Ticket will spare no effort to cancel the order by contacting the respective event organizer. We will try to reach a compromise in order to achieve an entire or partial reimbursement in cash or the form of a coupon for you.\nIf the cancellation is rejected by the organizers, we offer you the possibility to take your already booked tickets on commission up to 2 weeks before the event. They will then be offered on our website. In case your tickets are successfully sold, you will receive 50% of the ticket price refunded. If the tickets are not sold, you can of course still redeem them by yourself."
+        },
+        {
+          "id": 5.1,
+          "question": "What happens if a tour/concert is cancelled , can i cancel my booking ticket?",
+          "answer": "Should an organizer decide to postpone an event or change a venue, the ticket remains valid for the new date, respectively the new venue, regardless of the reasons for shifting. It is at the discretion of the organizer to decide whether tickets can be returned, refunded or exchanged.\nPerformances are subject to changes of cast, date and/or programme. In any case, these changes will not establish any claims in terms of cash refunds, price reductions or the return of tickets. Should an event be canceled, postponed or relocated, Culture Ticket guarantees you its full support for the cancellation process."
+
+        }
+      ]
+    },
+
+    {
+      "id": 6,
+      "panel": "Damages",
+      "panel_description": [
+        {
+          "id": 6.0,
+          "question": "What happens if my ticket is damaged?",
+          "answer": "It is important not to break the part of the barcode because the barcode is unique for each ticket and the online data for the ticket buyer is stored there. If the barcode is broken, you must book another ticket!"
+        },
+        {
+          "id": 6.1,
+          "question": "I lost my e-Ticket. What can I do?",
+          "answer": "If you lost your e-Ticket, please contact us, and we will send it to you again. If you suspect your ticket got stolen and could be used by another person, a new e-Ticket has to be issued. Please note, however, that Culture Ticket assumes no liability for lost or stolen tickets. Each E-Ticket contains a unique voucher number and can, therefore, be redeemed only once."
+        }
+      ]
+    }
+
+  ]
+}

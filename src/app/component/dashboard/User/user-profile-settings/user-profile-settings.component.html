@@ -39,10 +39,11 @@
     <div class="col-2 user-profile-menu">
       <h5 class="text-secondary mt-3 mb-5">General Settings&nbsp;<i class="fa-solid fa-gear"></i></h5>
       <hr>
-      <a class="mt-5 mb-5" (click)="navigateToMyPtofile()">My Profile&nbsp;<i
-        class="fa-regular fa-address-card"></i></a> <br>
-      <div *ngIf="userData?.role == userRoles[1]"><a class="mt-5 mb-5" (click)="navigateToMyTicketStore()">My Tickets
-        &nbsp;<i class="fa-solid fa-clipboard-list"></i></a></div>
+      <a class="mt-5 mb-5" (click)="navigateToMyPtofile()">My Profile <i class="fa-regular fa-address-card px-1"></i></a> <br>
+      <div *ngIf="userData?.role == userRoles[1]">
+        <a class="mt-5 mb-5" (click)="navigateToMyTicketStore()">My Tickets <i class="fa-solid fa-clipboard-list px-1"></i></a>
+      </div>
+      <a class="mt-5 mb-5" (click)="navigateToFAQ()">FAQ <i class="fa-solid fa-clipboard-question px-1"></i></a> <br>
     </div>
 
     <div class="col-6">

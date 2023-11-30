@@ -6,9 +6,9 @@
           <h1><strong>RIHANNA</strong></h1>
         </div>
         <div class="text-center">
-          <h1><strong>Welcome Back</strong></h1>
+          <h1><strong>{{"login.welcome" | translate }}</strong></h1>
         </div>
-        <div class="text-center text-secondary">The Faster you fill up, the faster you get a ticket</div>
+        <div class="text-center text-secondary">{{"login.firstTitle" | translate}}</div>
 
         <div *ngIf="loadingSpinner"  class="d-flex justify-content-center">
           <mat-spinner  color="warn" (progress)="signinLoading()"></mat-spinner>
@@ -44,14 +44,17 @@
                 <div *ngIf="password?.errors?.['minlength']">Password should have at least 8 characters</div>
               </mat-hint>
           </mat-form-field>
-          <button class="btn btn-dark" [disabled]="loginFormGroup.invalid" (click)="signin(loginFormGroup)">Sign in</button>
+          <button class="btn btn-dark" [disabled]="loginFormGroup.invalid" (click)="signin(loginFormGroup)">{{"login.signin" | translate}}</button>
         </form>
 
         <div class="row">
           <div class="col text-center">
-            <div class="text-secondary">Don't have an account?</div>
-            <button class="btn btn-dark" (click)="goToRegisterPage()">Sign up</button>
+            <div class="text-secondary">{{"login.question" | translate}}</div>
+            <button class="btn btn-dark" (click)="goToRegisterPage()">{{"login.signup" | translate}}</button>
           </div>
+        </div>
+        <div class="mt-2">
+          <app-translate></app-translate>
         </div>
       </div>
       <div class="col-6">

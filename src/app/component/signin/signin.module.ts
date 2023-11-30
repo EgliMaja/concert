@@ -8,20 +8,24 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { TranslateModuleCustom } from "../translate/translate-module-custom.module";
+import { TranslateModule } from "@ngx-translate/core";
 
 @NgModule({
 declarations : [SigninComponent],
-imports: [
-  CommonModule,
-  SigninRoutingModule,
-  FormsModule,
-  ReactiveFormsModule,
-  MatInputModule,
-  MatFormFieldModule,
-  MatButtonModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-]
+  imports: [
+    CommonModule,
+    SigninRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    TranslateModuleCustom,
+    TranslateModule,
+  ]
 })
 
 export class SigninModule {}

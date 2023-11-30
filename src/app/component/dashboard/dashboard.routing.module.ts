@@ -32,6 +32,11 @@ const routes: Routes = [
         canActivate: [CanActivateRoleGuard],
       },
       {
+        path:'booking/:barcode',
+        loadChildren: ()=> import('./User/booking-ticket/booking-ticket.module').then((m)=> m.BookingTicketModule),
+        canActivate: [CanActivateRoleGuard]
+      },
+      {
         path: 'frequently-asked-questions',
         loadChildren: () => import('./User/faq/faq.module').then((m)=> m.FaqModule)
       },

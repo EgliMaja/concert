@@ -1,0 +1,9 @@
+{
+  "login": {
+    "welcome": "Welcome Back",
+    "firstTitle": "The Faster you fill up, the faster you get a ticket",
+    "signin": "Sign in",
+    "question": "Don't have an account?",
+    "signup": "Sign up"
+  }
+}

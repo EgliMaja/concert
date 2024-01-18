@@ -10,6 +10,7 @@ import { MatInputModule } from "@angular/material/input";
 import { FillOutTicketModule } from "./fill-out-ticket/fill-out-ticket.module";
 import { ConfirmTicketModule } from "./confirm-ticet/confirm-ticket.module";
 import { PaymentTicketModule } from "./payment-ticket/payment-ticket.module";
+import { SharedReactiveFormComponent } from "../../../../shared/form-group.component";
 
 @NgModule({
     declarations: [ BookingTicketComponent ],
@@ -25,6 +26,7 @@ import { PaymentTicketModule } from "./payment-ticket/payment-ticket.module";
         FillOutTicketModule,
         ConfirmTicketModule,
         PaymentTicketModule,
+        SharedReactiveFormComponent,
     ]
 })
 export class BookingTicketModule {}

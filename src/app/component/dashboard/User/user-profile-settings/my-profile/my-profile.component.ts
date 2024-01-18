@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ValidatorsRegexPatterns } from "../../../../../function/function-validator";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
@@ -142,8 +142,8 @@ export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , O
 
 
  //Modify mt profile data
- updateProfile(data: FormGroup){
-   data = this.formGroupProfile;
+ updateProfile(){
+   let data = this.formGroupProfile;
    this.userData = {
      firstName: data.get('firstName')?.value,
      lastName: data.get('lastName')?.value,

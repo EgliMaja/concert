@@ -1,20 +1,58 @@
 <mat-horizontal-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-        <ng-template matStepLabel><b>Fill out your data</b></ng-template>
-        <app-fill-out-ticket></app-fill-out-ticket>
-        <button mat-button (click)="stepper.next()">Next</button>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-        <ng-template matStepLabel><strong>Confirm your ticket</strong></ng-template>
-        <app-confirm-ticet></app-confirm-ticet>
-        <button mat-button (click)="stepper.next()">Next</button>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel><strong>Pay for your ticket</strong></ng-template>
-        <app-payment-ticket></app-payment-ticket>
-        <div>
-            <button mat-button (click)="stepper.previous()">Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <ng-template matStepLabel><b>Fill out your data</b></ng-template>
+    <form [formGroup]="ticketFormGroup">
+      <div class="row mt-5">
+        <div class="col-6 mt-5">
+          <app-reactive-form controlKey="ticketDataFormGroup"></app-reactive-form>
         </div>
-    </mat-step>
+        <div class="col-6 mt-5">
+          <!-- Tour Name -->
+        <mat-form-field class="example-full-width mb-3 px-5">
+          <mat-label>Tour Name</mat-label>
+          <input matInput class="form-control" name="tourName" formControlName="tourName" id="tourName">
+        </mat-form-field>
+        <!-- Tour Date -->
+        <mat-form-field class="example-full-width mb-3 px-5">
+          <mat-label>Tour Date</mat-label>
+          <input matInput class="form-control" name="tourDate" formControlName="tourDate" type="date"  id="date">
+        </mat-form-field> <br>
+          <!-- Artist Name -->
+          <mat-form-field class="example-full-width mb-3 px-5">
+            <mat-label>Artist Name</mat-label>
+            <input matInput class="form-control" name="artistName"  formControlName="artistName" id="artistName">
+          </mat-form-field>
+        </div>
+      </div>
+      <label class="text-secondary">If you want to continue with these data, press next <i class="fa-solid fa-circle-info"></i></label> <br>
+      <label class="text-secondary">If you want to change the data , press fill data <i class="fa-solid fa-circle-info"></i></label><br>
+      <div class="d-flex justify-content-center mt-5">
+        <button mat-raised-button color="accent">
+          Fill Data
+        </button>
+        &nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="primary" class="px-2" [disabled]="ticketFormGroup.invalid" (click)="stepper.next()">
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <ng-template matStepLabel><strong>Confirm your ticket</strong></ng-template>
+    <app-confirm-ticet></app-confirm-ticet>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button color="primary" (click)="stepper.next()">Next</button>
+    </div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel><strong>Pay for your ticket</strong></ng-template>
+    <app-payment-ticket></app-payment-ticket>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button color="primary" (click)="stepper.previous()">Back</button>
+      <button mat-raised-button color="primary" class="px-3" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
 </mat-horizontal-stepper>

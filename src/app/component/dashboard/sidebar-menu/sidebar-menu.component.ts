@@ -4,7 +4,7 @@ import { SidebarMenu } from '../../../model/sidebar-menu.model';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
 import { AuthUserService } from "../../../service/auth-user.service";
 import { ERoles, UserDataModel } from "../../../model/userData.model";
-import {AuthenticationService} from "../../../service/authentication.service";
+import { AuthenticationService } from "../../../service/authentication.service";
 
 @Component({
   selector: 'app-sidebar-menu',

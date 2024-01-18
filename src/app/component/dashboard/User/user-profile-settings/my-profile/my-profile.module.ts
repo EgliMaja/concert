@@ -7,19 +7,21 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import {SharedReactiveFormComponent} from "../../../../../shared/form-group.component";
 
 @NgModule({
   declarations: [ MyProfileComponent ],
-  imports: [
-    CommonModule,
-    MyProfileRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatSnackBarModule,
-  ]
+    imports: [
+        CommonModule,
+        MyProfileRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule,
+        SharedReactiveFormComponent,
+    ]
 })
 
 export class MyProfileModule {}

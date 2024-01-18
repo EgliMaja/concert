@@ -10,8 +10,8 @@
       "id": 235234324
     },
     {
-      "firstName": "Person",
-      "lastName": "User",
+      "firstName": "First",
+      "lastName": "Person",
       "phone": "+340688185266",
       "email": "firstperson@gmail.com",
       "password": "sfghfgh2327$$",
@@ -171,6 +171,53 @@
       "addressLocation": "Merkezefendi, 34015 Zeytinburnu",
       "artistName": "Justin Biber",
       "id": 13
+    }
+  ],
+  "TaskTracer": [
+    {
+      "title": "Egli",
+      "responsibilities": "Krijo Nje Filter",
+      "assigned_person": "Egli Maja",
+      "priority": "High",
+      "status": "In Progress",
+      "progress": 70,
+      "id": 1
+    },
+    {
+      "title": "SibeBar",
+      "responsibilities": "Krijoni Nje Sidebar te bazuar ne role",
+      "assigned_person": "Joan",
+      "priority": "Normal",
+      "status": "Done",
+      "progress": 100,
+      "id": 2
+    },
+    {
+      "title": "Stepper",
+      "responsibilities": "Krijoni nje Stepper per pagesen e biletes",
+      "assigned_person": "Jehnyy",
+      "priority": "Low",
+      "status": "Not Started",
+      "progress": 10,
+      "id": 3
+    },
+    {
+      "title": "Role Based",
+      "responsibilities": "Create Role Based Authentication guard",
+      "assigned_person": "Person Three",
+      "priority": "High",
+      "status": "Canceled",
+      "progress": 32,
+      "id": 4
+    },
+    {
+      "title": "Login",
+      "responsibilities": "Create Login",
+      "assigned_person": "Person Two",
+      "priority": "Low",
+      "status": "In Progress",
+      "progress": 37,
+      "id": 5
     }
   ]
 }

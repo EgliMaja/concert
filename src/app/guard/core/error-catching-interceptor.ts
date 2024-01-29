@@ -11,7 +11,7 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
       if ([400 , 401 , 403 , 415 ].includes(err.status)){
-        this.authentificationService.unstoreUserData();
+        this.authentificationService.restoreUserData();
       }
       const  errror = err.error.message || err.statusText;
       return throwError(()=> errror);

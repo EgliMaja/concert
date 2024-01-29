@@ -3,6 +3,12 @@ import { environment } from "./environment";
 
 export const EndpointAPI = [
 
+  // User Authentication
+  { name: "getAllUsers" , endpoint: environment.api + "UserData"},
+  { name: "registerUser" , endpoint: environment.api + "UserData" },
+  { name: "getUserDataByID" , endpoint: environment.api + "UserData" },
+  { name: "updateProfileUser" , endpoint: environment.api + "UserData" },
+
   // Ticket Management
   { name: "getAllTicket" , endpoint: environment.api + "DataTour" },
   { name: "createTicket" , endpoint: environment.api + "DataTour" },

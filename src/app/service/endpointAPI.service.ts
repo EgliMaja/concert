@@ -7,6 +7,12 @@ import { EndpointAPI } from "../../environments/endpoint-API";
 
 export class EndpointAPIService {
 
+  // User Authentication
+  static readonly ENDPOINT_NAME_GET_ALL_USERS = "getAllUsers";
+  static readonly ENDPOINT_NAME_REGISTER_USER = "registerUser";
+  static readonly ENDPOINT_NAME_GET_USER_BY_ID = "getUserDataByID";
+  static readonly ENDPOINT_NAME_UPDATE_PROFILE_USER = "updateProfileUser";
+
   // Ticket Management
   static readonly ENDPOINT_NAME_GET_ALL_TICKET = "getAllTicket";
   static readonly ENDPOINT_NAME_CREATE_TICKET = "createTicket";

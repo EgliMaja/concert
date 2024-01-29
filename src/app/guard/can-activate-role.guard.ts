@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 import { AuthenticationService } from "../service/authentication.service";
 import { ERoles } from "../model/userData.model";
-import {map, of} from "rxjs";
+import { map, of } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,6 @@ import {map, of} from "rxjs";
 
 export class CanActivateRoleGuard implements CanActivate {
 
-  exeptedRole!: string;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
@@ -49,7 +48,7 @@ export class CanActivateRoleGuard implements CanActivate {
       // role is not authorized
       else {
         this.router.navigate(['signin']);
-        this.authenticationService.unstoreUserData();
+        this.authenticationService.restoreUserData();
         this.authenticationService.isUnathorized;
         return false;
       }
@@ -57,7 +56,7 @@ export class CanActivateRoleGuard implements CanActivate {
     }
 
     // user is not logged so ridirect to login page with the return url
-    this.authenticationService.unstoreUserData();
+    this.authenticationService.restoreUserData();
     this.authenticationService.isUnathorized;
     this.router.navigate(['signin'], {queryParams: {returnUrl: state.url}});
     return false;

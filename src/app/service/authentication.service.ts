@@ -14,12 +14,12 @@ export class AuthenticationService {
 
   /**  store the user in local storage **/
     storeUserData(user: UserDataModel){
-        localStorage.setItem('userData', JSON.stringify(user));
+        localStorage.setItem('UserData', JSON.stringify(user));
     }
 
     /** Unstore the user from local storage **/
-    unstoreUserData(){
-        localStorage.removeItem('userData');
+    restoreUserData(){
+        localStorage.removeItem('UserData');
         localStorage.clear();
         this.router.createUrlTree(['signin']);
     }
@@ -27,7 +27,7 @@ export class AuthenticationService {
 
     /** Get loged user the data  **/
     public get token(): string {
-        const token = localStorage.getItem('userData');
+        const token = localStorage.getItem('UserData');
         return JSON.stringify(token);
     }
 

@@ -14,9 +14,9 @@ export class CreateTicketComponent implements OnInit {
 
   @Input() ToDate = new Date().toISOString().split('T')[0];
   generateTicketForm!: FormGroup;
-  tourDatas!: DataTour;
-  ticetCreatedSucces: boolean = false;
-  ticetCreatedError: boolean = false;
+  tourData!: DataTour;
+  ticketCreatedSucces: boolean = false;
+  ticketCreatedError: boolean = false;
   image!: File[];
   allowedFileExtension = ['.jpg', '.png', '.jpeg'].toString();
 
@@ -49,11 +49,11 @@ export class CreateTicketComponent implements OnInit {
 
       priceOfTicket: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.pattern(regex_pattern.numberPattern), Validators.min(35), Validators.max(1200)]),
+        [Validators.required,  Validators.min(35), Validators.max(1200)]),
 
       barcode: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.min(15) , Validators.max(16) ,Validators.pattern(regex_pattern.numberPattern)]),
+        [Validators.required, Validators.min(15)  ,Validators.pattern(regex_pattern.numberPattern)]),
 
       uploadedImage: new FormControl(
         {value: '', disabled: false}, [Validators.required]),
@@ -66,14 +66,14 @@ export class CreateTicketComponent implements OnInit {
 
   // Generate | Create Ticket
   generateTicket() {
-    this.tourDatas = {...this.generateTicketForm.value};
-    this.service.createTour(this.tourDatas).subscribe({
+    this.tourData = {...this.generateTicketForm.value};
+    this.service.createTour(this.tourData).subscribe({
       next: (res) => {
-        this.ticetCreatedSucces = true;
+        this.ticketCreatedSucces = true;
         this.openSnackBar('Data Created Successfully!' , "Close");
       },
       error: (err) => {
-        this.ticetCreatedError = true;
+        this.ticketCreatedError = true;
         this.openSnackBar( err.message , "Close")
       },
       complete:()=>{
@@ -118,4 +118,5 @@ export class CreateTicketComponent implements OnInit {
   }
 
 
+  protected readonly JSON = JSON;
 }

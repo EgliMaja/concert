@@ -15,7 +15,6 @@ export class AuthUserService extends EndpointAPIService {
 
   private userSubject: BehaviorSubject<UserDataModel | null>;
   public personLoggedIn: Observable<UserDataModel | null>;
-  private readonly api: string;
   user!: UserDataModel;
 
   constructor(
@@ -24,13 +23,16 @@ export class AuthUserService extends EndpointAPIService {
     private authenticationService: AuthenticationService,
   ) {
     super();
-    this.api = environment.api + 'UserData';
     this.userSubject = new BehaviorSubject(authenticationService.isAuthetnicated);
     this.personLoggedIn = this.userSubject.asObservable();
   }
 
-  login(email: string, password: string): Observable<UserDataModel[]> {
-    return this.http.get<UserDataModel[]>(`${this.api}?email=${email}&password=${password}`);
+  login( email: string, password: string ): Observable<UserDataModel[]> {
+    const endpoint: string = this.getEndpoint( EndpointAPIService.ENDPOINT_NAME_GET_ALL_USERS );
+    let queryParams: HttpParams = new HttpParams();
+    queryParams = queryParams.set("?email" , email);
+    queryParams = queryParams.set("?password" , password);
+    return this.http.get<UserDataModel[]>(`${endpoint}${queryParams}`);
   }
 
   logout(){

@@ -23,7 +23,7 @@ import { Router } from "@angular/router";
     <form [formGroupName]="controlKey">
       <div class="row">
         <div class="col-sm-6">
-      <mat-form-field class="example-full-width mb-3">
+      <mat-form-field class="example-full-width px-5 mb-3">
       <!-- First Name -->
         <mat-label>First Name</mat-label>
         <input matInput type="text" placeholder="Your Name" name="firstName" formControlName="firstName" [readOnly]="isReadonly">
@@ -37,7 +37,7 @@ import { Router } from "@angular/router";
       </mat-form-field>
 
         <!-- Email-->
-        <mat-form-field class="example-full-width mb-3">
+        <mat-form-field class="example-full-width px-5 mb-3">
           <mat-label>Email</mat-label>
           <input matInput type="email" placeholder="Ex. pat@example.com" name="email" formControlName="email" [readOnly]="isReadonly">
           <mat-hint  *ngIf="email?.invalid && (email?.touched ||  email?.dirty)"
@@ -51,7 +51,7 @@ import { Router } from "@angular/router";
 
       <div class="col-sm-6">
         <!--Last Name-->
-        <mat-form-field class="example-full-width mb-3">
+        <mat-form-field class="example-full-width px-5 mb-3">
           <mat-label>Last Name</mat-label>
           <input matInput type="text" placeholder="Last Name" name="lastName" formControlName="lastName" [readOnly]="isReadonly">
           <mat-hint  *ngIf="lastName?.invalid && (lastName?.touched ||  lastName?.dirty)"
@@ -64,7 +64,7 @@ import { Router } from "@angular/router";
         </mat-form-field>
 
       <!--Phone Number -->
-        <mat-form-field class="example-full-width mb-3">
+        <mat-form-field class="example-full-width px-5 mb-3">
           <mat-label>Telephone</mat-label>
           <input matInput type="phone" placeholder="+355 06X 123 1234" name="phone" formControlName="phone" [readOnly]="isReadonly">
           <mat-hint  *ngIf="phoneNumber?.invalid && (phoneNumber?.touched ||  phoneNumber?.dirty)"

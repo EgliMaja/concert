@@ -35,6 +35,15 @@
       "password": "76543211",
       "role": "USER",
       "id": 235234326
+    },
+    {
+      "firstName": "Joana",
+      "lastName": "Beqollari",
+      "phone": "+355692505946",
+      "email": "joannabeqollari@gmail.com",
+      "password": "123456789",
+      "role": "USER",
+      "id": 235234327
     }
   ],
   "DataTour": [
@@ -63,7 +72,7 @@
     {
       "tourName": "Anti World Tour",
       "tourDate": "2023-09-30",
-      "priceOfTicket": 280,
+      "priceOfTicket": 285,
       "barcode": "0000067379001253",
       "uploadedImage": "C:\\fakepath\\374306-4k-wallpaper.jpg",
       "addressLocation": "Carrer Lliria , 56",
@@ -171,6 +180,17 @@
       "cityTourLocation": "Kruje",
       "artistName": "Elvana Gjata",
       "id": 14
+    },
+    {
+      "tourName": "Lana's Tour",
+      "tourDate": "2024-11-19",
+      "priceOfTicket": 499,
+      "barcode": "0000019112000191",
+      "uploadedImage": "C:\\fakepath\\Screenshot 2023-04-28 060802.png",
+      "addressLocation": "Lagja Clirim",
+      "cityTourLocation": "Berat",
+      "artistName": "Lana Del Rey",
+      "id": 15
     }
   ]
 }

@@ -1,9 +1,19 @@
 :host ::ng-deep {
-  .mat-horizontal-stepper-header .mat-step-icon{
+  .mat-horizontal-stepper-header .mat-step-icon {
     width: 40px;
     height: 40px;
   }
-  .mat-step-icon .mat-icon{
-    content:"\f099";
+
+  .mat-step-icon .mat-icon {
+    content: "\f099";
   }
+}
+
+.loading {
+  margin-top: 300px;
+}
+
+.text-price {
+  color: #FF4081;
+  padding-left: 280px;
 }

@@ -1,58 +1,91 @@
-<mat-horizontal-stepper linear #stepper>
+<ng-container *ngIf="loadingSpinner; else MatStepper">
+  <div class="loading d-flex justify-content-center">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>
 
-  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <ng-template matStepLabel><b>Fill out your data</b></ng-template>
-    <form [formGroup]="ticketFormGroup">
-      <div class="row mt-5">
-        <div class="col-6 mt-5">
-          <app-reactive-form controlKey="ticketDataFormGroup"></app-reactive-form>
-        </div>
-        <div class="col-6 mt-5">
-          <!-- Tour Name -->
-        <mat-form-field class="example-full-width mb-3 px-5">
-          <mat-label>Tour Name</mat-label>
-          <input matInput class="form-control" name="tourName" formControlName="tourName" id="tourName">
-        </mat-form-field>
-        <!-- Tour Date -->
-        <mat-form-field class="example-full-width mb-3 px-5">
-          <mat-label>Tour Date</mat-label>
-          <input matInput class="form-control" name="tourDate" formControlName="tourDate" type="date"  id="date">
-        </mat-form-field> <br>
-          <!-- Artist Name -->
-          <mat-form-field class="example-full-width mb-3 px-5">
-            <mat-label>Artist Name</mat-label>
-            <input matInput class="form-control" name="artistName"  formControlName="artistName" id="artistName">
-          </mat-form-field>
-        </div>
+<ng-template #MatStepper>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+      <ng-template matStepLabel><b>Fill out your data</b></ng-template>
+
+      <div class="row text-secondary mt-5 ">
+        <p><i class="fa-solid fa-circle-info"></i><span class="px-2"></span>If you want to fill the data , press fill data.
+          If you want to continue with these data, press next. </p>
       </div>
-      <label class="text-secondary">If you want to continue with these data, press next <i class="fa-solid fa-circle-info"></i></label> <br>
-      <label class="text-secondary">If you want to change the data , press fill data <i class="fa-solid fa-circle-info"></i></label><br>
-      <div class="d-flex justify-content-center mt-5">
-        <button mat-raised-button color="accent">
-          Fill Data
-        </button>
-        &nbsp;&nbsp;&nbsp;
-        <button mat-raised-button color="primary" class="px-2" [disabled]="ticketFormGroup.invalid" (click)="stepper.next()">
-          Next
-        </button>
+
+      {{JSON.stringify(ticketFormGroup.value) }}
+      <form [formGroup]="ticketFormGroup">
+        <div class="row mt-5">
+          <div class="col-6">
+
+            <app-reactive-form controlKey="ticketDataFormGroup"></app-reactive-form>
+
+            <mat-form-field class="example-full-width px-5 mb-3">
+              <mat-label>Number of Tickets</mat-label>
+              <mat-select name="numberTickets" formControlName="numberTickets">
+                <mat-option *ngFor="let numberTickets of numberOfTickets" [value]="numberTickets">{{ numberTickets }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+          <div class="col-6">
+            <!-- Tour Name -->
+            <mat-form-field class="example-full-width mb-3 px-5">
+              <mat-label>Tour Name</mat-label>
+              <input matInput name="tourName" formControlName="tourName" id="tourName">
+            </mat-form-field>
+            <!-- Tour Date -->
+            <mat-form-field class="example-full-width mb-3 px-5">
+              <mat-label>Tour Date</mat-label>
+              <input matInput name="tourDate" formControlName="tourDate" type="date" id="date">
+            </mat-form-field>
+            <br>
+            <!-- Artist Name -->
+            <mat-form-field class="example-full-width mb-3 px-5">
+              <mat-label>Artist Name</mat-label>
+              <input matInput name="artistName" formControlName="artistName" id="artistName">
+            </mat-form-field>
+            <!-- Ticket Type -->
+            <mat-form-field class="example-full-width px-5 mb-3 ">
+              <mat-label>Type of Ticket</mat-label>
+              <mat-select formControlName="ticketType">
+                <mat-option *ngFor="let ticketType of typeOfTickets" [value]="ticketType">{{ ticketType }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- Price -->
+            <mat-form-field class="example-full-width px-5 mb-3 ">
+              <mat-label>Price of Ticket</mat-label>
+              <input matInput name="priceOfTicket" formControlName="priceOfTicket" id="price" [disabled]="true" (change)="onChangesInputValues()">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center mt-5">
+          <button mat-raised-button color="accent" (click)="enableForm()">Fill Data</button>
+          &nbsp;&nbsp;&nbsp;
+          <button mat-raised-button color="primary" class="px-2" [disabled]="ticketFormGroup.invalid"
+                  (click)="stepper.next()"> Next </button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+      <ng-template matStepLabel><strong>Confirm your ticket</strong></ng-template>
+      <app-confirm-ticet></app-confirm-ticet>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" (click)="stepper.next()">Next</button>
       </div>
-    </form>
-  </mat-step>
+    </mat-step>
 
-  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <ng-template matStepLabel><strong>Confirm your ticket</strong></ng-template>
-    <app-confirm-ticet></app-confirm-ticet>
-    <div class="d-flex justify-content-center">
-      <button mat-raised-button color="primary" (click)="stepper.next()">Next</button>
-    </div>
-  </mat-step>
-
-  <mat-step>
-    <ng-template matStepLabel><strong>Pay for your ticket</strong></ng-template>
-    <app-payment-ticket></app-payment-ticket>
-    <div class="d-flex justify-content-center">
-      <button mat-raised-button color="primary" (click)="stepper.previous()">Back</button>
-      <button mat-raised-button color="primary" class="px-3" (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
+    <mat-step>
+      <ng-template matStepLabel><strong>Pay for your ticket</strong></ng-template>
+      <app-payment-ticket></app-payment-ticket>
+      <div class="d-flex justify-content-center">
+        <button mat-raised-button color="primary" (click)="stepper.previous()">Back</button>
+        <button mat-raised-button color="primary" class="px-3" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</ng-template>

@@ -18,7 +18,7 @@ export class TranslateComponent implements OnInit {
   selectLanguage(event: Event, selectedLanguage: string): void {
     event.preventDefault();
     sessionStorage.getItem('lang');
-    localStorage.setItem('lang', selectedLanguage);
+    sessionStorage.setItem('lang', selectedLanguage);
     this.translate.use(selectedLanguage);
   }
 

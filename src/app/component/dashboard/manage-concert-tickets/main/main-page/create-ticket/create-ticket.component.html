@@ -57,6 +57,7 @@
         <p *ngIf="barcode?.errors?.['pattern']"> Barcode must be number characters ! </p>
         <p *ngIf="barcode?.errors?.['minlength']"> Barcode must have 16 numbers. </p>
         <p *ngIf="barcode?.errors?.['maxlength']"> Barcode must have 16 numbers. </p>
+        <p *ngIf="barcode?.errors?.['barcodeTaken']">This Barcode already exist. </p>
       </label>
       <input id="barcode" class="form-control" name="barcode" formControlName="barcode" [maxlength]="16" [minlength]="16">
 

@@ -2,6 +2,7 @@ import { inject, Injectable } from "@angular/core";
 import { ERoles, UserDataModel } from "../model/userData.model";
 import { Router } from "@angular/router";
 import { delay, dematerialize, materialize, throwError } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Injectable({
     providedIn: 'root'
@@ -12,22 +13,30 @@ export class AuthenticationService {
     router = inject(Router);
     userData!: UserDataModel;
 
-  /**  store the user in local storage **/
+    constructor(private  _snackBar: MatSnackBar) { }
+
+   /**  store the user in local storage **/
     storeUserData(user: UserDataModel){
-        localStorage.setItem('UserData', JSON.stringify(user));
+        sessionStorage.setItem('UserData', JSON.stringify(user));
+        setTimeout(() => {
+          this.openSnackBar('Your Session has Expired , Please Login Again!' , 'Close');
+          this.restoreUserData();
+          console.log('Session Expired')
+        }, 500000);
     }
+
 
     /** Unstore the user from local storage **/
     restoreUserData(){
-        localStorage.removeItem('UserData');
-        localStorage.clear();
-        this.router.createUrlTree(['signin']);
+      sessionStorage.removeItem('UserData');
+      sessionStorage.clear();
+      this.router.createUrlTree(['signin']);
     }
 
 
     /** Get loged user the data  **/
     public get token(): string {
-        const token = localStorage.getItem('UserData');
+        const token = sessionStorage.getItem('UserData');
         return JSON.stringify(token);
     }
 
@@ -51,4 +60,9 @@ export class AuthenticationService {
       return throwError(()=> ({status: 401, error: {message: 'You are not allowed!'}}))
         .pipe(materialize() , delay(300) , dematerialize()) // call materialize and dematerialize to ensure delay even if an error is thrown
     }
+
+   /** Snackbar to Notify User **/
+   openSnackBar(message: string, action: string) {
+     this._snackBar.open(message, action);
+   }
 }

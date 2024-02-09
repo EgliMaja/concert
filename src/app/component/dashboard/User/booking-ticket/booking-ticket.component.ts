@@ -30,6 +30,8 @@ export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestro
     TypeOfTicketsModel.VIP_Ticket
   ]
   ticketPrice!: number;
+  protected readonly JSON = JSON;
+
 
   constructor(
       private formBuilder: FormBuilder,
@@ -87,8 +89,8 @@ export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestro
       tourName: [{value: this.dataTour?.tourName, disabled: true}, [Validators.required]],
       tourDate: [{value: this.dataTour?.tourDate, disabled: true}, [Validators.required]],
       artistName: [{value: this.dataTour?.artistName, disabled: true}, [Validators.required] ],
-      numberTickets: new FormControl('' ,  [Validators.required]),
-      ticketType: new FormControl('' ,  [Validators.required]),
+      numberTickets:[{value: '' , disabled: true},  [Validators.required]],
+      ticketType: [{value: '' , disabled: true},  [Validators.required]],
       priceOfTicket: [{value: this.dataTour?.addressLocation, disabled: true}, [Validators.required] ]
     });
   }

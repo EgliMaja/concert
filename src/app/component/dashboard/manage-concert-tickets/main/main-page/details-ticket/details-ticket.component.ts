@@ -81,8 +81,8 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 
          priceOfTicket: [
              {value: this.dataTour.priceOfTicket, disabled: this.isReadonlyInput},
-             Validators.compose([Validators.required, Validators.pattern(regex_pattern.numberPattern),
-                 Validators.min(35), Validators.max(1200)])],
+             {validators: [Validators.required, Validators.pattern(regex_pattern.numberPattern),
+                 Validators.min(35), Validators.max(1200)]}],
 
          artistName: [
              {value: this.dataTour.artistName, disabled: this.isReadonlyInput},

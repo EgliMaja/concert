@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { DataTour } from '../../../../../../model/concert.model';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";
+import {map, Observable, take} from "rxjs";
 @Component({
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
@@ -53,7 +54,11 @@ export class CreateTicketComponent implements OnInit {
 
       barcode: new FormControl(
         {value: '', disabled: false},
-        [Validators.required, Validators.min(15)  ,Validators.pattern(regex_pattern.numberPattern)]),
+        {
+          validators:[Validators.required, Validators.min(15)  ,Validators.pattern(regex_pattern.numberPattern)],
+          asyncValidators:[this.validateExistingBarcodes.bind(this)]
+        }
+        ),
 
       uploadedImage: new FormControl(
         {value: '', disabled: false}, [Validators.required]),
@@ -119,4 +124,18 @@ export class CreateTicketComponent implements OnInit {
 
 
   protected readonly JSON = JSON;
+
+
+  // Check if barcode exist , do not allow two same barcodes to create
+  validateExistingBarcodes(control: AbstractControl): Observable<ValidationErrors | null> {
+    const barcode = control.value as string;
+    return this.service.getDataCreatedTicket().pipe(
+      take(1),
+      map(barcodes => {
+        const isBarcodeTaken = barcodes.some(data => data.barcode === barcode);
+        return isBarcodeTaken ? { barcodeTaken: true } : null;
+      })
+    )
+}
+
 }

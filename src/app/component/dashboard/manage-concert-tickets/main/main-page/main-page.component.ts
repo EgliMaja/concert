@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component , OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-page',
@@ -7,13 +7,9 @@ import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Outp
 })
 export class MainPageComponent implements OnInit , AfterViewInit{
 
-  @Output() loadingSpinner:EventEmitter<boolean> =  new EventEmitter();
-
   constructor( private cd: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    this.loadingSpinner.emit(true);
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.cd.detectChanges();

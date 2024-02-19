@@ -9,6 +9,7 @@ import { ObserversModule } from "@angular/cdk/observers";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { SidebarMenuModule } from "./sidebar-menu/sidebar-menu.module";
+import { LoadingComponent } from "../loading/loading.component";
 
 @NgModule({
   declarations : [
@@ -24,6 +25,7 @@ import { SidebarMenuModule } from "./sidebar-menu/sidebar-menu.module";
     MatSidenavModule,
     MatSnackBarModule,
     SidebarMenuModule,
+    LoadingComponent,
   ],
   exports: [
     DashboardComponent ,

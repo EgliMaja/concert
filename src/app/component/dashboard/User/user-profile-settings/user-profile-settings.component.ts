@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthUserService } from "../../../../service/auth-user.service";
 import { Subject, takeUntil } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -10,13 +10,12 @@ import { ERoles, UserDataModel } from "../../../../model/userData.model";
   styleUrls: ['./user-profile-settings.component.scss']
 })
 
-export class UserProfileSettingsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserProfileSettingsComponent implements OnInit, OnDestroy {
 
   id!: number;
   userData!: UserDataModel;
   private $destroy: Subject<boolean> = new Subject<boolean>();
   @ViewChild('userProfile') userProfile: any;
-  loadingSpinner: boolean = true;
   isVisiblePassword: boolean = false;
   userRoles: any = [
     ERoles.admin,
@@ -33,10 +32,6 @@ export class UserProfileSettingsComponent implements OnInit, AfterViewInit, OnDe
 
   ngOnInit(): void {
     this.getUserProfileByID();
-  }
-
-  ngAfterViewInit() {
-    this.loadingUserProfile();
   }
 
   ngOnDestroy() {
@@ -59,19 +54,11 @@ export class UserProfileSettingsComponent implements OnInit, AfterViewInit, OnDe
           phone: res[0]?.phone,
           id: res[0]?.id
         } as UserDataModel;
-        this.loadingSpinner = false;
       },
       error: (err) => {
         console.log(err);
-        this.loadingSpinner = false;
       }
     })
-  }
-
-  loadingUserProfile() {
-    setTimeout(() => {
-      this.loadingSpinner = !this.userProfile;
-    }, 500);
   }
 
   visiblePassword() {

@@ -1,9 +1,9 @@
 <div class="body">
   <div class="container">
     <div class="row d-flex justify-content-center">
-      <div *ngIf="loadingSpinner; else ticketDetails" class="body-ticket d-flex justify-content-center">
-        <mat-spinner></mat-spinner>
-      </div>
+      <ng-container *ngIf="dataTour; else noDataMessage" class="body-ticket d-flex justify-content-center">
+        <ng-container *ngTemplateOutlet="ticketDetails"></ng-container>
+      </ng-container>
       <ng-template #ticketDetails>
         <form [formGroup]="ticketFormGroup" class="body-ticket">
           <div class="row">
@@ -104,3 +104,9 @@
   </div>
 </div>
 
+<ng-template #noDataMessage>
+  <div class="text-center noDataTourMessage">
+    <h5>There are no data ticket to display !</h5> <br>
+    <h5>Stay active on our site and create new tours :)</h5>
+  </div>
+</ng-template>

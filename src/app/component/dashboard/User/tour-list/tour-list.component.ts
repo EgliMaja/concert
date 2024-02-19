@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject, takeUntil } from "rxjs";
 import { CreateTicketService } from "../../../../service/create-ticket.service";
 import { Router } from "@angular/router";
@@ -11,11 +11,10 @@ import { MatSnackBar } from "@angular/material/snack-bar";
   styleUrls: ['./tour-list.component.scss']
 })
 
-export class TourListComponent implements OnInit , AfterViewInit , OnDestroy{
+export class TourListComponent implements OnInit , OnDestroy{
 
   @ViewChild('listOfTours') tourList : any;
   dataTour: DataTour[] = [];
-  loadingSpinner: boolean = true;
   page: number = 1;
   ticketPerPage: number = 8;
   private destroy$: Subject<boolean> = new Subject<boolean>();
@@ -30,10 +29,6 @@ export class TourListComponent implements OnInit , AfterViewInit , OnDestroy{
     this.getTours();
   }
 
-  ngAfterViewInit() {
-    this.loadingTickets();
-  }
-
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
@@ -46,10 +41,8 @@ export class TourListComponent implements OnInit , AfterViewInit , OnDestroy{
     ).subscribe({
       next: (res) => {
         this.dataTour = res;
-        this.loadingSpinner = false;
       },
       error: (err) => {
-        this.loadingSpinner = false;
         this.openSnackBar(err.message , "Close");
       }
     });
@@ -58,13 +51,6 @@ export class TourListComponent implements OnInit , AfterViewInit , OnDestroy{
   // Notifications
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action);
-  }
-
-  // loading indicator
-  loadingTickets(){
-    setTimeout(()=>{
-      this.loadingSpinner = !this.dataTour;
-    } , 500);
   }
 
   navigateDetailsOfTour(barcode: any){

@@ -13,13 +13,13 @@ import { HttpErrorResponse } from "@angular/common/http";
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.scss']
 })
-export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , OnDestroy{
+export class MyProfileComponent implements OnInit, OnChanges,  OnDestroy{
 
   @ViewChild('profileData',{static: false}) profileData: any;
   userData!: UserDataModel;
   formGroupProfile!: FormGroup;
+  sharedFormGroup!: FormGroup;
   private destroyer$: Subject<boolean> = new Subject<boolean>();
-  loadingSpinner: boolean = true;
   id!: number;
   isVisiblePassword:boolean = false;
   isBtnChangeDataClicked:boolean = true;
@@ -42,10 +42,6 @@ export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , O
     this.myProfileFormValidations();
   }
 
-  ngAfterViewInit() {
-    this.loadingProfileData();
-  }
-
   ngOnDestroy() {
     this.destroyer$.next(true);
     this.destroyer$.complete();
@@ -53,7 +49,7 @@ export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , O
 
   myProfileFormValidations(){
     let validatorPattern = new ValidatorsRegexPatterns();
-    this.formGroupProfile = this.formBuilder.group({
+    this.sharedFormGroup = this.formBuilder.group({
       firstName: new FormControl({value: this.userData?.firstName , disabled: true},
         Validators.compose([Validators.required, Validators.minLength(3),
           Validators.maxLength(20), Validators.pattern(validatorPattern.textPattern)])),
@@ -67,8 +63,10 @@ export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , O
           Validators.pattern(validatorPattern.phoneNumberPattern)])),
 
       email: new FormControl({value: this.userData?.email , disabled: true},
-          Validators.compose([Validators.required, Validators.email])),
+        Validators.compose([Validators.required, Validators.email])),
+    })
 
+    this.formGroupProfile = this.formBuilder.group({
       password: new FormControl({value:this.userData?.password , disabled: true},
           Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(15)])),
 
@@ -92,28 +90,14 @@ export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , O
           role: res[0]?.role,
           id: res[0]?.id
         } as  UserDataModel;
-        this.loadingSpinner = false;
       },
       error:(err)=>{
         console.log(err)
-        this.loadingSpinner = false;
       },
       complete:()=>{
         this.formGroupProfile.patchValue(this.userData);
       }
     })
-  }
-
-  // Set Loading Indicator into the component before loading data
-  loadingProfileData(){
-    setTimeout(() => {
-      if (this.profileData){
-        this.myProfileFormValidations();
-        this.loadingSpinner = false;
-      } else {
-        this.loadingSpinner = true;
-      }
-    }, 500);
   }
 
   visiblePassword(){
@@ -133,24 +117,25 @@ export class MyProfileComponent implements OnInit, OnChanges , AfterViewInit , O
   }
 
   // Get Validation Properties to show the error for UI
-  get firstName() { return this.formGroupProfile.get('firstName') };
-  get lastName() { return this.formGroupProfile.get('lastName') }
-  get phoneNumber() { return this.formGroupProfile.get('phone') };
-  get email() { return this.formGroupProfile.get('email') };
+  get firstName() { return this.sharedFormGroup.get('firstName') };
+  get lastName() { return this.sharedFormGroup.get('lastName') }
+  get phoneNumber() { return this.sharedFormGroup.get('phone') };
+  get email() { return this.sharedFormGroup.get('email') };
   get role() { return this.formGroupProfile.get('role') };
   get currentPassword() { return this.formGroupProfile.get('password') };
 
 
  //Modify mt profile data
  updateProfile(){
-   let data = this.formGroupProfile;
+   let firstFormData = this.sharedFormGroup;
+   let secondFormData = this.formGroupProfile;
    this.userData = {
-     firstName: data.get('firstName')?.value,
-     lastName: data.get('lastName')?.value,
-     phone: data.get('phone')?.value,
-     email: data.get('email')?.value,
-     password: data.get('password')?.value,
-     role: data.get('role')?.value,
+     firstName: firstFormData.get('firstName')?.value,
+     lastName: firstFormData.get('lastName')?.value,
+     phone: firstFormData.get('phone')?.value,
+     email: firstFormData.get('email')?.value,
+     password: secondFormData.get('password')?.value,
+     role: secondFormData.get('role')?.value,
      id: this.id
    } as  UserDataModel;
    this.authService.updateUserProfile(this.userData).subscribe({

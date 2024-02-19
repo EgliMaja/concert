@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "src/app/service/create-ticket.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -18,14 +18,13 @@ import { ERoles } from "../../../../../../model/userData.model";
     styleUrls: ['./details-ticket.component.scss']
 })
 
-export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DetailsTicketComponent implements OnInit, OnDestroy {
 
  @ViewChild('ticketDetails') ticket!: any;
  ticketFormGroup!: FormGroup;
  ticketDetailsSubject: Subject<boolean> = new Subject<boolean>();
  choosenBarcode: any;
  dataTour!: DataTour;
- loadingSpinner: boolean = true;
  isReadonlyInput!: boolean;
  isCheckedModify: boolean = false;
  userRole!: ERoles[];
@@ -49,10 +48,6 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
 
  ngOnInit(): void {
     this.getDetailsOfTicketByBarcode();
- }
-
- ngAfterViewInit() {
-    this.loadingTicket();
  }
 
  ngOnDestroy() {
@@ -111,28 +106,14 @@ export class DetailsTicketComponent implements OnInit, AfterViewInit, OnDestroy 
               artistName: resp[0]?.artistName,
               id: resp[0]?.id
           } as DataTour;
-            this.loadingSpinner = false;
         },
         error: (err) => {
             console.log(err);
-            this.loadingSpinner = false;
         },
         complete: () => {
             this.formGroupValidationTicket();
         }
     })
- }
-
-// loading indicator
- loadingTicket() {
-    setTimeout(() => {
-        if (this.ticket) {
-            this.formGroupValidationTicket()
-            this.loadingSpinner = false;
-        } else {
-            this.loadingSpinner = true;
-        }
-    }, 500);
  }
 
  goBackButton() {

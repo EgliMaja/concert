@@ -14,6 +14,9 @@ export const EndpointAPI = [
   { name: "createTicket" , endpoint: environment.api + "DataTour" },
   { name: "getTicketDetails" , endpoint: environment.api + "DataTour" },
   { name: "updateTicket" , endpoint: environment.api + "DataTour" },
-  { name: "deleteTicket" , endpoint: environment.api + "DataTour" }
+  { name: "deleteTicket" , endpoint: environment.api + "DataTour" },
+
+  // Booking
+  { name: "bookingTicket" , endpoint: environment.api + "Booking"}
 
 ] as EndpointModel[];

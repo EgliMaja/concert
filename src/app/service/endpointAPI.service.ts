@@ -20,6 +20,9 @@ export class EndpointAPIService {
   static readonly ENDPOINT_NAME_UPDATE_TICKET = "updateTicket";
   static readonly ENDPOINT_NAME_DELETE_TICKET = "deleteTicket";
 
+  // Booking
+  static readonly ENDPOINT_NAME_MAKE_BOOKING = "bookingTicket";
+
 
   protected getEndpoint( key: string , ...parameters: any[] ): string {
     let endpoint: string | undefined = EndpointAPI.find( construction=> construction.name == key )?.endpoint;

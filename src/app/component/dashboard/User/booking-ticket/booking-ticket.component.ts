@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {DataTour} from "../../../../model/concert.model";
-import {CreateTicketService} from "../../../../service/create-ticket.service";
-import {Subject, takeUntil} from "rxjs";
-import {TypeOfTicketsModel} from "../../../../model/ticket.model";
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { DataTour } from "../../../../model/concert.model";
+import { CreateTicketService } from "../../../../service/create-ticket.service";
+import { Subject, takeUntil } from "rxjs";
+import { TypeOfTicketsModel } from "../../../../model/ticket.model";
 
 @Component({
   selector: 'app-booking-ticket',
@@ -12,13 +12,12 @@ import {TypeOfTicketsModel} from "../../../../model/ticket.model";
   styleUrls: ['./booking-ticket.component.scss'],
 })
 
-export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestroy {
+export class BookingTicketComponent implements OnInit , OnDestroy {
 
   @ViewChild('MatStepper') MatStepper : any;
   ticketFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   isEditable = false;
-  loadingSpinner: boolean = true;
   choosenBarcode!: string;
   dataTour!: DataTour;
   private destroy$: Subject<boolean> = new Subject<boolean>();
@@ -47,10 +46,6 @@ export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestro
     this.secondFormGroup = this.formBuilder.group({});
   }
 
-  ngAfterViewInit() {
-    this.loadingData();
-  }
-
   ngOnDestroy() {
     this.destroy$.next(true);
     this.destroy$.complete();
@@ -75,7 +70,6 @@ export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestro
       },
       error: (err) => {
         console.log(err);
-        this.loadingSpinner = false;
       },
       complete:() =>{
         this.ticketFormGroup?.patchValue(this.dataTour);
@@ -102,12 +96,8 @@ export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestro
   enableForm() {
     this.ticketFormGroup.enable();
     this.ticketFormGroup.get('priceOfTicket')?.disable();
-  }
-
-  loadingData(){
-    setTimeout(()=>{
-      this.loadingSpinner = !(this.dataTour );
-    } , 1000);
+    this.ticketFormGroup.get('priceOfTicket')?.setValidators([Validators.required]);
+    this.ticketFormGroup.get('priceOfTicket')?.updateValueAndValidity();
   }
 
   onChangesInputValues() {
@@ -144,5 +134,4 @@ export class BookingTicketComponent implements OnInit , AfterViewInit , OnDestro
   }
 
 
-  protected readonly JSON = JSON;
 }

@@ -14,12 +14,6 @@
     </div>
 </ng-template>
 
-<ng-container *ngIf="loadingSpinner">
-    <div class="d-flex justify-content-center mt-5">
-        <mat-spinner></mat-spinner>
-    </div>
-</ng-container>
-
 <ng-template #faq let-item="item" let-panel="panel" let-i>
     <mat-accordion>
         <mat-expansion-panel class="mt-2" (opened)="panelOpenState = true" (closed)="panelOpenState = false">

@@ -47,9 +47,9 @@ export class CanActivateRoleGuard implements CanActivate {
       }
       // role is not authorized
       else {
-        this.router.navigate(['signin']);
         this.authenticationService.restoreUserData();
         this.authenticationService.isUnathorized;
+        this.router.navigate(['signin']);
         return false;
       }
       // }

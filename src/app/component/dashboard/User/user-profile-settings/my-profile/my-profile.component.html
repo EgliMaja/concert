@@ -3,17 +3,21 @@
     <h4 class="text-secondary">My Profile</h4>
   </div>
 
-  <div *ngIf="loadingSpinner; else profileData" class="body-ticket d-flex justify-content-center">
-    <mat-spinner></mat-spinner>
-  </div>
+  <ng-container *ngIf="userData ; else noUserData" class="body-ticket d-flex justify-content-center">
+    <ng-container *ngTemplateOutlet="profileData"></ng-container>
+  </ng-container>
 
   <ng-template #profileData>
     <form [formGroup]="formGroupProfile">
       <div class="row mt-5 ps-5 d-flex justify-content-center">
-          <app-reactive-form  controlKey="personalDataFormGroup" (makeFieldEnabled)="makeFieldsEnabled()"></app-reactive-form>
-        <div class="col-6">
+<!--            [parentFormGroup]="sharedFormGroup"-->
+          <app-reactive-form
+            controlKey="personalDataFormGroup"
+            (makeFieldEnabled)="makeFieldsEnabled()"
+          ></app-reactive-form>
+        <div class="col-6 first-col">
           <!--  Password    -->
-          <mat-form-field class="example-full-width mb-4">
+          <mat-form-field class="example-full-width mb-4 px-5">
             <mat-label>Password</mat-label>
             <input matInput [type]="isVisiblePassword ? 'text' : 'password' " placeholder=" Password " name="password" formControlName="password">
             <div>
@@ -35,7 +39,7 @@
 
         <div class="col-6">
           <!--  Role    -->
-          <mat-form-field class="example-full-width mb-5 mt-3">
+          <mat-form-field class="example-full-width mb-5 mt-3 px-5">
             <mat-label>Role</mat-label>
             <input matInput name="role" formControlName="role">
             <mat-hint *ngIf="role?.invalid ||  (role?.touched || role?.dirty)">
@@ -53,6 +57,11 @@
       Save Changes
     </button>
   </div>
-
-
 </div>
+
+<ng-template #noUserData>
+  <div class="text-center noDataTourMessage">
+    <h5>There are no data to display !</h5> <br>
+  </div>
+</ng-template>
+

@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FaqService } from "../../../../service/faq.service";
 import { FaqModel } from "../../../../model/faq.model";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: 'app-faq',
@@ -8,11 +9,11 @@ import { FaqModel } from "../../../../model/faq.model";
   styleUrls: ['./faq.component.scss']
 })
 
-export class FaqComponent implements OnInit , AfterViewInit {
+export class FaqComponent implements OnInit , OnDestroy {
 
   panelOpenState = false;
   faqModel!: FaqModel[];
-  loadingSpinner: boolean = true;
+  private destroyer$: Subject<boolean> = new Subject<boolean>();
 
   constructor( private faqService: FaqService ) { }
 
@@ -20,27 +21,21 @@ export class FaqComponent implements OnInit , AfterViewInit {
     this.getQuestions_Answers();
   }
 
-  ngAfterViewInit() {
-    this.loadingQuestions();
+  ngOnDestroy() {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
   }
 
   getQuestions_Answers(){
-    this.faqService.getFAQ().subscribe({
+    this.faqService.getFAQ().pipe(takeUntil(this.destroyer$.asObservable()))
+      .subscribe({
       next:(res )=> {
         this.faqModel = res.faq;
-        this.loadingSpinner = false;
       },
       error:(err) => {
         console.log(err.message);
-        this.loadingSpinner = false;
       }
     })
-  }
-
-  loadingQuestions(){
-    setTimeout(()=>{
-      this.loadingSpinner = !this.faqModel;
-    },1000)
   }
 
 }

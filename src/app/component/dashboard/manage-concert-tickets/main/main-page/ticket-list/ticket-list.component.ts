@@ -13,7 +13,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   @ViewChild('listOfTickets') listOfTicket : any;
-  @Input() loadingSpinner!: boolean;
   choosenBarcode: any;
   ticket!: "";
   page: number = 1;
@@ -38,7 +37,6 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
 
   ngAfterViewInit() {
     this.cd.detectChanges();
-    this.loadingTickets();
   }
 
   ngOnDestroy() {
@@ -51,20 +49,11 @@ export class TicketListComponent implements OnInit , AfterViewInit , OnDestroy {
    this.service.getDataCreatedTicket().pipe( takeUntil(this.destroy$)).subscribe({
       next: (res) => {
         this.ticketList = res;
-        this.loadingSpinner = false;
       },
       error: (err) => {
-        this.loadingSpinner = false;
         this.openSnackBar(err.message , "Close")
       },
     });
-  }
-
-  // loading indicator
-  loadingTickets(){
-    setTimeout(()=>{
-      this.loadingSpinner = !(this.ticketList && this.listOfTicket);
-    } , 1000);
   }
 
   navigateDetailsOfTicket(barcode: any){

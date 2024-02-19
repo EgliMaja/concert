@@ -1,13 +1,13 @@
 <div class="container border-box ">
   <div class="row">
     <div class="col-4 profile-container">
-      <ng-container *ngIf="loadingSpinner; else userProfile" class="body-ticket d-flex justify-content-center">
-        <mat-spinner></mat-spinner>
+      <ng-container *ngIf="userData ; else noUserData" class="body-ticket d-flex justify-content-center">
+        <ng-container *ngTemplateOutlet="userProfile"></ng-container>
       </ng-container>
 
       <ng-template #userProfile class="">
         <div class="d-flex justify-content-center">
-          <img src="assets/images/person-user.png" class="person-user-image">
+          <img src="assets/images/person-user.png" class="person-user-image" alt="">
         </div>
 
         <div class="userProfileFormGroup">
@@ -50,7 +50,12 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-
-
 </div>
 
+
+
+<ng-template #noUserData>
+  <div class="text-center noDataTourMessage">
+    <h5>There are no data to display !</h5> <br>
+  </div>
+</ng-template>

@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
 
 @Injectable()
-export class AuthUserInterceptor implements HttpInterceptor {
+export class AuthenticationInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService ) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>> {

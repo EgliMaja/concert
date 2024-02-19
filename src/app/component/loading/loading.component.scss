@@ -1,0 +1,32 @@
+.overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgb(255 255 255 / 50%);
+  z-index: 99999;
+}
+
+:host ::ng-deep .mat-progress-spinner circle{
+  fill: #d1d1d1 !important;
+  transform-origin: center;
+  transition: stroke-dashoffset 225ms linear;
+  //background-image: url("../../../assets/images/favicon-music.png")!important;
+  top: 50%;
+}
+
+.load-container  {
+  display: inline-block;
+  position: relative;
+}
+
+img {
+  position: absolute;
+  top: 25px;
+  clip-path: circle(45% at 50% 49%);
+}
+

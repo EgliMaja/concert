@@ -11,10 +11,11 @@ import { AuthUserService } from "./service/auth-user.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { PendingChangesGuard } from "./guard/can-deactivate.guard";
 import { CanActivateRoleGuard } from "./guard/can-activate-role.guard";
-import { AuthUserInterceptor } from "./guard/core/authUser-interceptor";
-import { ErrorCatchingInterceptor } from "./guard/core/error-catching-interceptor";
+import { AuthenticationInterceptor } from "./guard/core/authentication.interceptor";
+import { ErrorCatchingInterceptor } from "./guard/core/error-catching.interceptor";
 import { TranslateLoader , TranslateModule } from "@ngx-translate/core"
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import {LoadingInterceptor} from "./guard/core/loading.interceptor";
 
 @NgModule({
   declarations: [
@@ -35,21 +36,26 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
   ],
   providers:[
     AuthUserService,
     PendingChangesGuard,
     CanActivateRoleGuard,
-    AuthUserInterceptor,
+    AuthenticationInterceptor,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthUserInterceptor,
+      useClass: AuthenticationInterceptor,
       multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorCatchingInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true
     }
   ],

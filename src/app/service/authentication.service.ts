@@ -19,8 +19,9 @@ export class AuthenticationService {
     storeUserData(user: UserDataModel){
         sessionStorage.setItem('UserData', JSON.stringify(user));
         setTimeout(() => {
-          this.openSnackBar('Your Session has Expired , Please Login Again!' , 'Close');
           this.restoreUserData();
+          this.openSnackBar('Your Session has Expired , Please Login Again!' , 'Close');
+          this.router.navigate(['signin'], {queryParams: {returnUrl: ''}});
           console.log('Session Expired')
         }, 500000);
     }

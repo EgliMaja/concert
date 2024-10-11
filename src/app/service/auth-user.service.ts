@@ -2,7 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject , Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { UserDataModel } from '../model/userData.model';
+import { UserDataModel } from '../model/interface/userData.model';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "./authentication.service";
 import { EndpointAPIService } from "./endpointAPI.service";

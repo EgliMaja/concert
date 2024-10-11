@@ -13,24 +13,28 @@ import { PaymentTicketModule } from "./payment-ticket/payment-ticket.module";
 import { SharedReactiveFormComponent } from "../../../../shared/form-group.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {DashboardModule} from "../../dashboard.module";
 
 @NgModule({
-    declarations: [ BookingTicketComponent ],
-    imports: [
-        CommonModule,
-        BookingTicketRouterModule,
-        MatStepperModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatInputModule,
-        FillOutTicketModule,
-        ConfirmTicketModule,
-        PaymentTicketModule,
-        SharedReactiveFormComponent,
-        MatSelectModule,
-        MatProgressSpinnerModule,
-    ]
+    declarations: [
+      BookingTicketComponent,
+    ],
+  imports: [
+    CommonModule,
+    BookingTicketRouterModule,
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    FillOutTicketModule,
+    ConfirmTicketModule,
+    PaymentTicketModule,
+    SharedReactiveFormComponent,
+    MatSelectModule,
+    MatProgressSpinnerModule,
+    DashboardModule,
+  ]
 })
 export class BookingTicketModule {}

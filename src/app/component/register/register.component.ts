@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthUserService } from '../../service/auth-user.service';
-import { ERoles, UserDataModel } from '../../model/userData.model';
+import { ERoles, UserDataModel } from '../../model/interface/userData.model';
 import { ValidatorsRegexPatterns } from "../../function/function-validator";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { map, Observable, take } from "rxjs";

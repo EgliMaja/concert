@@ -10,12 +10,14 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { SidebarMenuModule } from "./sidebar-menu/sidebar-menu.module";
 import { LoadingComponent } from "../loading/loading.component";
+import { CurrencyPipe } from "../../pipes/currency.pipe";
 
 @NgModule({
   declarations : [
     DashboardComponent,
     NavbarComponent,
     HasRolesDirective,
+    CurrencyPipe
   ],
   imports: [
     CommonModule,
@@ -28,9 +30,10 @@ import { LoadingComponent } from "../loading/loading.component";
     LoadingComponent,
   ],
   exports: [
-    DashboardComponent ,
+    DashboardComponent,
     NavbarComponent,
     HasRolesDirective,
+    CurrencyPipe,
   ],
 })
 

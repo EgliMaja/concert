@@ -1,11 +1,12 @@
 import { AfterViewInit, Component,  OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ERoles, UserDataModel } from '../../model/userData.model';
+import { ERoles, UserDataModel } from '../../model/interface/userData.model';
 import { AuthUserService } from '../../service/auth-user.service';
 import { Subject, takeUntil } from "rxjs";
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from "../../service/authentication.service";
+import {ErrorMessagesEnum} from "../../model/enum/error-messages.enum";
 
 @Component({
   selector: 'app-signin',
@@ -69,6 +70,16 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
         });
 
         if (!userType) {
+          this.loadingSpinner = false;
+          this.displayErrorMsg = true;
+          this.errormsg = ErrorMessagesEnum.notExist;
+          return;
+        }
+
+        if (userType.password !== login.value.password) {
+          this.loadingSpinner = false;
+          this.displayErrorMsg = true;
+          this.errormsg = ErrorMessagesEnum.badCredential;
           return;
         }
 
@@ -97,29 +108,28 @@ export class SigninComponent implements OnInit , AfterViewInit , OnDestroy{
       error:(error: HttpErrorResponse)=>{
         this.loadingSpinner = false;
         this.displayErrorMsg = true;
-          if (error.status == 401){
-              this.errormsg = "This account has temporarily  blocked!";
-          }
-          if(error.status == 403){
-            this.errormsg = "Bad credentials";
-          }
-          if(error.status == 404){
-              this.errormsg = "This account does not exist!";
-          }
-          if(error.status == 405){
-            this.errormsg = "Server connection error.";
-          }
-          if(error.status == 409){
-            this.errormsg = "Server conflict. Please retry again later!" ;
-          }
-          else {
-            this.errormsg = "Server connection refused."
-          }
+        switch (error.status) {
+          case 401:
+            this.errormsg = ErrorMessagesEnum.blocked;
+            break;
+          case 403:
+            this.errormsg = ErrorMessagesEnum.badCredential;
+            break;
+          case 404:
+            this.errormsg = ErrorMessagesEnum.notExist;
+            break;
+          case 405:
+            this.errormsg = ErrorMessagesEnum.connectRefused;
+            break;
+          case 409:
+            this.errormsg = ErrorMessagesEnum.serverConflict;
+            break;
+
+          default : this.errormsg = ErrorMessagesEnum.generalError;
+        }
       },
       complete:()=>{
         this.loginFormGroup.updateValueAndValidity();
-        this.loadingSpinner = false;
-        this.displayErrorMsg = false;
       }
     });
   }

@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CreateTicketService } from "../../../../../../service/create-ticket.service";
 import { Subject,takeUntil } from "rxjs";
-import { DataTour } from "../../../../../../model/concert.model";
+import { DataTour } from "../../../../../../model/interface/concert.model";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 

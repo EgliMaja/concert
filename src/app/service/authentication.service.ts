@@ -1,5 +1,5 @@
 import { inject, Injectable } from "@angular/core";
-import { ERoles, UserDataModel } from "../model/userData.model";
+import { ERoles, UserDataModel } from "../model/interface/userData.model";
 import { Router } from "@angular/router";
 import { delay, dematerialize, materialize, throwError } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";

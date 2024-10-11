@@ -1,5 +1,5 @@
 import { Subject, takeUntil } from "rxjs";
-import { DataTour } from "../model/concert.model";
+import { DataTour } from "../model/interface/concert.model";
 import { CreateTicketService } from "../service/create-ticket.service";
 
 export class ReusedTicketManageFunctions {

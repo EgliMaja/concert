@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthUserService } from "../../../../service/auth-user.service";
 import { Subject, takeUntil } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ERoles, UserDataModel } from "../../../../model/userData.model";
+import { ERoles, UserDataModel } from "../../../../model/interface/userData.model";
 
 @Component({
   selector: 'app-user-profile-settings',

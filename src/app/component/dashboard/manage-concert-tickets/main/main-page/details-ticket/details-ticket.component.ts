@@ -3,14 +3,14 @@ import { CreateTicketService } from "src/app/service/create-ticket.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
-import { DataTour } from "../../../../../../model/concert.model";
+import { DataTour } from "../../../../../../model/interface/concert.model";
 import { MatDialog } from "@angular/material/dialog";
 import { DeleteTicketComponent } from "../delete-ticket/delete-ticket.component";
 import { DataSharingService } from "../../../../../../service/data-sharing.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";
 import { AuthenticationService } from "../../../../../../service/authentication.service";
-import { ERoles } from "../../../../../../model/userData.model";
+import { ERoles } from "../../../../../../model/interface/userData.model";
 
 @Component({
     selector: 'app-details-ticket',
@@ -29,6 +29,7 @@ export class DetailsTicketComponent implements OnInit, OnDestroy {
  isCheckedModify: boolean = false;
  userRole!: ERoles[];
  protected readonly ERoles = ERoles;
+ backgroundIMG: string = "../../assets/images/concert2.jpg";
 
  constructor(
     private service: CreateTicketService,
@@ -87,7 +88,7 @@ export class DetailsTicketComponent implements OnInit, OnDestroy {
              Validators.compose([Validators.required, Validators.minLength(16),
                  Validators.maxLength(16), Validators.pattern(regex_pattern.numberPattern)])],
 
-         uploadedImage: [{value: '', disabled: this.isReadonlyInput}],
+         uploadedImage: [{value: this.dataTour.uploadedImage, disabled: this.isReadonlyInput}],
      });
  }
 

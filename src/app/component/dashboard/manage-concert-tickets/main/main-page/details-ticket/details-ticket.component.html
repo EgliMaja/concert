@@ -7,18 +7,11 @@
       <ng-template #ticketDetails>
         <form [formGroup]="ticketFormGroup" class="body-ticket">
           <div class="row">
-            <div class="backgound-img">
-              <div class="col d-flex justify-content-start">
-                  <img alt="" src="../../../../../../../assets/images/barcode.png" class="image-barcode">
+            <div class="background-img">
+<!--              <img  [ngSrc]="backgroundIMG" [width]="400" [height]="200" alt="" class="background-img">-->
+              <div class="barcode">
+                <ngx-barcode [bc-value]="dataTour.barcode" [bc-display-value]="true"></ngx-barcode>
               </div>
-                <!--Barcode-->
-                  <input class="barcode" formControlName="barcode" [readonly]="!isReadonlyInput">
-                  <label *ngIf="barcode?.invalid || (barcode?.dirty || barcode?.touched)" class="text-danger bg-light">
-                    <p *ngIf="barcode?.errors?.['required']"> Barcode is required.</p>
-                    <p *ngIf="barcode?.errors?.['pattern']"> Barcode must be number characters ! </p>
-                    <p *ngIf="barcode?.errors?.['minLength']"> Barcode must have at least 16 numbers. </p>
-                    <p *ngIf="barcode?.errors?.['maxLength']"> Barcode must have at least 16 numbers. </p>
-                  </label>
             </div>
             <div class="row d-flex justify-content-center">
               <div class="col-6">
@@ -79,7 +72,7 @@
                   <p *ngIf="priceOfTicket?.errors?.['max']">  must be less then 1200$. </p>
                 </label>
                 <input class="form-control" id="price" placeholder="$" name="priceOfTicket" formControlName="priceOfTicket"
-                type="number" [readonly]="isReadonlyInput">
+                type="number" [readonly]="isReadonlyInput" [value]="priceOfTicket?.value | currencyPipe">
 
                 <div *ngIf="!isCheckedModify" class="col mt-3 d-flex justify-content-end">
                   <button class="btn bg-black text-white fw-bold" (click)="goBackButton()">Go Back</button>
@@ -87,7 +80,12 @@
                     <button class="btn bg-primary text-black fw-bold" (click)="onClickModify()">Modify</button>
                   </div>
                   <div *ngIf="userRole.includes(ERoles.user)">
-                    <button class="btn bg-primary text-black fw-bold" (click)="navigateToBooking()">Buy</button>
+                    <button class="btn bg-primary text-black fw-bold"
+                      [disabled]="ticketFormGroup.invalid"
+                      (click)="navigateToBooking()"
+                    >
+                      Buy
+                    </button>
                   </div>
                 </div>
                 <div *ngIf="isCheckedModify" class="col mt-3 d-flex justify-content-end">

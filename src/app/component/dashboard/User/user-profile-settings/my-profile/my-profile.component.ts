@@ -3,7 +3,7 @@ import { ValidatorsRegexPatterns } from "../../../../../function/function-valida
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 import { AuthUserService } from "../../../../../service/auth-user.service";
-import { UserDataModel } from "../../../../../model/userData.model";
+import { UserDataModel } from "../../../../../model/interface/userData.model";
 import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -140,6 +140,7 @@ export class MyProfileComponent implements OnInit, OnChanges,  OnDestroy{
    } as  UserDataModel;
    this.authService.updateUserProfile(this.userData).subscribe({
      next:(res)=>{
+       console.log(res)
        this.openSnackBar('Data Updated Successfully!' , "Close");
      },
      error:(err: HttpErrorResponse)=>{

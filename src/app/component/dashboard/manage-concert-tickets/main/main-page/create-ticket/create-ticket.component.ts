@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import { DataTour } from '../../../../../../model/concert.model';
+import { DataTour } from '../../../../../../model/interface/concert.model';
 import { CreateTicketService } from 'src/app/service/create-ticket.service';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ValidatorsRegexPatterns } from "../../../../../../function/function-validator";
@@ -71,7 +71,7 @@ export class CreateTicketComponent implements OnInit {
 
   // Generate | Create Ticket
   generateTicket() {
-    this.tourData = {...this.generateTicketForm.value};
+    this.tourData = {...this.generateTicketForm.value , uploadedImage: this.image};
     this.service.createTour(this.tourData).subscribe({
       next: (res) => {
         this.ticketCreatedSucces = true;
@@ -106,25 +106,12 @@ export class CreateTicketComponent implements OnInit {
 
 // Function Format Controler | Validator of Uploadet Image
   handleImgFormat(event: any) {
-      const file: File = event.target.files[0];
-
-      if (file) {
-          // Read the file as a data URL
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-              this.image = e.target.result;
-          };
-          reader.readAsDataURL(file);
-    // const uploadedImage = this.generateTicketForm.get('uploadedImage')?.value.replace( "fakepath",`Users${"\\user\\Pictures\\Camera Roll"}`);
-    // if (uploadedImage && event.target.files) {
-    //   this.image = uploadedImage;
-    // }
-      }
+    const uploadedImage = this.generateTicketForm.get('uploadedImage')?.value;
+    if (uploadedImage && event.target.files) {
+      this.image = uploadedImage.replace('fakepath' , 'Desktop\\concert\\src\\assets\\img');
+      console.log("File" , this.image)
+    }
   }
-
-
-  protected readonly JSON = JSON;
-
 
   // Check if barcode exist , do not allow two same barcodes to create
   validateExistingBarcodes(control: AbstractControl): Observable<ValidationErrors | null> {

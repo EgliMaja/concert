@@ -1,9 +1,9 @@
 import { Component , OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
-import { SidebarMenu } from '../../../model/sidebar-menu.model';
+import { SidebarMenu } from '../../../model/interface/sidebar-menu.model';
 import { SidebarMenuService } from 'src/app/service/sidebar-menu.service';
 import { AuthUserService } from "../../../service/auth-user.service";
-import { ERoles, UserDataModel } from "../../../model/userData.model";
+import { ERoles, UserDataModel } from "../../../model/interface/userData.model";
 import { AuthenticationService } from "../../../service/authentication.service";
 
 @Component({

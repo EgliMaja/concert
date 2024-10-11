@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
-import { LanguageModel } from "./model/language.model";
+import { LanguageModel } from "./model/interface/language.model";
 
 @Component({
   selector: 'app-root',

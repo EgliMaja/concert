@@ -14,7 +14,7 @@
       "lastName": "Person",
       "phone": "+340688185266",
       "email": "firstperson@gmail.com",
-      "password": "sfghfgh2327$$",
+      "password": "12345678",
       "role": "USER",
       "id": 2
     },
@@ -191,6 +191,28 @@
       "cityTourLocation": "Berat",
       "artistName": "Lana Del Rey",
       "id": 15
+    },
+    {
+      "cityTourLocation": "Verona",
+      "addressLocation": "Verona , Italy",
+      "tourName": "Lana's Tour",
+      "tourDate": "2024-02-22",
+      "priceOfTicket": 45,
+      "barcode": "0000067379001255",
+      "uploadedImage": "C:\\Desktop\\concert\\src\\assets\\img\\Screenshot 2023-05-04 101921.png",
+      "artistName": "Lana Del Rey",
+      "id": 16
+    },
+    {
+      "cityTourLocation": "Tokyo",
+      "addressLocation": "Tokyo Japan",
+      "tourName": "Demon Slayer",
+      "tourDate": "2024-12-26",
+      "priceOfTicket": 1200,
+      "barcode": "0000067378001253",
+      "uploadedImage": "C:\\Desktop\\concert\\src\\assets\\img\\Screenshot 2024-09-12 125023.png",
+      "artistName": "Jujutsu Kaisen",
+      "id": 17
     }
   ]
 }

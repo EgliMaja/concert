@@ -12,17 +12,17 @@
           If you want to continue with these data, press next. </p>
       </div>
 
-      {{JSON.stringify(ticketFormGroup.value) }}
+<!--      {{JSON.stringify(ticketFormGroup.value) }}-->
       <form [formGroup]="ticketFormGroup">
         <div class="row mt-5">
           <div class="col-6">
 
             <app-reactive-form controlKey="ticketDataFormGroup"></app-reactive-form>
 
-            <mat-form-field class="example-full-width px-5 mb-3">
+            <mat-form-field class="example-full-width px-5 mb-3" appearance="fill">
               <mat-label>Number of Tickets</mat-label>
               <mat-select name="numberTickets" formControlName="numberTickets">
-                <mat-option *ngFor="let numberTickets of numberOfTickets" [value]="numberTickets">{{ numberTickets }}
+                <mat-option *ngFor="let numberTickets of numberOfTickets" [value]="numberTickets" (onSelectionChange)="onChangesInputValues()">{{ numberTickets }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -30,32 +30,32 @@
           </div>
           <div class="col-6">
             <!-- Tour Name -->
-            <mat-form-field class="example-full-width mb-3 px-5">
+            <mat-form-field class="example-full-width mb-3 px-5" appearance="fill">
               <mat-label>Tour Name</mat-label>
               <input matInput name="tourName" formControlName="tourName" id="tourName">
             </mat-form-field>
             <!-- Tour Date -->
-            <mat-form-field class="example-full-width mb-3 px-5">
+            <mat-form-field class="example-full-width mb-3 px-5" appearance="fill">
               <mat-label>Tour Date</mat-label>
               <input matInput name="tourDate" formControlName="tourDate" type="date" id="date">
             </mat-form-field>
             <br>
             <!-- Artist Name -->
-            <mat-form-field class="example-full-width mb-3 px-5">
+            <mat-form-field class="example-full-width mb-3 px-5" appearance="fill">
               <mat-label>Artist Name</mat-label>
               <input matInput name="artistName" formControlName="artistName" id="artistName">
             </mat-form-field>
             <!-- Ticket Type -->
-            <mat-form-field class="example-full-width px-5 mb-3 ">
+            <mat-form-field class="example-full-width px-5 mb-3 " appearance="fill">
               <mat-label>Type of Ticket</mat-label>
               <mat-select formControlName="ticketType">
-                <mat-option *ngFor="let ticketType of typeOfTickets" [value]="ticketType">{{ ticketType }}</mat-option>
+                <mat-option *ngFor="let ticketType of typeOfTickets" [value]="ticketType" (onSelectionChange)="onChangesInputValues()" (click)="clickTicketType()">{{ ticketType }}</mat-option>
               </mat-select>
             </mat-form-field>
             <!-- Price -->
-            <mat-form-field class="example-full-width px-5 mb-3 ">
+            <mat-form-field class="example-full-width px-5 mb-3 " appearance="fill">
               <mat-label>Price of Ticket</mat-label>
-              <input matInput name="priceOfTicket" formControlName="priceOfTicket" id="price" [disabled]="true" (change)="onChangesInputValues()">
+              <input matInput name="priceOfTicket" formControlName="priceOfTicket" [value]="priceOfTicket?.value | currencyPipe" id="price" [disabled]="true" >
             </mat-form-field>
           </div>
         </div>
@@ -63,7 +63,7 @@
         <div class="d-flex justify-content-center mt-5">
           <button mat-raised-button color="accent" (click)="enableForm()">Fill Data</button>
           &nbsp;&nbsp;&nbsp;
-          <button mat-raised-button color="primary" class="px-2" [disabled]="ticketFormGroup.invalid"
+          <button mat-raised-button color="primary" class="px-2" [disabled]="ticketFormGroup.invalid || !ticketFormGroup.touched"
                   (click)="stepper.next()"> Next </button>
         </div>
       </form>

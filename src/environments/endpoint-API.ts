@@ -1,4 +1,4 @@
-import { EndpointModel } from "../app/model/endpoint.model";
+import { EndpointModel } from "../app/model/interface/endpoint.model";
 import { environment } from "./environment";
 
 export const EndpointAPI = [

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FaqService } from "../../../../service/faq.service";
-import { FaqModel } from "../../../../model/faq.model";
+import { FaqModel } from "../../../../model/interface/faq.model";
 import { Subject, takeUntil } from "rxjs";
 
 @Component({

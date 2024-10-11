@@ -1,4 +1,4 @@
-import { UserDataModel , ERoles } from "../model/userData.model";
+import { UserDataModel , ERoles } from "../model/interface/userData.model";
 import { Directive , Input , OnChanges ,TemplateRef , ViewContainerRef  }from '@angular/core';
 
 @Directive({

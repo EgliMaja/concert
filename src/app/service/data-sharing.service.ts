@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DataTour } from "../model/concert.model";
+import { DataTour } from "../model/interface/concert.model";
 
 @Injectable({
     providedIn: "root"

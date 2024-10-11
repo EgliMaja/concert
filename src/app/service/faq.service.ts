@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { DataFaqModel, FaqModel } from "../model/faq.model";
+import { DataFaqModel, FaqModel } from "../model/interface/faq.model";
 import { Observable, of } from "rxjs";
 import * as faq from '../../data/frequently-asked-questions.json';
 
